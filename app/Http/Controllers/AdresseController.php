@@ -14,7 +14,7 @@ class AdresseController extends Controller
   public function index()
   {
     // get all the adresse
-    $adresse = Adresse::latest();
+    $adresse = Adresse::paginate(10);
     // load the view and pass the adresse
     return View('adresse.index',compact('adresse'));
   }

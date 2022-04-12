@@ -14,7 +14,7 @@ class XentralUserController extends Controller
   public function index()
   {
     // get all the Users
-    $users = XentralUser::latest();
+    $users = XentralUser::paginate(10);
     // load the view and pass the Users
     return View('users.index',compact('users'));
   }

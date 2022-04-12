@@ -4,7 +4,7 @@
 <div class="container">
 <nav class="navbar navbar-inverse">
     <ul class="nav navbar-nav">
-        <li><a href="{{ URL::to('adresse/create') }}">Create a Adresse</a>
+        <li><a href="{{ URL::to('/create') }}">Create a Adresse</a>
           <li><a href="{{ URL::to('users/') }}">View All Users</a>
     </ul>
 </nav>
@@ -20,6 +20,7 @@
         <tr>
             <td>ID</td>
             <td>Type</td>
+            <td>Name</td>
             <td>Email</td>
         </tr>
     </thead>
@@ -34,10 +35,10 @@
             <td>
 
                 <!-- show the adress (uses the show method found at GET /adresse/{id} -->
-                <a class="btn btn-small btn-success" href="{{ URL::to('adresse/' . $value->id) }}">Show this Adress</a>
+                <a class="btn btn-small btn-success" href="{{ URL::to('/adresse/' . $value->id) }}">Show this Adress</a>
 
                 <!-- edit this adress (uses the edit method found at GET /adresse/{id}/edit -->
-                <a class="btn btn-small btn-info" href="{{ URL::to('adresse/' . $value->id . '/edit') }}">Edit this Adress</a>
+                <a class="btn btn-small btn-info" href="{{ URL::to('/adresse/' . $value->id . '/edit') }}">Edit this Adress</a>
 
                 <!-- delete the adress (uses the destroy method DESTROY /adresse/{id} -->
                 <form action="./adresse/{{$value->id }}"  onsubmit="return confirm('Are you sure to delete: {{ $value->name}}')" method="POST">
@@ -52,5 +53,6 @@
     @endforeach
     </tbody>
 </table>
+  {!! $adresse->render() !!}
 </div>
 @endsection

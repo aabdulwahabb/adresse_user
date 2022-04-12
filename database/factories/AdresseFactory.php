@@ -26,7 +26,7 @@ class AdresseFactory extends Factory
     {
         return [
             'usereditid' => random_int(1,5),
-            'typ' => $this->faker->randomElement(['frau', 'herr']),
+            'typ' => $this->faker->randomElement(['herr', 'frau']),
             'firma' => 1,
             'logdatei' => now(),
             'useredittimestamp' => now(),

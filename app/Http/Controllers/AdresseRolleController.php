@@ -37,7 +37,7 @@ class AdresseRolleController extends Controller
 
            $this->validate($request, [
                'adresse'       => 'required|numeric',
-               'obkejt'       => 'required',
+               'objekt'       => 'required',
                'projekt'      => 'required|numeric',
                ]);
 
