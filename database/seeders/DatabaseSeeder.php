@@ -17,6 +17,8 @@ use App\Models\Project;
 use App\Models\Storage;
 use App\Models\TracyUser;
 use App\Models\Item;
+use App\Models\Adresse;
+use App\Models\XentralUser;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -86,7 +88,17 @@ class DatabaseSeeder extends Seeder
             TracyUser::factory()->create([
                 'email' => 'admin@versandmanufaktur.de',
                 'is_admin' => 1,
-            ]);
+                ]);
+
+                // Create an Adresse
+                Adresse::factory(5)
+                    ->has(XentralUser::factory()->count(2), 'user')
+                    ->create();
+
+                    // Create an Adresse
+                    XentralUser::factory(5)
+                        ->has(Adresse::factory()->count(1), 'adresse')
+                        ->create();
         }
     }
 }

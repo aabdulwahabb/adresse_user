@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Arr;
 
 
-class XentralUesr extends Model
+class XentralUser extends Model
 {
   use HasFactory;
 

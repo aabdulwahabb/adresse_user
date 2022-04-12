@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\XentralUesr;
+use App\Models\XentralUser;
 use View;
 
 class XentralUserController extends Controller
@@ -14,7 +14,7 @@ class XentralUserController extends Controller
   public function index()
   {
     // get all the Users
-    $users = XentralUesr::latest();
+    $users = XentralUser::latest();
     // load the view and pass the Users
     return View('users.index',compact('users'));
   }
@@ -43,7 +43,7 @@ class XentralUserController extends Controller
 
 
                 // store
-               XentralUesr::create([
+               XentralUser::create([
                 'adresse'      =>  $request->integer,
                 'type'      =>  $request->string,
                 'username'      =>  $request->string,
@@ -58,7 +58,7 @@ class XentralUserController extends Controller
   public function show($id)
   {
     // get the user
-    $user = XentralUesr::find($id);
+    $user = XentralUser::find($id);
 
     // show the view and pass the user to it
     return View('users.show',compact('user'));
@@ -67,7 +67,7 @@ class XentralUserController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(xentraluesr $user)
+  public function edit(xentraluser $user)
   {
   return View('users.edit',compact('user'));
   }
@@ -75,7 +75,7 @@ class XentralUserController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, xentraluesr $user)
+  public function update(Request $request, xentraluser $user)
   {
     $this->validate($request, [
         'adresse'       => 'required|numeric',
@@ -90,7 +90,7 @@ class XentralUserController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(xentraluesr $user)
+  public function destroy(xentraluser $user)
   {
     $user->delete();
      return back();

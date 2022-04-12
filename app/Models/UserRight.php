@@ -15,7 +15,7 @@ class UserRight extends Model
 {
   use HasFactory;
 
-  protected $table = 'user';
+  protected $table = 'userrights';
   public $timestamps = false;
   protected $guarded = [];
 
@@ -58,7 +58,7 @@ class UserRight extends Model
    * @return BelongsTo
    */
   public function user(): BelongsTo {
-      return $this->belongsTo(XentralUesr::class, 'user');
+      return $this->belongsTo(XentralUser::class, 'user');
   }
 
     /**

@@ -19,7 +19,7 @@ class CreateAdresseTable extends Migration
                 $table->id();
                 $table->boolean('abperfax')->default(0);
                 $table->string('abpermail',128)->default('');
-                $table->string('abteilung');
+                $table->string('abteilung')->default('');
                 $table->integer('abweichende_rechnungsadresse')->default(0);
                 $table->string('abweichendeemailab',64)->nullable();
                 $table->string('adresszusatz');
