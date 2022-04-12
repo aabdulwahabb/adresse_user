@@ -22,7 +22,7 @@ Route::get('/', function () {
 });*/
 
 Route::get('/', [AdresseController::class, 'index'])->name('adresse');
-Route::get('/{{ $adress->id }}', [AdresseController::class, 'show'])->name('adresse_show');
-Route::get('/{{ $adress->id }}/edit', [AdresseController::class, 'edit'])->name('adresse_edit');
+Route::get('{{ $adress->id }}', [AdresseController::class, 'show'])->name('adresse_show');
+Route::get('{{ $adress->id }}/edit', [AdresseController::class, 'edit'])->name('adresse_edit');
 Route::get('/create', [AdresseController::class, 'create'])->name('adresse_create');
 Route::get('/users', [XentralUserController::class, 'index'])->name('users');
