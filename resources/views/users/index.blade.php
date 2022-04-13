@@ -34,13 +34,13 @@
             <td>
 
                 <!-- show the user (uses the show method found at GET /users/{id} -->
-                <a class="btn btn-small btn-success" href="{{ URL::to('users/' . $value->id) }}">Show this User</a>
+                <a class="btn btn-small btn-success" href="{{ URL::to('/users/' . $value->id) }}">Show this User</a>
 
                 <!-- edit this user (uses the edit method found at GET /users/{id}/edit -->
-                <a class="btn btn-small btn-info" href="{{ URL::to('users/' . $value->id . '/edit') }}">Edit this User</a>
+                <a class="btn btn-small btn-info" href="{{ URL::to('/users/' . $value->id . '/edit') }}">Edit this User</a>
 
                 <!-- delete the user (uses the destroy method DESTROY /users/{id} -->
-                <form action="./adresse/{{$value->id }}"  onsubmit="return confirm('Are you sure to delete: {{ $value->username}}')" method="POST">
+                <form action="./users/{{$value->id }}"  onsubmit="return confirm('Are you sure to delete: {{ $value->username}}')" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <button type="submit" class="btn btn-danger">
@@ -52,5 +52,6 @@
     @endforeach
     </tbody>
 </table>
+    {!! $users->render() !!}
 </div>
 @endsection

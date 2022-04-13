@@ -20,9 +20,14 @@ use App\Http\Controllers\UserRightController;
 Route::get('/', function () {
     return view('welcome');
 });*/
+// Adresse Page
+Route::get('/', [AdresseController::class, 'index'])->name('adresse.index');
+Route::get('/create', [AdresseController::class, 'create'])->name('adresse.create');
+Route::get('/adresse/{id}', [AdresseController::class, 'show'])->name('adresse.show');
+Route::get('adresse/{id}/edit', [AdresseController::class, 'edit'])->name('adresse.edit');
 
-Route::get('/', [AdresseController::class, 'index'])->name('adresse');
-Route::get('{{ $adress->id }}', [AdresseController::class, 'show'])->name('adresse_show');
-Route::get('{{ $adress->id }}/edit', [AdresseController::class, 'edit'])->name('adresse_edit');
-Route::get('/create', [AdresseController::class, 'create'])->name('adresse_create');
-Route::get('/users', [XentralUserController::class, 'index'])->name('users');
+
+// User Page
+Route::get('/users', [XentralUserController::class, 'index'])->name('users.index');
+Route::get('/users/{id}', [XentralUserController::class, 'show'])->name('users.show');
+Route::get('/users/{id}/edit', [XentralUserController::class, 'edit'])->name('user.edit');
