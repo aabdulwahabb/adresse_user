@@ -59,7 +59,7 @@ class XentralUser extends Model
   */
  public function projekt(): HasMany
  {
-     return $this->hasMany(Projekt::class, 'projekt');
+     return $this->hasMany(Project::class, 'projekt');
  }
 
  /**
@@ -67,7 +67,7 @@ class XentralUser extends Model
   *
   * @return HasMany
   */
- public function userrights(): HasMany
+ public function userright(): HasMany
  {
      return $this->hasMany(Userright::class, 'user');
  }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AdresseRolle;
 use App\Models\DeliveryNote;
 use App\Models\DeliveryNotePosition;
 use App\Models\GoodsReceipt;
@@ -18,6 +19,7 @@ use App\Models\Storage;
 use App\Models\TracyUser;
 use App\Models\Item;
 use App\Models\Adresse;
+use App\Models\UserRight;
 use App\Models\XentralUser;
 use Illuminate\Database\Seeder;
 
@@ -93,11 +95,13 @@ class DatabaseSeeder extends Seeder
                 // Create an Adresse
                 Adresse::factory(5)
                     ->has(XentralUser::factory()->count(2), 'user')
+                    ->has(AdresseRolle::factory()->count(2), 'adresseRolle')
                     ->create();
 
                     // Create an Adresse
                     XentralUser::factory(5)
                         ->has(Adresse::factory()->count(1), 'adresse')
+                        ->has(UserRight::factory()->count(3), 'userright')
                         ->create();
         }
     }

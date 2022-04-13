@@ -17,8 +17,11 @@ class CreateUserTable extends Migration
       if (!app()->environment('production')) {
              Schema::create('user', function (Blueprint $table) {
                $table->id();
+               $table->string('username',100)->nullable();
+               $table->string('password')->nullable();
                $table->integer('activ')->nullable()->default(0);
-               $table->integer('adresse');
+               $table->string('type',100)->nullable()->default('');
+               $table->integer('adresse')->index('adresse');
                $table->boolean('callcenter_notification')->default('1');
                $table->boolean('chat_popup')->default('1');
                $table->string('defaultcolor',10)->default('');
@@ -43,7 +46,6 @@ class CreateUserTable extends Migration
                $table->string('motpsecret')->nullable();
                $table->integer('paketmarkendrucker')->default(0);
                $table->integer('parentuser')->nullable();
-               $table->string('password')->nullable();
                $table->string('passwordhash',60)->nullable();
                $table->string('passwordmd5')->nullable();
                $table->string('passwordsha512',128)->default('');
@@ -61,8 +63,6 @@ class CreateUserTable extends Migration
                $table->integer('standardversanddrucker')->default(0);
                $table->string('startseite',1024)->nullable();
                $table->string('stechuhrdevice')->default('');
-               $table->string('type',100)->nullable()->default('');
-               $table->string('username',100)->nullable();
                $table->string('vergessencode')->default('');
                $table->date('vergessenzeit')->nullable();
                $table->string('vorlage')->nullable();

@@ -4,7 +4,8 @@
 <div class="container">
       <nav class="navbar navbar-inverse">
           <ul class="nav navbar-nav">
-            <li><a href="{{ URL::to('/') }}">View All Adresse</a></li>
+              <li><a href="{{ URL::to('/create') }}">Create a Adresse</a></li>
+            <li><a href="{{ URL::to('/') }}">View All Adresse</a>
             <li><a href="{{ URL::to('users/') }}">View All Users</a>
           </ul>
       </nav>

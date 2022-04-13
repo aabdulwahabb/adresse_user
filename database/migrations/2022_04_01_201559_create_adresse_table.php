@@ -17,6 +17,7 @@ class CreateAdresseTable extends Migration
       if (!app()->environment('production')) {
              Schema::create('adresse', function (Blueprint $table) {
                 $table->id();
+                 $table->string('name')->index();
                 $table->boolean('abperfax')->default(0);
                 $table->string('abpermail',128)->default('');
                 $table->string('abteilung')->default('');
@@ -61,7 +62,7 @@ class CreateAdresseTable extends Migration
                 $table->decimal('bonus9_ab',10,2)->nullable();
                 $table->string('bundesland',64)->nullable();
                 $table->string('bundesstaat',32)->default('');
-                $table->string('email');
+                $table->string('email')->index();
                 $table->text('filiale')->nullable();
                 $table->integer('firma');
                 $table->boolean('firmensepa')->default(0);
@@ -90,10 +91,10 @@ class CreateAdresseTable extends Migration
                 $table->date('geburtstag')->nullable();
                 $table->boolean('geburtstagkalender')->default(0);
                 $table->boolean('geburtstagskarte')->default(0);
-                $table->integer('geloescht');
+                $table->integer('geloescht')->index();
                 $table->integer('geworbenvon')->nullable();
                 $table->string('glaeubigeridentnr')->default('');
-                $table->string('gln',32)->default('');
+                $table->string('gln',32)->default('')->index();
                 $table->string('gutschrift_cc',128)->default('');
                 $table->string('gutschrift_email',128)->default('');
                 $table->string('gutschrift_fax_cc',128)->default('');
@@ -102,7 +103,7 @@ class CreateAdresseTable extends Migration
                 $table->string('iban',64)->nullable();
                 $table->text('infoauftragserfassung');
                 $table->string('inhaber');
-                $table->integer('innendienst')->nullable();
+                $table->integer('innendienst')->nullable()->index();
                 $table->text('internetseite')->nullable();
                 $table->integer('kalender_aufgaben')->nullable();
                 $table->integer('kassiereraktiv')->default(0);
@@ -114,13 +115,13 @@ class CreateAdresseTable extends Migration
                 $table->string('konto',64)->nullable();
                 $table->decimal('kreditlimit',10,2)->default(0.00);
                 $table->integer('kundenfreigabe');
-                $table->string('kundennummer');
+                $table->string('kundennummer')->index();
                 $table->string('kundennummer_buchhaltung',20)->default('');
                 $table->string('kundennummerlieferant');
                 $table->string('land',64)->nullable();
                 $table->decimal('lat',18,12)->nullable();
                 $table->boolean('lead')->default(0);
-                $table->string('lieferantennummer');
+                $table->string('lieferantennummer')->index();
                 $table->string('lieferantennummer_buchhaltung',20)->default('');
                 $table->string('lieferantennummerbeikunde',128)->nullable();
                 $table->text('lieferbedingung');
@@ -158,7 +159,6 @@ class CreateAdresseTable extends Migration
                 $table->decimal('mlmwartekonto',10,2)->default(0.00);
                 $table->string('mobil',64)->nullable();
                 $table->string('nachname',128)->default('');
-                $table->string('name');
                 $table->string('ort');
                 $table->integer('partner');
                 $table->integer('passwort_gesendet');
@@ -170,7 +170,7 @@ class CreateAdresseTable extends Migration
                 $table->decimal('portofreiab',10,2)->default(0.00);
                 $table->decimal('portofreiablieferant',10,2)->default(0.00);
                 $table->boolean('portofreilieferant_aktiv')->default(0);
-                $table->integer('projekt');
+                $table->integer('projekt')->index('projekt');
                 $table->decimal('provision',10,2)->nullable();
                 $table->decimal('rabatt',10,2)->nullable();
                 $table->decimal('rabatt1',10,2)->nullable();
@@ -210,7 +210,7 @@ class CreateAdresseTable extends Migration
                 $table->string('sachkonto',20)->default('');
                 $table->boolean('serienbrief')->default(0);
                 $table->text('sonstiges');
-                $table->integer('sponsor')->nullable();
+                $table->integer('sponsor')->nullable()->index();
                 $table->string('sprache',32)->nullable();
                 $table->string('steuer');
                 $table->integer('steuerbefreit')->nullable();
@@ -226,7 +226,7 @@ class CreateAdresseTable extends Migration
                 $table->string('ueberstunden');
                 $table->string('umsatzsteuer_lieferant',64)->default('');
                 $table->string('unterabteilung');
-                $table->integer('usereditid')->nullable();
+                $table->integer('usereditid')->nullable()->index('user');
                 $table->timestamp('useredittimestamp')->default('0000-00-00 00:00:00');
                 $table->integer('ust_befreit');
                 $table->string('ustid',64)->nullable();
@@ -238,7 +238,7 @@ class CreateAdresseTable extends Migration
                 $table->integer('verrechnungskontoreisekosten')->default(0);
                 $table->string('versandart');
                 $table->string('versandartlieferant');
-                $table->integer('vertrieb')->nullable();
+                $table->integer('vertrieb')->nullable()->index();
                 $table->string('vorname')->nullable();
                 $table->string('waehrung');
                 $table->string('webid',1024)->nullable();

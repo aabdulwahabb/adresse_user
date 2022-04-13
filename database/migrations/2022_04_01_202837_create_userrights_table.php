@@ -17,10 +17,11 @@ class CreateUserRightsTable extends Migration
       if (!app()->environment('production')) {
              Schema::create('userrights', function (Blueprint $table) {
                $table->id();
-               $table->string('action',64);
+               $table->integer('user')->index('user');
                $table->string('module',64);
+               $table->string('action',64);
                $table->boolean('permission');
-               $table->integer('user');
+
              });
         }
      }

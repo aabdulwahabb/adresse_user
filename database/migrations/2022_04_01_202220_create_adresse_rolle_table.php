@@ -17,14 +17,14 @@ class CreateAdresseRolleTable extends Migration
       if (!app()->environment('production')) {
              Schema::create('adresse_rolle', function (Blueprint $table) {
               $table->id();
-              $table->integer('adresse');
-              $table->string('objekt');
-              $table->string('parameter');
-              $table->string('praedikat');
-              $table->integer('projekt');
-              $table->string('subjekt');
-                $table->date('bis')->default(0000-00-00);
+              $table->integer('adresse')->index('adresse');
+              $table->integer('projekt')->index('projekt');
+              $table->string('subjekt')->index();
+              $table->string('praedikat')->index();
+              $table->string('objekt')->index();
+              $table->string('parameter')->index();
               $table->date('von');
+              $table->date('bis')->default(0000-00-00);
              });
           }
      }
