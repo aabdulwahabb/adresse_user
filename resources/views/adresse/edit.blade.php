@@ -24,7 +24,7 @@
     {{ csrf_field() }}
     {{ method_field('PATCH')}}
     <div class="form-group">
-        <label for="formGroupExampleInput">Type:</label>
+        <label for="formGroupExampleInput">Type:(dropdown)</label>
         <input type="text" name="typ" class="form-control" value="{{ $adress->typ }}">
     </div>
     <div class="form-group">
@@ -34,6 +34,10 @@
     <div class="form-group">
         <label for="formGroupExampleInput">Email:</label>
         <input type="text" name="email" class="form-control" value="{{ $adress->email }}">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Rolle:(dropdown und text)</label>
+        <input type="text" name="rolle" class="form-control" value="{{ $adress->subjekt }}">
     </div>
     <div class="form-group">
 </div>

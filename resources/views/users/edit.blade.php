@@ -24,12 +24,20 @@
     {{ csrf_field() }}
     {{ method_field('PATCH')}}
     <div class="form-group">
-        <label for="formGroupExampleInput">Type:</label>
+        <label for="formGroupExampleInput">Type:(dropdown)</label>
         <input type="text" name="type" class="form-control" value="{{ $user->type }}">
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Username:</label>
         <input type="text" name="username" class="form-control" value="{{ $user->username }}">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Password:</label>
+        <input type="password" name="password" class="form-control" value="{{ $user->password }}">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Repassword:</label>
+        <input type="password" name="repassword" class="form-control" value="{{ $user->repassword }}">
     </div>
     <div class="form-group">
 </div>

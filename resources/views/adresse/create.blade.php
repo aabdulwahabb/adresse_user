@@ -22,7 +22,7 @@
 <form action="{{ url('adresse') }}" method="POST" class="form-horizontal">
     {{ csrf_field() }}
     <div class="form-group">
-        <label for="formGroupExampleInput">Type:</label>
+        <label for="formGroupExampleInput">Type:(dropdown)</label>
         <input type="text" name="typ" class="form-control" value="{{ old('typ') }}">
     </div>
     <div class="form-group">
@@ -33,6 +33,24 @@
         <label for="formGroupExampleInput">Email:</label>
         <input type="text" name="email" class="form-control" value="{{ old('email') }}">
     </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Rolle:(dropdown und text)</label>
+        <input type="text" name="rolle" class="form-control" value="{{ old('rolle') }}">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Username:</label>
+        <input type="username" name="username" class="form-control" value="{{ old('username') }}">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Password:</label>
+        <input type="password" name="password" class="form-control" value="{{ old('password') }}">
+    </div>
+
+    <div class="form-group">
+        <label for="formGroupExampleInput">Repassword:</label>
+        <input type="password" name="repassword" class="form-control" value="{{ old('repassword') }}">
+    </div>
+
     <div class="form-group">
 </div>
 <!-- Add Button -->
