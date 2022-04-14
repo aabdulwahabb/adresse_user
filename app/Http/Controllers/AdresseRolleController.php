@@ -2,23 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\AdresseRolle;
+use App\Models\Adresse;
+use Illuminate\Support\Facades\Auth;
 use View;
 
 class AdresseRolleController extends Controller
 {
-  /**
-  * Display a listing of the resource.
-  */
- public function index()
- {
-   // get all the adresserolle
-   $adresserolle = AdresseRolle::latest();
-   // load the view and pass the adresserolle
-   return View('adresserolle.index',compact('adresserolle'));
- }
-
  /**
   * Show the form for creating a new resource.
   */
@@ -57,11 +49,16 @@ class AdresseRolleController extends Controller
   */
  public function show($id)
  {
-   // get the adressRolle
-   $adresseroll = AdresseRolle::find($id);
-
-   // show the view and pass the adressRolle to it
-   return View('adresserolle.show',compact('adresseroll'));
+     $adress = Adresse::find($id);
+     $adresserolle = $adress->adresseRolle()->get();
+     $projekt = Project::find($id);
+     $projektrolle = $projekt->projektRolle()->get();
+     // get all the adresserolle
+     $adresserolls = AdresseRolle::paginate(10);
+     return View('adresserolle.index', compact('adresserolls'))->with(array("adress" => $adress,
+         "adresserolle" => $adresserolle,
+         "projekt" => $projekt,
+         "projektrolle" => $projektrolle));
  }
 
  /**

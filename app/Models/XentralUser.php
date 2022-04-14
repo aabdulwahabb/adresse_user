@@ -69,7 +69,7 @@ class XentralUser extends Model
   */
  public function userright(): HasMany
  {
-     return $this->hasMany(Userright::class, 'user');
+     return $this->hasMany(UserRight::class, 'user');
  }
 
  /**

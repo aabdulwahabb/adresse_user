@@ -2,23 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Adresse;
+use App\Models\AdresseRolle;
+use App\Models\Project;
+use App\Models\XentralUser;
 use Illuminate\Http\Request;
 use App\Models\UserRight;
 use View;
 
 class UserRightController extends Controller
 {
-  /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-      // get all the Userrights
-      $userrights = Userright::latest();
-      // load the view and pass the Userrights
-      return View('userrights.index',compact('userrights'));
-    }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -59,11 +52,14 @@ class UserRightController extends Controller
      */
     public function show($id)
     {
-      // get the userright
-      $userright = Userright::find($id);
+        $user = XentralUser::find($id);
+        $userrights = $user->userright()->get();
 
-      // show the view and pass the userright to it
-      return View('userrights.show',compact('userright'));
+        // get all the $userrightes
+        $userrightes = UserRight::paginate(10);
+        return View('userrights.index', compact('userrightes'))->with(array("user" => $user,
+            "userrights" => $userrights,
+           ));
     }
 
     /**

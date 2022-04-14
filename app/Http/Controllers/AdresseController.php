@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Adresse;
+use App\Models\AdresseRolle;
+use Illuminate\Support\Facades\Auth;
 use View;
 
 class AdresseController extends Controller
@@ -18,6 +20,7 @@ class AdresseController extends Controller
     // load the view and pass the adresse
     return View('adresse.index',compact('adresse'));
   }
+
 
   /**
    * Show the form for creating a new resource.
@@ -59,9 +62,10 @@ class AdresseController extends Controller
   {
     // get the adress
     $adress = Adresse::find($id);
+      $adresserolle = $adress->adresseRolle()->get();
 
     // show the view and pass the adress to it
-    return View('adresse.show',compact('adress'));
+    return View('adresse.show',compact('adress'))->with('adresserolle', $adresserolle);
   }
 
   /**

@@ -59,4 +59,14 @@ class Project extends Model
     {
         return $this->hasMany(Item::class, 'projekt');
     }
+
+    /**
+     * Adresse has many  adresse_rollen
+     *
+     * @return HasMany
+     */
+    public function projektRolle(): HasMany
+    {
+        return $this->hasMany(AdresseRolle::class, 'projekt');
+    }
 }

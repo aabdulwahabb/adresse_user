@@ -5,7 +5,8 @@
 <nav class="navbar navbar-inverse">
     <ul class="nav navbar-nav">
         <li><a href="{{ URL::to('/create') }}">Create a Adresse</a>
-          <li><a href="{{ URL::to('users/') }}">View All Users</a>
+        <li><a href="{{ URL::to('/') }}">View All Adresse</a>
+        <li><a href="{{ URL::to('users/') }}">View All Users</a>
     </ul>
 </nav>
 <h1>All the Adresse</h1>
@@ -22,6 +23,7 @@
             <td>Type</td>
             <td>Name</td>
             <td>Email</td>
+            <td>Action</td>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +31,7 @@
         <tr>
             <td>{{ $value->id }}</td>
             <td>{{ $value->typ }}</td>
+            <td>{{ $value->name }}</td>
             <td>{{ $value->email }}</td>
 
             <!-- we will also add show, edit, and delete buttons -->
@@ -36,6 +39,9 @@
 
                 <!-- show the adress (uses the show method found at GET /adresse/{id} -->
                 <a class="btn btn-small btn-success" href="{{ URL::to('/adresse/' . $value->id) }}">Show this Adress</a>
+
+                <!-- show the adressroll (uses the show method found at GET /adresse/{id} -->
+                <a class="btn btn-small btn-success" href="{{ URL::to('/adresserolle/adresse/' . $value->id) }}">Show Rolle</a>
 
                 <!-- edit this adress (uses the edit method found at GET /adresse/{id}/edit -->
                 <a class="btn btn-small btn-info" href="{{ URL::to('/adresse/' . $value->id . '/edit') }}">Edit this Adress</a>

@@ -26,8 +26,14 @@ Route::get('/create', [AdresseController::class, 'create'])->name('adresse.creat
 Route::get('/adresse/{id}', [AdresseController::class, 'show'])->name('adresse.show');
 Route::get('adresse/{id}/edit', [AdresseController::class, 'edit'])->name('adresse.edit');
 
+//Adresse Rolle Page
+Route::get('/adresserolle/adresse/{id}', [AdresseRolleController::class, 'show'])->name('adresserolle.index');
+
 
 // User Page
 Route::get('/users', [XentralUserController::class, 'index'])->name('users.index');
 Route::get('/users/{id}', [XentralUserController::class, 'show'])->name('users.show');
 Route::get('/users/{id}/edit', [XentralUserController::class, 'edit'])->name('user.edit');
+
+// Userrights Page
+Route::get('/userrights/users/{id}', [UserRightController::class, 'show'])->name('userrights.index');

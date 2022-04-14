@@ -6,6 +6,7 @@
     <ul class="nav navbar-nav">
        <li><a href="{{ URL::to('/create') }}">Create a Adresse</a>
         <li><a href="{{ URL::to('/') }}">View All Adresse</a>
+        <li><a href="{{ URL::to('users/') }}">View All Users</a>
     </ul>
 </nav>
 <h1>All the Users</h1>
@@ -21,6 +22,7 @@
             <td>ID</td>
             <td>Username</td>
             <td>Type</td>
+            <td>Action</td>
         </tr>
     </thead>
     <tbody>
@@ -35,6 +37,9 @@
 
                 <!-- show the user (uses the show method found at GET /users/{id} -->
                 <a class="btn btn-small btn-success" href="{{ URL::to('/users/' . $value->id) }}">Show this User</a>
+
+                <!-- show the user (uses the show method found at GET userrights/users/{id} -->
+                <a class="btn btn-small btn-success" href="{{ URL::to('userrights/users/' . $value->id) }}">Show Userrights</a>
 
                 <!-- edit this user (uses the edit method found at GET /users/{id}/edit -->
                 <a class="btn btn-small btn-info" href="{{ URL::to('/users/' . $value->id . '/edit') }}">Edit this User</a>

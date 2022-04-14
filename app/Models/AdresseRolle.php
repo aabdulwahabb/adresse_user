@@ -6,6 +6,7 @@ use App\Scopes\ProjectScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Arr;
@@ -58,7 +59,7 @@ class AdresseRolle extends Model
    */
   public function projekt(): HasMany
   {
-      return $this->hasMany(Projekt::class, 'projekt');
+      return $this->hasMany(Project::class, 'projekt');
   }
 
   /**
@@ -67,7 +68,7 @@ class AdresseRolle extends Model
    * @return BelongsTo
    */
   public function adresse(): BelongsTo {
-      return $this->belongsTo(Adresse::class, 'adresse');
+      return $this->belongsTo(Adresse::class);
   }
     /**
      * apply model scopes
