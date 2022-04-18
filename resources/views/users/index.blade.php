@@ -4,9 +4,10 @@
 <div class="container">
 <nav class="navbar navbar-inverse">
     <ul class="nav navbar-nav">
-       <li><a href="{{ URL::to('/create') }}">Create a Adresse</a>
-        <li><a href="{{ URL::to('/') }}">View All Adresse</a>
-        <li><a href="{{ URL::to('users/') }}">View All Users</a>
+       <li><a href="{{ URL::to('/create') }}">Adresse & User anlegen</a>
+        <li><a href="{{ URL::to('/') }}">Alle Adresse</a>
+        <li><a href="{{ URL::to('users/') }}">Alle Users</a>
+        <li><a href="{{ URL::to('projekte/') }}">Alle Projekte</a>
     </ul>
 </nav>
 <h1>All the Users</h1>
@@ -32,26 +33,13 @@
             <td>{{ $value->username }}</td>
             <td>{{ $value->type }}</td>
 
-            <!-- we will also add show, edit, and delete buttons -->
+            <!-- we will also add show, and delete buttons -->
             <td>
-
                 <!-- show the user (uses the show method found at GET /users/{id} -->
                 <a class="btn btn-small btn-success" href="{{ URL::to('/users/' . $value->id) }}">Show this User</a>
 
                 <!-- show the user (uses the show method found at GET userrights/users/{id} -->
-                <a class="btn btn-small btn-success" href="{{ URL::to('userrights/users/' . $value->id) }}">Show Userrights</a>
-
-                <!-- edit this user (uses the edit method found at GET /users/{id}/edit -->
-                <a class="btn btn-small btn-info" href="{{ URL::to('/users/' . $value->id . '/edit') }}">Edit this User</a>
-
-                <!-- delete the user (uses the destroy method DESTROY /users/{id} -->
-                <form action="./users/{{$value->id }}"  onsubmit="return confirm('Are you sure to delete: {{ $value->username}}')" method="POST">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fa fa-btn fa-trash">Delete</i>
-                    </button>
-                </form>
+                <a class="btn btn-small btn-info" href="{{ URL::to('userrights/users/' . $value->id) }}">Show Userrights</a>
             </td>
         </tr>
     @endforeach

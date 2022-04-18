@@ -19,6 +19,12 @@ class XentralUser extends Model
  public $timestamps = false;
  protected $guarded = [];
 
+ protected $hidden = [
+   'password',
+   'repassword',
+   'remember_token'
+ ];
+
  protected $casts = [
      'username' => 'string'
  ];

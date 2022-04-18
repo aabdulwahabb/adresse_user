@@ -31,25 +31,18 @@ class XentralUserController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
-  {
-    // validate
+   /*
+public function store(Request $request) {
+    $this->validate($request, [
+       'username' => 'required|min:5|max:255',
+       'password' => 'required|min:8|max:255',
+    ]);
+    $newuser = new XentralUser();
+    $newuser->username = request('username');
+    $newuser->password = request('password');
+    $newuser->save();
 
-            $this->validate($request, [
-                'adresse'       => 'required|numeric',
-                'type'       => 'required',
-                'username'      => 'required',
-                ]);
-
-
-                // store
-               XentralUser::create([
-                'adresse'      =>  $request->integer,
-                'type'      =>  $request->string,
-                'username'      =>  $request->string,
-              ]);
-       return back();
-
+    return redirect('/');
   }
 
   /**

@@ -4,12 +4,13 @@
 <div class="container">
 <nav class="navbar navbar-inverse">
     <ul class="nav navbar-nav">
-        <li><a href="{{ URL::to('/create') }}">Create a Adresse</a>
-        <li><a href="{{ URL::to('/') }}">View All Adresse</a>
-        <li><a href="{{ URL::to('users/') }}">View All Users</a>
+      <li><a href="{{ URL::to('/create') }}">Adresse & User anlegen</a>
+       <li><a href="{{ URL::to('/') }}">Alle Adresse</a>
+       <li><a href="{{ URL::to('users/') }}">Alle Users</a>
+       <li><a href="{{ URL::to('projekte/') }}">Alle Projekte</a>
     </ul>
 </nav>
-<h1>All the Adresse</h1>
+<h1>All Adresse</h1>
 
 <!-- will be used to show any messages -->
 @if (Session::has('message'))
@@ -41,19 +42,7 @@
                 <a class="btn btn-small btn-success" href="{{ URL::to('/adresse/' . $value->id) }}">Show this Adress</a>
 
                 <!-- show the adressroll (uses the show method found at GET /adresse/{id} -->
-                <a class="btn btn-small btn-success" href="{{ URL::to('/adresserolle/adresse/' . $value->id) }}">Show Rolle</a>
-
-                <!-- edit this adress (uses the edit method found at GET /adresse/{id}/edit -->
-                <a class="btn btn-small btn-info" href="{{ URL::to('/adresse/' . $value->id . '/edit') }}">Edit this Adress</a>
-
-                <!-- delete the adress (uses the destroy method DESTROY /adresse/{id} -->
-                <form action="./adresse/{{$value->id }}"  onsubmit="return confirm('Are you sure to delete: {{ $value->name}}')" method="POST">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fa fa-btn fa-trash">Delete</i>
-                    </button>
-                </form>
+                <a class="btn btn-small btn-info" href="{{ URL::to('/adresserolle/adresse/' . $value->id) }}">Show Rolle</a>
             </td>
         </tr>
     @endforeach

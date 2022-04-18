@@ -62,7 +62,7 @@ class CreateAdresseTable extends Migration
                 $table->decimal('bonus9_ab',10,2)->nullable();
                 $table->string('bundesland',64)->nullable();
                 $table->string('bundesstaat',32)->default('');
-                $table->string('email')->index();
+                $table->string('email')->index()->unique();
                 $table->text('filiale')->nullable();
                 $table->integer('firma');
                 $table->boolean('firmensepa')->default(0);

@@ -23,26 +23,18 @@ class AdresseRolleController extends Controller
  /**
   * Store a newly created resource in storage.
   */
- public function store(Request $request)
+ /*
+ public function store()
  {
-   // validate
-
-           $this->validate($request, [
-               'adresse'       => 'required|numeric',
-               'objekt'       => 'required',
-               'projekt'      => 'required|numeric',
-               ]);
-
-
-               // store
-              AdresseRolle::create([
-               'adresse'      =>  $request->integer,
-               'objekt'      =>  $request->string,
-               'projekt'      =>  $request->integer,
+ // validate // store
+     $attributes = request()->validate([
+             'projekt'       => Project::where('abkuerzung', '=', $request->input('projekt'))->first();
+             => 'required',
              ]);
-      return back();
+             AdresseRolle::create($attributes);
 
- }
+             return redirect('/');
+}
 
  /**
   * Display the specified resource.

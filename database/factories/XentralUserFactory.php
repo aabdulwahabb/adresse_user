@@ -28,10 +28,12 @@ class XentralUserFactory extends Factory
     {
         return [
             'adresse' => random_int(1,5),
-            'passwordmd5' => $this->faker->regexify('[A-Za-z0-9]{10}'),
-            'passwordsha512' => $this->faker->regexify('[A-Za-z0-9]{10}'),
-            'salt' => $this->faker->regexify('[A-Za-z0-9]{10}'),
-            'password' => $this->faker->regexify('[A-Za-z0-9]{10}'),
+            'passwordmd5' => $this->faker->regexify(bcrypt('[A-Za-z0-9]{10}')),
+            'passwordsha512' => $this->faker->regexify(bcrypt('[A-Za-z0-9]{10}')),
+            'salt' => $this->faker->regexify(bcrypt('[A-Za-z0-9]{10}')),
+            'password' => $this->faker->regexify(bcrypt('[A-Za-z0-9]{10}')),
+            'repassword' => $this->faker->regexify(bcrypt('[A-Za-z0-9]{10}')),
+            'remember_token' => $this->faker->regexify(bcrypt('[A-Za-z0-9]{10}')),
             'firma' => 1,
             'logdatei' => now(),
             'username' => $this->faker->regexify('[a-z]{10}'),

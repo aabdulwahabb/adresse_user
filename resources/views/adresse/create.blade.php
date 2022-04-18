@@ -19,38 +19,37 @@
         </ul>
     </div>
 @endif
-<form action="{{ url('adresse') }}" method="POST" class="form-horizontal">
+<form action="{{ url('/adresse') }}" method="POST" class="form-horizontal">
     {{ csrf_field() }}
     <div class="form-group">
-        <label for="formGroupExampleInput">Type:(dropdown)</label>
-        <input type="text" name="typ" class="form-control" value="{{ old('typ') }}">
+        <label for="formGroupExampleInput">Type:</label>
+        <input type="text" name="typ" id="typ" required class="form-control" value="{{ old('typ') }}">
+        <small class="form-text text-muted">Type Ihr Konto: Frau oder Herr</small>
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Name:</label>
-        <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+        <input type="text" name="name" id="name" required class="form-control" value="{{ old('name') }}">
+        <small class="form-text text-muted">Vor und Nachname</small>
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Email:</label>
-        <input type="text" name="email" class="form-control" value="{{ old('email') }}">
+        <input type="email" name="email" id="email" required class="form-control" value="{{ old('email') }}">
+        <small class="form-text text-muted">Bitte gültige Email</small>
     </div>
     <div class="form-group">
-        <label for="formGroupExampleInput">Rolle:(dropdown und text)</label>
-        <input type="text" name="rolle" class="form-control" value="{{ old('rolle') }}">
+        <label for="formGroupExampleInput">Project:</label>
+        <input type="text" name="projekt" id="projekt" required  class="form-control" value="{{ old('projekt') }}">
+        <small class="form-text text-muted">Entweder abkürzung: vm000 oder alle für alle projekte</small>
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Username:</label>
-        <input type="username" name="username" class="form-control" value="{{ old('username') }}">
+        <input type="username" name="username" id="username" required class="form-control" value="{{ old('username') }}">
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Password:</label>
-        <input type="password" name="password" class="form-control" value="{{ old('password') }}">
+        <input type="password" name="password" id="password" required class="form-control" value="{{ old('password') }}">
+        <small class="form-text text-muted">Mindestens 8 Zeichen</small>
     </div>
-
-    <div class="form-group">
-        <label for="formGroupExampleInput">Repassword:</label>
-        <input type="password" name="repassword" class="form-control" value="{{ old('repassword') }}">
-    </div>
-
     <div class="form-group">
 </div>
 <!-- Add Button -->

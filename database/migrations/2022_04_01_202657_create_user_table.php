@@ -17,7 +17,7 @@ class CreateUserTable extends Migration
       if (!app()->environment('production')) {
              Schema::create('user', function (Blueprint $table) {
                $table->id();
-               $table->string('username',100)->nullable();
+               $table->string('username',100)->nullable()->unique();
                $table->string('password')->nullable();
                $table->integer('activ')->nullable()->default(0);
                $table->string('type',100)->nullable()->default('');

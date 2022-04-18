@@ -21,7 +21,7 @@ class AdresseRolle extends Model
   protected $guarded = [];
 
   protected $casts = [
-      'objekt' => 'string'
+      'subjekt' => 'string'
   ];
 
 

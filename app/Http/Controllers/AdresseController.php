@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Adresse;
+use App\Models\XentralUser;
+use App\Models\Userright;
 use App\Models\AdresseRolle;
+use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use View;
 
@@ -34,26 +37,44 @@ class AdresseController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
-  {
-    // validate
 
-            $this->validate($request, [
-                'typ'       => 'required',
-                'name'       => 'required',
-                'email'      => 'required|email',
-                ]);
-
-
-                // store
-               Adresse::create([
-                'typ'      =>  $request->string,
-                'name'      =>  $request->string,
-                'email'      =>  $request->email,
-              ]);
-       return back();
-
-  }
+   public function store(Request $request)
+   {
+             // validate adresse
+             $this->validate($request, [
+                 'typ'       => 'required|min:4|max:4',
+                 'name'       => 'required|max:255',
+                 'email'   => 'required|max:255',
+                 ]);
+                 // store adresse
+              $neuadresse = Adresse::create([
+                 'typ'      =>  request('typ'),
+                 'name'      =>  request('name'),
+                 'email'  =>  request('email'),
+               ]);
+               // validate user
+                 $this->validate($request, [
+                     'username'       => 'required|max:255',
+                     'password'       => 'required|min:8|max:255',
+                     ]);
+                 // store user
+                XentralUser::create([
+                 'username'      =>  request('username'),
+                 'password'      =>  request('password'),
+                 'adresse'       =>  $neuadresse->id,
+               ]);
+               // validate rolle
+               $this->validate($request, [
+                   'projekt'       => 'required|max:5|min:5',
+                   ]);
+               // store rolle
+               $projektinput = Project::select('id')->where('abkuerzung', request('projekt'))->first();
+              AdresseRolle::create([
+               'projekt'      => $projektinput->id,
+               'adresse'       =>  $neuadresse->id,
+             ]);
+       return redirect('/');
+   }
 
   /**
    * Display the specified resource.

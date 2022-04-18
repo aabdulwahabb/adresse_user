@@ -20,7 +20,7 @@ class UserRight extends Model
   protected $guarded = [];
 
   protected $casts = [
-      'username' => 'string'
+      'module' => 'string'
   ];
 
 
