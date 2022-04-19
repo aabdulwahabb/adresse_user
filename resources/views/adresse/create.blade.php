@@ -4,13 +4,14 @@
 <div class="container">
       <nav class="navbar navbar-inverse">
           <ul class="nav navbar-nav">
-              <li><a href="{{ URL::to('/') }}">View All Adresse</a></li>
-              <li><a href="{{ URL::to('users/') }}">View All Users</a>
+              <li><a href="{{ URL::to('/') }}">Alle Adresse</a>
+              <li><a href="{{ URL::to('users/') }}">Alle Users</a>
+              <li><a href="{{ URL::to('projekte/') }}">Alle Projekte</a>
           </ul>
       </nav>
-<h1>Create a Adresse, Rolle, User and Userrights </h1>
+<h1>Create Adresse, Rolle, and Login Xentral && Stechuhr User</h1>
 <!-- if there are creation errors, they will show here -->
-@if (count($errors) > 0)
+    @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -23,7 +24,10 @@
     {{ csrf_field() }}
     <div class="form-group">
         <label for="formGroupExampleInput">Type:</label>
-        <input type="text" name="typ" id="typ" required class="form-control" value="{{ old('typ') }}">
+        <input type="text" name="typ" id="typ" required class= "form-control" value="{{ old('typ') }}">
+        @error('typ')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <small class="form-text text-muted">Type Ihr Konto: Frau oder Herr</small>
     </div>
     <div class="form-group">

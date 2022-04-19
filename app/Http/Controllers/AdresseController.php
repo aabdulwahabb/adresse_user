@@ -42,9 +42,9 @@ class AdresseController extends Controller
    {
              // validate adresse
              $this->validate($request, [
-                 'typ'       => 'required|min:4|max:4',
-                 'name'       => 'required|max:255',
-                 'email'   => 'required|max:255',
+                 'typ'       => 'required|string|min:4|max:4',
+                 'name'       => 'required|string|max:255',
+                 'email'   => 'required|string|unique:adresse|max:255',
                  ]);
                  // store adresse
               $neuadresse = Adresse::create([
@@ -54,7 +54,7 @@ class AdresseController extends Controller
                ]);
                // validate user
                  $this->validate($request, [
-                     'username'       => 'required|max:255',
+                     'username'       => 'required|string|max:255',
                      'password'       => 'required|min:8|max:255',
                      ]);
                  // store user
@@ -65,14 +65,14 @@ class AdresseController extends Controller
                ]);
                // validate rolle
                $this->validate($request, [
-                   'projekt'       => 'required|max:5|min:5',
+                   'projekt'       => 'required|string|max:5|min:5',
                    ]);
                // store rolle
                $projektinput = Project::select('id')->where('abkuerzung', request('projekt'))->first();
-              AdresseRolle::create([
-               'projekt'      => $projektinput->id,
+           AdresseRolle::create([
+               'projekt'      =>   $projektinput->id,
                'adresse'       =>  $neuadresse->id,
-             ]);
+           ]);
        return redirect('/');
    }
 
