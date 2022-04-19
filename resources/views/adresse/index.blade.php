@@ -33,10 +33,8 @@
             <td>{{ $value->typ }}</td>
             <td>{{ $value->name }}</td>
             <td>{{ $value->email }}</td>
-
             <!-- we will also add show, edit, and delete buttons -->
             <td>
-
                 <!-- show the adress (uses the show method found at GET /adresse/{id} -->
                 <a class="btn btn-small btn-success" href="{{ URL::to('/adresse/' . $value->id) }}">Show this Adress</a>
 
@@ -50,3 +48,28 @@
   {!! $adresse->render() !!}
 </div>
 @endsection
+<footer>
+    <p class="copyright">© 2022 Versandmanufaktur</p>
+</footer>
+<style>
+    footer {
+        height: 30px;
+        width: 100%;
+        background-color: black;
+        position: fixed;
+        bottom:0;
+    }
+
+    p.copyright {
+        position: fixed;
+        width: 100%;
+        color: darkgray;
+        line-height: 40px;
+        font-size: 1.0em;
+        text-align: center;
+        bottom: -16px;
+    }
+</style>
+
+
+
