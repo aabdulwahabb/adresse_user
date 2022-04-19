@@ -20,6 +20,7 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
+            <td>ID</td>
             <td>Projekt Name</td>
             <td>Abkürzung</td>
             <td>Verantwortlicher</td>
@@ -28,6 +29,7 @@
     <tbody>
     @foreach($projekte as $key => $value)
         <tr>
+            <td>{{ $value->id }}</td>
             <td>{{ $value->name }}</td>
             <td>{{ $value->abkuerzung }}</td>
             <td>{{ $value->verantwortlicher }}</td>

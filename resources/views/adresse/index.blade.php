@@ -8,6 +8,8 @@
        <li><a href="{{ URL::to('/') }}">Alle Adresse</a>
        <li><a href="{{ URL::to('users/') }}">Alle Users</a>
        <li><a href="{{ URL::to('projekte/') }}">Alle Projekte</a>
+             <li><label for="formGroupExampleInput">Suche</label>
+             <input type="text" name="name" id="name" required class="form-control">
     </ul>
 </nav>
 <h1>All Adresse</h1>
