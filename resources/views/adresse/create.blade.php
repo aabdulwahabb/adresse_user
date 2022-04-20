@@ -2,13 +2,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-      <nav class="navbar navbar-inverse">
-          <ul class="nav navbar-nav">
-              <li><a href="{{ URL::to('/') }}">Alle Adresse</a>
-              <li><a href="{{ URL::to('users/') }}">Alle Users</a>
-              <li><a href="{{ URL::to('projekte/') }}">Alle Projekte</a>
-          </ul>
-      </nav>
+    @extends('components.navigation')
 <h1>Create Adresse, Rolle, and Login Xentral && Stechuhr User</h1>
 <!-- if there are creation errors, they will show here -->
     @if ($errors->any())
@@ -25,9 +19,6 @@
     <div class="form-group">
         <label for="formGroupExampleInput">Type:</label>
         <input type="text" name="typ" id="typ" required class= "form-control" value="{{ old('typ') }}">
-        @error('typ')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
         <small class="form-text text-muted">Type Ihr Konto: Frau oder Herr</small>
     </div>
     <div class="form-group">
@@ -67,3 +58,4 @@
 </form>
 </div>
 @endsection
+@extends('components.footer')

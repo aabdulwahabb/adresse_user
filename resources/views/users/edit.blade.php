@@ -2,13 +2,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-      <nav class="navbar navbar-inverse">
-          <ul class="nav navbar-nav">
-            <li><a href="{{ URL::to('/create') }}">Create a Adresse</a>
-            <li><a href="{{ URL::to('/') }}">View All Adresse</a></li>
-            <li><a href="{{ URL::to('users/') }}">View All Users</a>
-          </ul>
-      </nav>
+    @extends('components.navigation')
 <h1>Edit {{ $user->username }}</h1>
 <!-- if there are creation errors, they will show here -->
 @if (count($errors) > 0)
@@ -52,3 +46,4 @@
 </form>
 </div>
 @endsection
+@extends('components.footer')
