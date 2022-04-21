@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Hash;
 
 class SessionController extends Controller
 {
@@ -11,31 +16,32 @@ class SessionController extends Controller
         return view('components.login');
     }
 
-    public function store()
+    public function authenticate(Request $request)
     {
-        // validate the request
-        $attributes = request()->validate([
-           'username' => 'required|string',
-            'password' => 'required'
+        request()->validate([
+            'username' => 'required',
+            'password' => 'required',
         ]);
-
-        //attempt to authenticate and log in the user
-        // based on the provided credentials
-        if(! auth()->attempt($attributes)) {
-            // auth failed.? and redirect with a success flash message
-            throw ValidationException::withMessages([
-                'username' => 'Your provided credentials could not be verified.'
-            ]);
+        $credentials = $request->only('username', 'password');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
         }
-        // session fixation
-        session()->regenerate();
-        return redirect('/adresse')->with('success', 'welcome back!');
+            return Redirect::to("/")->withSuccess('Oppes! You have entered invalid credentials');
     }
 
-    public function destroy()
+    public function home()
     {
-        auth()->logout();
-        return redirect('/')->with('success', 'Goodbye!');
+
+        if(Auth::check()){
+            return view('/adresse');
+        }
+        return Redirect::to("/")->withSuccess('Opps! You do not have access');
+    }
+
+    public function logout() {
+        Session::flush();
+        Auth::logout();
+        return Redirect('/');
     }
 
 }

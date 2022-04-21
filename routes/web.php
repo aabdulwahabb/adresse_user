@@ -11,7 +11,7 @@ use App\Http\Controllers\SessionController;
 
 //login
 Route::get('/', [SessionController::class, 'create'])->middleware('guest');
-Route::post('login', [SessionController::class, 'store'])->middleware('guest');
+Route::post('/adresse', [SessionController::class, 'authenticate'])->middleware('guest');
 
 // Adresse Page
 Route::get('/adresse', [AdresseController::class, 'index'])->name('adresse.index');
@@ -19,7 +19,7 @@ Route::get('/adresse/create', [AdresseController::class, 'create'])->name('adres
 Route::get('/adresse/{id}', [AdresseController::class, 'show'])->name('adresse.show');
 Route::get('adresse/{id}/edit', [AdresseController::class, 'edit'])->name('adresse.edit');
 // Store Adresse
-    Route::post('adresse', [AdresseController::class, 'store']);
+    Route::post('/adresse', [AdresseController::class, 'store']);
 
 //Adresse Rolle Page
 Route::get('/adresserolle/adresse/{id}', [AdresseRolleController::class, 'show'])->name('adresserolle.index');
@@ -35,4 +35,4 @@ Route::get('/projekte', [ProjektController::class, 'index'])->name('projekte.ind
 Route::get('/userrights/users/{id}', [UserRightController::class, 'show'])->name('userrights.index');
 
 //logout
-Route::post('/', [SessionController::class, 'destroy'])->middleware('auth');
+Route::post('/', [SessionController::class, 'logout'])->middleware('auth');

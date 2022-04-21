@@ -73,7 +73,7 @@ class AdresseController extends Controller
                'projekt'      =>   $projektinput->id,
                'adresse'       =>  $neuadresse->id,
            ]);
-       return redirect('/');
+       return redirect('/adresse')->with('success', 'Adresse wurde erstellt!');;
    }
 
   /**
