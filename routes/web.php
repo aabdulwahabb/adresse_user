@@ -6,24 +6,16 @@ use App\Http\Controllers\AdresseRolleController;
 use App\Http\Controllers\XentralUserController;
 use App\Http\Controllers\UserRightController;
 use App\Http\Controllers\ProjektController;
+use App\Http\Controllers\SessionController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-/*
-Route::get('/', function () {
-    return view('welcome');
-});*/
+
+//login
+Route::get('/', [SessionController::class, 'create'])->middleware('guest');
+Route::post('login', [SessionController::class, 'store'])->middleware('guest');
+
 // Adresse Page
-Route::get('/', [AdresseController::class, 'index'])->name('adresse.index');
-Route::get('/create', [AdresseController::class, 'create'])->name('adresse.create');
+Route::get('/adresse', [AdresseController::class, 'index'])->name('adresse.index');
+Route::get('/adresse/create', [AdresseController::class, 'create'])->name('adresse.create');
 Route::get('/adresse/{id}', [AdresseController::class, 'show'])->name('adresse.show');
 Route::get('adresse/{id}/edit', [AdresseController::class, 'edit'])->name('adresse.edit');
 // Store Adresse
@@ -43,3 +35,6 @@ Route::get('/users/{id}/edit', [XentralUserController::class, 'edit'])->name('us
 Route::get('/projekte', [ProjektController::class, 'index'])->name('projekte.index');
 // Userrights Page
 Route::get('/userrights/users/{id}', [UserRightController::class, 'show'])->name('userrights.index');
+
+//logout
+Route::post('/', [SessionController::class, 'destroy'])->middleware('auth');

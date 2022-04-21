@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -61,12 +62,12 @@ class Project extends Model
     }
 
     /**
-     * Adresse has many  adresse_rollen
+     * Adresse_rolle has many  projekt
      *
-     * @return HasMany
+     * @return BelongsTo
      */
-    public function projektRolle(): HasMany
+    public function projekt(): BelongsTo
     {
-        return $this->hasMany(AdresseRolle::class, 'projekt');
+        return $this->belongsTo(Project::class, 'projekt');
     }
 }

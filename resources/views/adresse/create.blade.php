@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     @extends('components.navigation')
-<h1>Create Adresse, Rolle, and Login Xentral && Stechuhr User</h1>
+<h1>Create Adresse, Rolle, Xentral and Stechuhr User</h1>
 <!-- if there are creation errors, they will show here -->
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -38,7 +38,7 @@
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Username:</label>
-        <input type="username" name="username" id="username" required class="form-control" value="{{ old('username') }}">
+        <input type="text" name="username" id="username" required class="form-control" value="{{ old('username') }}">
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Password:</label>

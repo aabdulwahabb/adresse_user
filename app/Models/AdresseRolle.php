@@ -55,11 +55,11 @@ class AdresseRolle extends Model
   /**
    * Adresse_rolle has many  projekt
    *
-   * @return HasMany
+   * @return BelongsTo
    */
-  public function projekt(): HasMany
+  public function projekt(): BelongsTo
   {
-      return $this->hasMany(Project::class, 'projekt');
+      return $this->belongsTo(Project::class);
   }
 
   /**
