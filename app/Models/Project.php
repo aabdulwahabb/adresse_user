@@ -66,8 +66,8 @@ class Project extends Model
      *
      * @return BelongsTo
      */
-    public function projekt(): BelongsTo
+    public function rolleprojekt(): BelongsTo
     {
-        return $this->belongsTo(Project::class, 'projekt');
+        return $this->belongsTo(AdresseRolle::class, 'projekt');
     }
 }

@@ -41,11 +41,10 @@ class AdresseRolleController extends Controller
   */
  public function show($id)
  {
-     $adresseroll = AdresseRolle::find($id);
      $adress = Adresse::find($id);
      $adresserolle = $adress->adresseRolle()->get();
      $projekt = Project::find($id);
-     $projektrolle = $projekt->projektRolle()->get();
+     $projektrolle = $projekt->rolleprojekt()->get();
      // get all the adresserolle
      $adresserolls = AdresseRolle::paginate(10);
      return View('adresserolle.index', compact('adresserolls'))->with(array("adress" => $adress,
