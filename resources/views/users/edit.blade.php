@@ -18,27 +18,26 @@
     {{ csrf_field() }}
     {{ method_field('PATCH')}}
     <div class="form-group">
-        <label for="formGroupExampleInput">Type:(dropdown)</label>
-        <input type="text" name="type" class="form-control" value="{{ $user->type }}">
-    </div>
-    <div class="form-group">
         <label for="formGroupExampleInput">Username:</label>
-        <input type="text" name="username" class="form-control" value="{{ $user->username }}">
+        <input type="text" name="username" id="username" required class="form-control" value="{{ old('username') }}">
+        @if ($errors->has('username'))
+            <span class="error">{{ $errors->first('username') }}</span>
+        @endif
     </div>
-    <div class="form-group">
+        <div class="form-group">
         <label for="formGroupExampleInput">Password:</label>
-        <input type="password" name="password" class="form-control" value="{{ $user->password }}">
-    </div>
-    <div class="form-group">
-        <label for="formGroupExampleInput">Repassword:</label>
-        <input type="password" name="repassword" class="form-control" value="{{ $user->repassword }}">
+        <input type="password" name="password" id="password" required class="form-control" value="{{ old('password') }}">
+        <small class="form-text text-muted">Mindestens 8 Zeichen</small>
+        @if ($errors->has('password'))
+            <span class="error">{{ $errors->first('password') }}</span>
+        @endif
     </div>
     <div class="form-group">
 </div>
 <!-- Update Button -->
  <div class="form-group">
      <div class="col-sm-offset-3 col-sm-6">
-         <button type="submit" class="btn btn-default">
+         <button type="submit" class="btn btn-small btn-success">
              <i class="fa fa-btn fa-plus">update</i>
          </button>
      </div>

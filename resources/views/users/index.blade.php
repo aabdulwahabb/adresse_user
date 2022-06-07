@@ -33,6 +33,9 @@
 
                 <!-- show the user (uses the show method found at GET userrights/users/{id} -->
                 <a class="btn btn-small btn-info" href="{{ URL::to('userrights/users/' . $value->id) }}">Show Userrights</a>
+
+                <!-- edit this user (uses the edit method found at GET /users/{id}/edit -->
+                <a class="btn btn-danger" href="{{ URL::to('users/' . $value->id . '/edit') }}">Edit this User</a>
             </td>
         </tr>
     @endforeach

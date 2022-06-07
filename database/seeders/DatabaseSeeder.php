@@ -16,6 +16,7 @@ use App\Models\Order;
 use App\Models\OrderReturn;
 use App\Models\Project;
 use App\Models\Storage;
+use App\Models\Team;
 use App\Models\TracyUser;
 use App\Models\Item;
 use App\Models\Adresse;
@@ -102,6 +103,10 @@ class DatabaseSeeder extends Seeder
                     XentralUser::factory(5)
                         ->has(Adresse::factory()->count(1), 'adresse')
                         ->has(UserRight::factory()->count(3), 'userright')
+                        ->create();
+
+                    //Create Teams
+                    Team::factory(5)
                         ->create();
         }
     }

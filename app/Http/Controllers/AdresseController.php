@@ -45,13 +45,22 @@ class AdresseController extends Controller
                  'typ'       => 'required|string|min:4|max:4',
                  'name'       => 'required|string|max:255',
                  'email'   => 'required|string|unique:adresse|max:255',
+                 'abteilung' => 'required|string|unique:team',
+                 'telefon' => 'integer|unique:adresse',
+                 'ansprechpartner' => 'string|unique:adresse',
+                 'freifeld1' => 'string',
                  ]);
                  // store adresse
               $neuadresse = Adresse::create([
                  'typ'      =>  request('typ'),
                  'name'      =>  request('name'),
                  'email'  =>  request('email'),
+                 'abteilung'  =>  request('abteilung'),
+                 'telefon'  =>  request('telefon'),
+                 'ansprechpartner'  =>  request('ansprechpartner'),
+                 'freifeld1'  =>  request('freifeld1'),
                ]);
+
                // validate user
                  $this->validate($request, [
                      'username'       => 'required|string|max:255',
@@ -61,17 +70,38 @@ class AdresseController extends Controller
                 XentralUser::create([
                  'username'      =>  request('username'),
                  'password'      =>  request('password'),
+                 'type'      =>  'standard',
                  'adresse'       =>  $neuadresse->id,
+                 'setting'      =>   'Tjs=',
+                 'startseite'      =>   'index.php?module=welcome&action=start',
+                 'logdatei'      =>   now(),
+                 'activ'      =>   1,
+                 'sprachebevorzugen'      =>   'deutsch',
                ]);
-               // validate rolle
-               $this->validate($request, [
-                   'projekt'       => 'required|string|max:5|min:5',
-                   ]);
+
+       // store stechuhr user
+       XentralUser::create([
+           $stechuhruser = 'username'      =>  '100'.random_int(100, 999),
+           'adresse'       =>  $neuadresse->id,
+           'setting'      =>   'Tjs=',
+           'startseite'      =>   'index.php?module=stechuhr&action=list',
+           'logdatei'      =>   now(),
+           'activ'      =>   1,
+           'sprachebevorzugen'      =>   'deutsch',
+           'stechuhrdevice'      =>   $stechuhruser.'RzA5US8F5Z',
+       ]);
+
                // store rolle
                $projektinput = Project::select('id')->where('abkuerzung', request('projekt'))->first();
            AdresseRolle::create([
-               'projekt'      =>   $projektinput->id,
                'adresse'       =>  $neuadresse->id,
+               'projekt'      =>   0,
+               'subjekt'      =>   'Mitarbeiter',
+               'praedikat'      =>   'von',
+               'objekt'      =>   'projekt',
+               'parameter'      =>   '',
+               'von' => now(),
+               'bis' => date('0000-00-00'),
            ]);
        return redirect('/adresse')->with('success', 'Adresse wurde erstellt!');;
    }

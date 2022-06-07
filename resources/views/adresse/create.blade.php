@@ -19,7 +19,7 @@
 
     <div class="form-group">
     <select class="form-control" name="typ" id="typ">
-        <option class="form-control" value="{{ old('name') }}">Bitte wählen Sie Ihr Kontotype aus</option>
+        <option class="form-control" value="{{ old('typ') }}">Bitte wählen Sie Ihr Kontotype aus</option>
         <option name="frau" value="frau">Frau</option>
         <option name="herr" value="herr">Herr</option>
     </select>
@@ -38,7 +38,7 @@
         @endif
     </div>
     <div class="form-group">
-        <label for="formGroupExampleInput">Bitte geben Sie Dienstleiter Type</label><br>
+        <label for="formGroupExampleInput">Bitte geben Sie Dienstleister Type</label><br>
         <input type="radio" id="freifeld1" name="freifeld1" value="{{ old('freifeld1') }}"
                checked>
         <label for="formGroupExampleInput">Intern</label>
@@ -58,12 +58,16 @@
         @if ($errors->has('password'))
             <span class="error">{{ $errors->first('password') }}</span>
         @endif
+    </div>
+        <div class="form-group">
    <label for="formGroupExampleInput">Team:</label>
     <select class="form-control" name="typ" id="typ">
-        <option class="form-control">Bitte wählen Sie Ihr Team</option>
+        <option class="form-control" value="{{ old('abteilung') }}">Bitte wählen Sie Ihr Team aus</option>
+        @foreach(\App\Models\Team::get() as $team)
+        <option name="abteilung" value="abteilung">{{$team->name}}</option>
+        @endforeach
     </select>
     </div>
-
     <div class="form-group">
         <label for="formGroupExampleInput">Telefon:</label>
         <input type="text" name="telefon" id="telefon" placeholder="Optional"
@@ -74,17 +78,11 @@
         <input type="text" name="ansprechpartner" id="ansprechpartner" placeholder="Optional"
                class="form-control" value="{{ old('ansprechpartner') }}">
     </div>
-    <div class="form-group">
-        <label for="formGroupExampleInput">Abteilung:</label>
-        <input type="text" name="abteilung" id="abteilung" placeholder="Optional"
-               class="form-control" value="{{ old('abteilung') }}">
-    </div>
-
         <div class="form-group"></div>
 <!-- Add Button -->
  <div class="form-group">
      <div class="col-sm-offset-3 col-sm-6">
-         <button type="submit" class="btn btn-default">
+         <button type="submit" class="btn btn-small btn-info">
              <i class="fa fa-btn fa-plus"></i>Add
          </button>
      </div>

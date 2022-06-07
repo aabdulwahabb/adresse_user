@@ -30,7 +30,7 @@ class CreateUserTable extends Migration
                $table->string('docscan_passwort',64)->nullable();
                $table->boolean('email_bevorzugen')->default('1');
                $table->integer('externlogin')->nullable();
-               $table->integer('fehllogins');
+               $table->integer('fehllogins')->default(0);
                $table->integer('firma');
                $table->integer('gpsstechuhr')->nullable();
                $table->integer('hwcounter')->nullable();
@@ -45,7 +45,7 @@ class CreateUserTable extends Migration
                $table->string('motppin')->nullable();
                $table->string('motpsecret')->nullable();
                $table->integer('paketmarkendrucker')->default(0);
-               $table->integer('parentuser')->nullable();
+               $table->integer('parentuser')->nullable()->default(0);
                $table->string('passwordhash',60)->nullable();
                $table->string('passwordmd5')->nullable();
                $table->string('passwordsha512',128)->default('');

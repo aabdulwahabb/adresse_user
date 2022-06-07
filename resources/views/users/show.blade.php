@@ -7,7 +7,8 @@
     <div class="jumbotron text-center">
         <p>
             <strong>Username:</strong> {{ $user->username }}<br>
-            <strong>Type:</strong>{{ $user->type }} User
+            <strong>Type:</strong>{{ $user->type }} User <br>
+            <strong>Password:</strong> {{ $user->password }}<br>
         </p>
     </div>
 </div>

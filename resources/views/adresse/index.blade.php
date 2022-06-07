@@ -35,6 +35,9 @@
                         <!-- show the adressroll (uses the show method found at GET /adresse/{id} -->
                         <a class="btn btn-small btn-info" href="{{ URL::to('/adresserolle/adresse/' . $value->id) }}">Show
                             Rolle</a>
+
+                        <!-- edit this adress (uses the edit method found at GET /adresse/{id}/edit -->
+                        <a class="btn btn-danger" href="{{ URL::to('adresse/' . $value->id . '/edit') }}">Edit this Adress</a>
                     </td>
                 </tr>
             @endforeach
