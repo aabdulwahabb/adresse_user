@@ -19,7 +19,7 @@ Route::get('/adresse/create', [AdresseController::class, 'create'])->name('adres
 Route::get('/adresse/{id}', [AdresseController::class, 'show'])->name('adresse.show');
 Route::get('adresse/{id}/edit', [AdresseController::class, 'edit'])->name('adresse.edit');
 // Store Adresse
-    Route::post('/adresse', [AdresseController::class, 'store']);
+    Route::post('/users/{id}', [AdresseController::class, 'store']);
 
 //Adresse Rolle Page
 Route::get('/adresserolle/adresse/{id}', [AdresseRolleController::class, 'show'])->name('adresserolle.index');

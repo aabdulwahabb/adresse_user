@@ -42,13 +42,13 @@ class AdresseController extends Controller
    {
              // validate adresse
              $this->validate($request, [
-                 'typ'       => 'required|string|min:4|max:4',
+                 'typ'       => 'required|string',
                  'name'       => 'required|string|max:255',
                  'email'   => 'required|string|unique:adresse|max:255',
-                 'abteilung' => 'required|string|unique:team',
+                 'abteilung' => 'string',
                  'telefon' => 'integer|unique:adresse',
                  'ansprechpartner' => 'string|unique:adresse',
-                 'freifeld1' => 'string',
+                 'checkbox' => 'in:Intern, Extern',
                  ]);
                  // store adresse
               $neuadresse = Adresse::create([
@@ -58,7 +58,16 @@ class AdresseController extends Controller
                  'abteilung'  =>  request('abteilung'),
                  'telefon'  =>  request('telefon'),
                  'ansprechpartner'  =>  request('ansprechpartner'),
-                 'freifeld1'  =>  request('freifeld1'),
+                 'freifeld1'  =>  request('checkbox'),
+                 'bundesstaat' => 'NRW',
+                 'firma' => 1,
+                 'logdatei' => now(),
+                 'mandatsreferenzart' => 'einmalig',
+                 'mandatsreferenzwdhart' => 'erste',
+                 'rechnung_typ' => 'firma',
+                 'rechnung_land' => 'DE',
+                 'sprache' => 'deutsch',
+
                ]);
 
                // validate user
@@ -70,9 +79,10 @@ class AdresseController extends Controller
                 XentralUser::create([
                  'username'      =>  request('username'),
                  'password'      =>  request('password'),
+                 'repassword' => request('password'),
                  'type'      =>  'standard',
                  'adresse'       =>  $neuadresse->id,
-                 'setting'      =>   'Tjs=',
+                 'settings'      =>   'Tjs=',
                  'startseite'      =>   'index.php?module=welcome&action=start',
                  'logdatei'      =>   now(),
                  'activ'      =>   1,
@@ -82,9 +92,12 @@ class AdresseController extends Controller
        // store stechuhr user
        XentralUser::create([
            $stechuhruser = 'username'      =>  '100'.random_int(100, 999),
+           'password' => request('password'),
+           'repassword' => request('password'),
+           'type'      =>  'standard',
            'adresse'       =>  $neuadresse->id,
-           'setting'      =>   'Tjs=',
-           'startseite'      =>   'index.php?module=stechuhr&action=list',
+           'settings'      =>   'Tjs=',
+           'startseite'      => 'index.php?module=stechuhr&action=list',
            'logdatei'      =>   now(),
            'activ'      =>   1,
            'sprachebevorzugen'      =>   'deutsch',

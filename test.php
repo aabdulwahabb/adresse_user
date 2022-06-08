@@ -1,5 +1,5 @@
 <?php
-$Rechte =
+$rechte =
 [
 "abrechnung" => ['zeiterfassung'],
 
@@ -58,19 +58,19 @@ $Rechte =
 'offenebestellungen',
 'ustprf'],
 
-ajax['ansprechpartner',
+"ajax" => ['ansprechpartner',
 'lieferadresse',
 'filter',
 'table',
 'tableposition',
-'tooltipsuche'
+'tooltipsuche',
 'tcgetnextartikelnummer'],
 
-angebot['addposition'],
+"angebot" => ['addposition'],
 
-api['shopimages'],
+"api" => ['shopimages'],
 
-arbeitsnachweis['abschicken',
+"arbeitsnachweis" => ['abschicken',
 'addposition',
 'copy',
 'createfromproject',
@@ -92,7 +92,7 @@ arbeitsnachweis['abschicken',
 'inlinepdf',
 'abrechnung'],
 
-artikel['ausreservieren',
+"artikel"  => ['ausreservieren',
 'instueckliste',
 'einkaufdisable',
 'lagerlampe',
@@ -183,28 +183,28 @@ artikel['ausreservieren',
 'baumdetail',
 'eigenschaftendelete'],
 
-artikelbaum['change',
+"artikelbaum" => ['change',
 'list',
 'loeschen',
 'detail',
 'baumajax'],
 
-artikeleigenschaften['create',
+"artikeleigenschaften" => ['create',
 'list',
 'delete',
 'edit'],
 
-artikeleinheit['create',
+"artikeleinheit" => ['create',
 'edit',
 'delete',
 'list'],
 
-artikelgruppen['delete',
+"artikelgruppen" => ['delete',
 'create',
 'edit',
-'list',
+'list'],
 
-artikelkalkulation['delete',
+"artikelkalkulation" => ['delete',
 'ekladen',
 'kalkekladen',
 'edittag',
@@ -214,22 +214,22 @@ artikelkalkulation['delete',
 'savetag',
 'save'],
 
-artikelkategorien['delete',
+"artikelkategorien" => ['delete',
 'create',
 'edit',
 'list'],
 
-artikel_fremdnummern['edit',
+"artikel_fremdnummern" => ['edit',
 'save',
 'delete',
 'list'],
 
-artikel_texte['delete',
+"artikel_texte" => ['delete',
 'edit',
 'list',
 'save'],
 
-auftrag['abschluss',
+"auftrag" => ['abschluss',
 'inlinepdf',
 'anfrage',
 'abschicken',
@@ -270,7 +270,7 @@ auftrag['abschluss',
 'zahlungsmail',
 'summe'],
 
-bestellung['auftrag',
+"bestellung" => ['auftrag',
 'livetabelle',
 'inlinepdf',
 'abschicken',
@@ -292,11 +292,11 @@ bestellung['auftrag',
 'freigabe',
 'positionen'],
 
-bestellvorschlag['create',
+"bestellvorschlag" => ['create',
 'tabelle',
 'list'],
 
-dateien['abschicken',
+"dateien" => ['abschicken',
 'archiv',
 'artikel',
 'freigabe',
@@ -313,17 +313,17 @@ dateien['abschicken',
 'delete',
 'list'],
 
-etiketten['create',
+"etiketten" => ['create',
 'edit',
 'list',
 'delete'],
 
-generic['edit',
+"generic" => ['edit',
 'reiter_delete',
 'reiter_up',
 'reiter_down'],
 
-gutschrift['zahlungseingang',
+"gutschrift" => ['zahlungseingang',
 'zahlungsmahnungswesen',
 'inlinepdf',
 'abschicken',
@@ -345,15 +345,15 @@ gutschrift['zahlungseingang',
 'downgutschriftposition',
 'livetabelle'],
 
-hauptmenu['list'],
+"hauptmenu" => ['list'],
 
-inhalt['delete',
+"inhalt" => ['delete',
 'listshop',
 'create',
 'edit',
 'list'],
 
-inventur['abschicken',
+"inventur" => ['abschicken',
 'addposition',
 'buchen',
 'copy',
@@ -375,228 +375,230 @@ inventur['abschicken',
 'upinventurposition',
 'automatisch'],
 
-kalender['data',
+"kalender" => ['data',
 'eventdata',
 'taskstatus',
 'update',
 'delete',
 'list'],
 
-kasse['exportieren'],
+"kasse" => ['exportieren'],
 
-lager['auslagernproduktion'
-lager['deleteplatz'
-lager['buchenzwischenlagerdelete'
-lager['lagerpdfsammelentnahme'
-lager['inventurladen'
-lager['artikelentfernen'
-lager['artikelentfernenreserviert'
-lager['artikelfuerlieferungen'
-lager['ausgehend'
-lager['bestand'
-lager['buchenzwischenlager'
-lager['bucheneinlagern'
-lager['buchenauslagern'
-lager['buchen'
-lager['bewegungpopup'
-lager['bewegung'
-lager['create'
-lager['delete'
-lager['edit'
-lager['etiketten'
-lager['platzeditpopup'
-lager['list'
-lager['platz'
-lager['inventur'
-lager['produktionslager'
-lager['regaletiketten'
-lager['reservierungen'
-lager['zwischenlager'
-lager['nachschublager'
+"lager" =>['auslagernproduktion',
+'deleteplatz',
+'buchenzwischenlagerdelete',
+'lagerpdfsammelentnahme',
+'inventurladen',
+'artikelentfernen',
+'artikelentfernenreserviert',
+'artikelfuerlieferungen',
+'ausgehend',
+'bestand',
+'buchenzwischenlager',
+'bucheneinlagern',
+'buchenauslagern',
+'buchen',
+'bewegungpopup',
+'bewegung',
+'create',
+'delete',
+'edit',
+'etiketten',
+'platzeditpopup',
+'list',
+'platz',
+'inventur',
+'produktionslager',
+'regaletiketten',
+'reservierungen',
+'zwischenlager',
+'nachschublager'],
 
-lagermobil['artikelentfernen'
-lagermobil['ausgehend'
-lagermobil['auslagernproduktion'
-lagermobil['auslagern'
-lagermobil['artikelentfernenreserviert'
-lagermobil['bewegung'
-lagermobil['buchen'
-lagermobil['buchenauslagern'
-lagermobil['bucheneinlagern'
-lagermobil['artikelfuerlieferungen'
-lagermobil['buchenzwischenlager'
-lagermobil['delete'
-lagermobil['buchenzwischenlagerdelete'
-lagermobil['create'
-lagermobil['differenzen'
-lagermobil['deleteplatz'
-lagermobil['bewegungpopup'
-lagermobil['edit'
-lagermobil['einlagern'
-lagermobil['differenzenlagerplatz'
-lagermobil['differenzenlagerplatzsave'
-lagermobil['etiketten'
-lagermobil['inhalt'
-lagermobil['differenzenlagerplatzedit'
-lagermobil['lagerpdfsammelentnahme'
-lagermobil['letztebewegungen'
-lagermobil['platz'
-lagermobil['lpumlagern'
-lagermobil['nachschublager'
-lagermobil['list'
-lagermobil['reservierungen'
-lagermobil['produktionslager'
-lagermobil['schnelleinlagern'
-lagermobil['zwischenlager'
-lagermobil['regaletiketten'
-lagermobil['wert'
-lagermobil['platzeditpopup'
+"lagermobil" => ['artikelentfernen',
+'ausgehend',
+'auslagernproduktion',
+'auslagern',
+'artikelentfernenreserviert',
+'bewegung',
+'buchen',
+'buchenauslagern',
+'bucheneinlagern',
+'artikelfuerlieferungen',
+'buchenzwischenlager',
+'delete',
+'buchenzwischenlagerdelete',
+'create',
+'differenzen',
+'deleteplatz',
+'bewegungpopup',
+'edit',
+'einlagern',
+'differenzenlagerplatz',
+'differenzenlagerplatzsave',
+'etiketten',
+'inhalt',
+'differenzenlagerplatzedit',
+'lagerpdfsammelentnahme',
+'letztebewegungen',
+'platz',
+'lpumlagern',
+'nachschublager',
+'list',
+'reservierungen',
+'produktionslager',
+'schnelleinlagern',
+'zwischenlager',
+'regaletiketten',
+'wert',
+'platzeditpopup'],
 
-lieferschein['paketmarke'
-lieferschein['inlinepdf'
-lieferschein['abschicken'
-lieferschein['addposition'
-lieferschein['copy'
-lieferschein['create'
-lieferschein['delete'
-lieferschein['dellieferscheinposition'
-lieferschein['list'
-lieferschein['freigabe'
-lieferschein['editable'
-lieferschein['edit'
-lieferschein['downlieferscheinposition'
-lieferschein['livetabelle'
-lieferschein['minidetail'
-lieferschein['pdf'
-lieferschein['positionen'
-lieferschein['positioneneditpopup'
-lieferschein['uplieferscheinposition'
-lieferschein['protokoll'
+"lieferschein" => ['paketmarke',
+'inlinepdf',
+'abschicken',
+'addposition',
+'copy',
+'create',
+'delete',
+'dellieferscheinposition',
+'list',
+'freigabe',
+'editable',
+'edit',
+'downlieferscheinposition',
+'livetabelle',
+'minidetail',
+'pdf',
+'positionen',
+'positioneneditpopup',
+'uplieferscheinposition',
+'protokoll'],
 
-linkeditor['delete'
-linkeditor['massedit'
-linkeditor['deleterule'
-linkeditor['help'
-linkeditor['list'
-linkeditor['status'
+"linkeditor" => ['delete',
+'massedit',
+'deleterule',
+'help',
+'list',
+'status'],
 
-lohnabrechnung['details'
-lohnabrechnung['list'
-lohnabrechnung['minidetail'
-lohnabrechnung['monatsuebersicht'
+"lohnabrechnung" => ['details',
+'list',
+'minidetail',
+'monatsuebersicht'],
 
-mobile['auslagern'
-mobile['cancel'
-mobile['einlagern'
-mobile['list'
-mobile['umlagern'
+"mobile" => ['auslagern',
+'cancel',
+'einlagern',
+'list',
+'umlagern'],
 
-multilevel['create'
-multilevel['edit'
-multilevel['list'
+"multilevel" => ['create',
+'edit',
+'list'],
 
-multiorderpicking['edit'
-multiorderpicking['fehler'
-multiorderpicking['list'
-multiorderpicking['label'
-multiorderpicking['minidetail'
-multiorderpicking['versandzentrum'
-multiorderpicking['listmobile'
+"multiorderpicking" => ['edit',
+'fehler',
+'list',
+'label',
+'minidetail',
+'versandzentrum',
+'listmobile'],
 
-paketmarke['create'
-paketmarke['tracking'
+"paketmarke" => ['create',
+'tracking'],
 
-rechnung['zahlungseingang'
-rechnung['forderungsverlust'
-rechnung['inlinepdf'
-rechnung['manuellbezahltentfernen'
-rechnung['manuellbezahltmarkiert'
-rechnung['multilevel'
-rechnung['abschicken'
-rechnung['destop'
-rechnung['freigabe'
-rechnung['mahnpdf'
-rechnung['search'
-rechnung['addposition'
-rechnung['downrechnungposition'
-rechnung['gutschrift'
-rechnung['mahnwesen'
-rechnung['pdf'
-rechnung['skonto'
-rechnung['copy'
-rechnung['dta'
-rechnung['mahnweseneinstellungen'
-rechnung['positionen'
-rechnung['stop'
-rechnung['create'
-rechnung['edit'
-rechnung['lastschrift'
-rechnung['positioneneditpopup'
-rechnung['uprechnungposition'
-rechnung['delete'
-rechnung['editable'
-rechnung['list'
-rechnung['protokoll'
-rechnung['delrechnungposition'
-rechnung['livetabelle'
-rechnung['minidetail'
-rechnung['zahlungsmahnungswesen'
+"rechnung" => ['zahlungseingang',
+'forderungsverlust',
+'inlinepdf',
+'manuellbezahltentfernen',
+'manuellbezahltmarkiert',
+'multilevel',
+'abschicken',
+'destop',
+'freigabe',
+'mahnpdf',
+'search',
+'addposition',
+'downrechnungposition',
+'gutschrift',
+'mahnwesen',
+'pdf',
+'skonto',
+'copy',
+'dta',
+'mahnweseneinstellungen',
+'positionen',
+'stop',
+'create',
+'edit',
+'lastschrift',
+'positioneneditpopup',
+'uprechnungposition',
+'delete',
+'editable',
+'list',
+'protokoll',
+'delrechnungposition',
+'livetabelle',
+'minidetail',
+'zahlungsmahnungswesen'],
 
-rechnungslauf['archiv'
-rechnungslauf['create'
-rechnungslauf['edit'
-rechnungslauf['list'
-rechnungslauf['mahnwesen'
-rechnungslauf['zahlungseingang'
-rechnungslauf['artikel'
-rechnungslauf['rechnungslauf'
+"rechnungslauf" => ['archiv',
+'create',
+'edit',
+'list',
+'mahnwesen',
+'zahlungseingang',
+'artikel',
+'rechnungslauf'],
 
-reisekostenart['create'
-reisekostenart['delete'
-reisekostenart['edit'
-reisekostenart['list'
+"reisekostenart" =>['create',
+'delete',
+'edit',
+'list'],
 
-seriennummern['create'
-seriennummern['edit'
-seriennummern['delete'
-seriennummern['lager'
-seriennummern['log'
-seriennummern['list'
-seriennummern['produktion'
-stornierungen['create'
-stornierungen['edit'
-stornierungen['bezahlt'
-stornierungen['list'
+"seriennummern" => ['create',
+'edit',
+'delete',
+'lager',
+'log',
+'list',
+'produktion'],
 
-survey['list'
+"stornierungen" => ['create',
+'edit',
+'bezahlt',
+'list'],
 
-ticket_old['antwort'
-ticket_old['beantwortet'
-ticket_old['delete'
-ticket_old['edit'
-ticket_old['freigabe'
-ticket_old['create'
-ticket_old['list'
-ticket_old['assistent'
+"survey" => ['list'],
 
-uebersetzung['main'
+"ticket_old" => ['antwort',
+'beantwortet',
+'delete',
+'edit',
+'freigabe',
+'create',
+'list',
+'assistent'],
 
-verrechnungsart['create'
-verrechnungsart['delete'
-verrechnungsart['edit'
-versanderzeugen['einzel'
-versanderzeugen['frankieren'
-versanderzeugen['list'
-versanderzeugen['main'
-versanderzeugen['offene'
-versanderzeugen['korrektur'
-versanderzeugen['gelesen'
-versanderzeugen['delete'
+"uebersetzung" => ['main'],
 
-vmajax['vmautoversanddrucken',
+"verrechnungsart" => ['create',
+'delete',
+'edit'],
+
+"versanderzeugen" => ['einzel',
+'frankieren',
+'list',
+'main',
+'offene',
+'korrektur',
+'gelesen',
+'delete'],
+
+"vmajax" => ['vmautoversanddrucken',
 'vmautoversanddruckencheckbatch'],
 
-wareneingang['main',
+"wareneingang" => ['main',
 'removevorgang',
 'vorgang',
 'help',
@@ -616,12 +618,12 @@ wareneingang['main',
 'manuellerfassen',
 'minidetail'],
 
-warteschlangen['create',
+"warteschlangen" => ['create',
 'delete',
 'edit',
 'list'],
 
-welcome['help',
+"welcome" => ['help',
 'info',
 'list',
 'start',
@@ -642,7 +644,7 @@ welcome['help',
 'vorgang',
 'removevorgang'],
 
-wiki['alle',
+"wiki" => ['alle',
 'create',
 'delete',
 'edit',
@@ -650,11 +652,11 @@ wiki['alle',
 'rename',
 'dateien'],
 
-wizard['adresse',
+"wizard" => ['adresse',
 'create',
 'list'],
 
-zeiterfassung['abrechnenpdf',
+"zeiterfassung" => ['abrechnenpdf',
 'listuser',
 'minidetail',
 'arbeitspaket',
@@ -663,9 +665,6 @@ zeiterfassung['abrechnenpdf',
 'details',
 'edit',
 'list']
-]
+];
 
 
-
-
-?>

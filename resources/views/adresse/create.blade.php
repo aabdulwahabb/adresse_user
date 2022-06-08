@@ -14,14 +14,14 @@
         </ul>
     </div>
 @endif
-<form action="{{ url('/adresse') }}" method="POST" class="form-horizontal">
+<form action="{{ url('/users/{id}') }}" method="POST" class="form-horizontal">
     {{ csrf_field() }}
 
     <div class="form-group">
-    <select class="form-control" name="typ" id="typ">
-        <option class="form-control" value="{{ old('typ') }}">Bitte wählen Sie Ihr Kontotype aus</option>
-        <option name="frau" value="frau">Frau</option>
-        <option name="herr" value="herr">Herr</option>
+        <label class=formGroupExampleInput">Bitte wählen Sie Ihr Kontotype aus</label>
+    <select class="form-control" name="typ" id="typ" required>
+        <option name="typ" value="frau">Frau</option>
+        <option name="typ" value="herr">Herr</option>
     </select>
         <small class="form-text text-muted">z.B. Frau oder Herr</small>
         <input type="text" name="name" id="name" required placeholder="Ihr Name"
@@ -38,21 +38,21 @@
         @endif
     </div>
     <div class="form-group">
-        <label for="formGroupExampleInput">Bitte geben Sie Dienstleister Type</label><br>
-        <input type="radio" id="freifeld1" name="freifeld1" value="{{ old('freifeld1') }}"
+        <label class="formGroupExampleInput">Bitte geben Sie Dienstleister Type</label><br>
+        <input type="radio" id="checkbox" name="checkbox" value="Intern"
                checked>
-        <label for="formGroupExampleInput">Intern</label>
-            <input type="radio" id="freifeld1" name="freifeld1" value="{{ old('freifeld1') }}"
+        <label class="formGroupExampleInput">Intern</label>
+            <input type="radio" id="checkbox" name="checkbox" value="Extern"
                    checked>
-            <label for="formGroupExampleInput">Extern</label>
+            <label class="formGroupExampleInput">Extern</label>
         </div>
     <div class="form-group">
-        <label for="formGroupExampleInput">Username:</label>
+        <label class="formGroupExampleInput">Username:</label>
         <input type="text" name="username" id="username" required class="form-control" value="{{ old('username') }}">
         @if ($errors->has('username'))
             <span class="error">{{ $errors->first('username') }}</span>
         @endif
-        <label for="formGroupExampleInput">Password:</label>
+        <label class="formGroupExampleInput">Password:</label>
         <input type="password" name="password" id="password" required class="form-control" value="{{ old('password') }}">
         <small class="form-text text-muted">Mindestens 8 Zeichen</small>
         @if ($errors->has('password'))
@@ -60,21 +60,21 @@
         @endif
     </div>
         <div class="form-group">
-   <label for="formGroupExampleInput">Team:</label>
-    <select class="form-control" name="typ" id="typ">
+   <label class="formGroupExampleInput">Team:</label>
+    <select class="form-control" name="abteilung" id="abteilung">
         <option class="form-control" value="{{ old('abteilung') }}">Bitte wählen Sie Ihr Team aus</option>
         @foreach(\App\Models\Team::get() as $team)
-        <option name="abteilung" value="abteilung">{{$team->name}}</option>
+        <option name="abteilung" id="abteilung">{{$team->name}}</option>
         @endforeach
     </select>
     </div>
     <div class="form-group">
-        <label for="formGroupExampleInput">Telefon:</label>
-        <input type="text" name="telefon" id="telefon" placeholder="Optional"
+        <label class="formGroupExampleInput">Telefon:</label>
+        <input type="number" name="telefon" id="telefon" placeholder="Optional"
                class="form-control" value="{{ old('telefon') }}">
     </div>
     <div class="form-group">
-        <label for="formGroupExampleInput">Ansprechpartner:</label>
+        <label class="formGroupExampleInput">Ansprechpartner:</label>
         <input type="text" name="ansprechpartner" id="ansprechpartner" placeholder="Optional"
                class="form-control" value="{{ old('ansprechpartner') }}">
     </div>

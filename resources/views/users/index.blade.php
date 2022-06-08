@@ -13,26 +13,29 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <td>ID</td>
-            <td>Username</td>
-            <td>Type</td>
-            <td>Action</td>
+            <td>Login</td>
+            <td>Typ</td>
+            <td>Beschreibung</td>
+            <td>Aktiv</td>
+            <td>Extern</td>
+            <td>Anzahl Rechte</td>
+            <td>Menü</td>
         </tr>
     </thead>
     <tbody>
     @foreach($users as $key => $value)
         <tr>
-            <td>{{ $value->id }}</td>
             <td>{{ $value->username }}</td>
             <td>{{ $value->type }}</td>
+            <td>{{ $value->adresse }}</td>
+            <td>{{ $value->activ }}</td>
+            <td>{{ $value->externlogin }}</td>
+            <td> Anzahl Rechte</td>
 
             <!-- we will also add show, and delete buttons -->
             <td>
                 <!-- show the user (uses the show method found at GET /users/{id} -->
                 <a class="btn btn-small btn-success" href="{{ URL::to('/users/' . $value->id) }}">Show this User</a>
-
-                <!-- show the user (uses the show method found at GET userrights/users/{id} -->
-                <a class="btn btn-small btn-info" href="{{ URL::to('userrights/users/' . $value->id) }}">Show Userrights</a>
 
                 <!-- edit this user (uses the edit method found at GET /users/{id}/edit -->
                 <a class="btn btn-danger" href="{{ URL::to('users/' . $value->id . '/edit') }}">Edit this User</a>

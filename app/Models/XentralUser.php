@@ -84,7 +84,7 @@ class XentralUser extends Model
   * @return BelongsTo
   */
  public function adresse(): BelongsTo {
-     return $this->belongsTo(Adresse::class, 'usereditid');
+     return $this->belongsTo(Adresse::class, 'id');
  }
 
     /**

@@ -12,29 +12,37 @@
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
-                <td>ID</td>
-                <td>Type</td>
                 <td>Name</td>
+                <td>Kunde</td>
+                <td>Land</td>
+                <td>PLZ</td>
+                <td>Ort</td>
                 <td>Email</td>
-                <td>Action</td>
+                <td>Projekt</td>
+                <td>Ansprechpartner</td>
+                <td>Telefon</td>
+                <td>Mobile</td>
+                <td>Menü</td>
             </tr>
             </thead>
             <tbody>
             @foreach($adresse as $key => $value)
                 <tr>
-                    <td>{{ $value->id }}</td>
-                    <td>{{ $value->typ }}</td>
                     <td>{{ $value->name }}</td>
+                    <td>{{ $value->kundennummer }}</td>
+                    <td>{{ $value->land }}</td>
+                    <td>{{ $value->plz }}</td>
+                    <td>{{ $value->ort }}</td>
                     <td>{{ $value->email }}</td>
+                    <td>{{ $value->projekt }}</td>
+                    <td>{{ $value->ansprechpartner }}</td>
+                    <td>{{ $value->telefon }}</td>
+                    <td>{{ $value->mobil }}</td>
                     <!-- we will also add show, edit, and delete buttons -->
                     <td>
                         <!-- show the adress (uses the show method found at GET /adresse/{id} -->
                         <a class="btn btn-small btn-success" href="{{ URL::to('/adresse/' . $value->id) }}">Show this
                             Adress</a>
-
-                        <!-- show the adressroll (uses the show method found at GET /adresse/{id} -->
-                        <a class="btn btn-small btn-info" href="{{ URL::to('/adresserolle/adresse/' . $value->id) }}">Show
-                            Rolle</a>
 
                         <!-- edit this adress (uses the edit method found at GET /adresse/{id}/edit -->
                         <a class="btn btn-danger" href="{{ URL::to('adresse/' . $value->id . '/edit') }}">Edit this Adress</a>

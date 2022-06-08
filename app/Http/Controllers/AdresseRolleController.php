@@ -47,7 +47,9 @@ class AdresseRolleController extends Controller
      $projektrolle = $projekt->rolleprojekt()->get();
      // get all the adresserolle
      $adresserolls = AdresseRolle::paginate(10);
-     return View('adresserolle.index', compact('adresserolls'))->with(array("adress" => $adress,
+     return View('adresserolle.index',
+         compact('adresserolls'))->with(array(
+         "adress" => $adress,
          "adresserolle" => $adresserolle,
          "projekt" => $projekt,
          "projektrolle" => $projektrolle));
