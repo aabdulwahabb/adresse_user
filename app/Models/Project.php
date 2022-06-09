@@ -70,4 +70,14 @@ class Project extends Model
     {
         return $this->belongsTo(AdresseRolle::class, 'projekt');
     }
+
+    /**
+     * Adresse_rolle has many  projekt
+     *
+     * @return BelongsTo
+     */
+    public function adresseprojekt(): BelongsTo
+    {
+        return $this->belongsTo(Adresse::class, 'projekt');
+    }
 }

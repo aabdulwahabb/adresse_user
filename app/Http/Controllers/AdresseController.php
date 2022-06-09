@@ -67,6 +67,7 @@ class AdresseController extends Controller
                  'rechnung_typ' => 'firma',
                  'rechnung_land' => 'DE',
                  'sprache' => 'deutsch',
+                  'projekt' => 'VM000'
 
                ]);
 
@@ -122,15 +123,14 @@ class AdresseController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show($id)
-  {
-    // get the adress
-    $adress = Adresse::find($id);
-      $adresserolle = $adress->adresseRolle()->get();
+    public function show($id)
+    {
+        // get the adresse
+        $adress = Adresse::find($id);
 
-    // show the view and pass the adress to it
-    return View('adresse.show',compact('adress'))->with('adresserolle', $adresserolle);
-  }
+        // show the view and pass the user to it
+        return View('adresse.show',compact('adress'));
+    }
 
   /**
    * Show the form for editing the specified resource.

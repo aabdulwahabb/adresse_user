@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Adresse;
+use App\Models\UserRight;
 use Illuminate\Http\Request;
 use App\Models\XentralUser;
 use View;
@@ -11,13 +13,19 @@ class XentralUserController extends Controller
   /**
    * Display a listing of the resource.
    */
-  public function index()
-  {
-    // get all the Users
-    $users = XentralUser::paginate(10);
-    // load the view and pass the Users
-    return View('users.index',compact('users'));
-  }
+    public function index()
+    {
+        $adresse = Adresse::find(1);
+        $useradresse = $adresse->user()->get();
+
+        // get all the $users
+        $users = XentralUser::paginate(10);
+        return View('users.index',
+            compact('users'))->with(array(
+            "adresse" => $adresse,
+            "useradresse" => $useradresse,
+        ));
+    }
 
   /**
    * Show the form for creating a new resource.

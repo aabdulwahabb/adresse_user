@@ -34,18 +34,24 @@
                     <td>{{ $value->plz }}</td>
                     <td>{{ $value->ort }}</td>
                     <td>{{ $value->email }}</td>
-                    <td>{{ $value->projekt }}</td>
+                    @if($value->projekt == 0)
+                    <td>alle</td>
+                    @else
+                    <td>-</td>
+                    @endif
                     <td>{{ $value->ansprechpartner }}</td>
                     <td>{{ $value->telefon }}</td>
                     <td>{{ $value->mobil }}</td>
                     <!-- we will also add show, edit, and delete buttons -->
-                    <td>
-                        <!-- show the adress (uses the show method found at GET /adresse/{id} -->
-                        <a class="btn btn-small btn-success" href="{{ URL::to('/adresse/' . $value->id) }}">Show this
-                            Adress</a>
 
+                    <td>
                         <!-- edit this adress (uses the edit method found at GET /adresse/{id}/edit -->
-                        <a class="btn btn-danger" href="{{ URL::to('adresse/' . $value->id . '/edit') }}">Edit this Adress</a>
+                        <a class="btn btn-small btn-success" href="{{ URL::to('/adresserolle/adresse/' . $value->id) }}">Rolle</a>
+                    </td>
+
+                    <td>
+                        <!-- edit this adress (uses the edit method found at GET /adresse/{id}/edit -->
+                        <a class="btn btn-danger" href="{{ URL::to('adresse/' . $value->id . '/edit') }}">Bearbeiten</a>
                     </td>
                 </tr>
             @endforeach

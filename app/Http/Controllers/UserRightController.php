@@ -57,7 +57,9 @@ class UserRightController extends Controller
 
         // get all the $userrightes
         $userrightes = UserRight::paginate(10);
-        return View('userrights.index', compact('userrightes'))->with(array("user" => $user,
+        return View('userrights.index',
+            compact('userrightes'))->with(array(
+            "user" => $user,
             "userrights" => $userrights,
            ));
     }

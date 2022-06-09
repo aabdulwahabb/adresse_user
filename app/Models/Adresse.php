@@ -66,8 +66,18 @@ class Adresse extends Model
    * @return HasMany
    */
   public function user(): HasMany {
-      return $this->hasMany(XentralUser::class, 'adresse');
+      return $this->hasMany(XentralUser::class, 'id');
   }
+
+    /**
+     * Adresse has many  projekt
+     *
+     * @return BelongsTo
+     */
+    public function projekt(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
 
     /**
      * apply model scopes

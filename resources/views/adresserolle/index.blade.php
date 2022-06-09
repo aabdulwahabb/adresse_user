@@ -25,7 +25,11 @@
         <tr>
             <td>{{ $value->subjekt }}</td>
             <td>{{ $value->objekt }}</td>
+            @if($value->projekt == 0)
+                <td>alle</td>
+            @else
             <td>{{ $projekt->abkuerzung }}</td>
+            @endif
             <td>{{ $value->von }}</td>
             <td>{{ $value->bis }}</td>
         </tr>

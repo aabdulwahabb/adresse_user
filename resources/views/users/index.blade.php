@@ -27,18 +27,26 @@
         <tr>
             <td>{{ $value->username }}</td>
             <td>{{ $value->type }}</td>
-            <td>{{ $value->adresse }}</td>
-            <td>{{ $value->activ }}</td>
-            <td>{{ $value->externlogin }}</td>
+            <td>{{ $adresse->name}}</td>
+            @if($value->activ == 1)
+                <td>ja</td>
+            @elseif($value->activ == 0)
+                <td>-</td>
+            @endif
+            @if($value->externlogin == 1)
+            <td>erlaubt</td>
+            @elseif($value->externlogin == 0)
+                <td>-</td>
+            @endif
             <td> Anzahl Rechte</td>
 
             <!-- we will also add show, and delete buttons -->
             <td>
                 <!-- show the user (uses the show method found at GET /users/{id} -->
-                <a class="btn btn-small btn-success" href="{{ URL::to('/users/' . $value->id) }}">Show this User</a>
+                <a class="btn btn-small btn-success" href="{{ URL::to('/users/' . $value->id) }}">Mitarbeiter Karte</a>
 
                 <!-- edit this user (uses the edit method found at GET /users/{id}/edit -->
-                <a class="btn btn-danger" href="{{ URL::to('users/' . $value->id . '/edit') }}">Edit this User</a>
+                <a class="btn btn-danger" href="{{ URL::to('users/' . $value->id . '/edit') }}">Bearbeiten</a>
             </td>
         </tr>
     @endforeach
