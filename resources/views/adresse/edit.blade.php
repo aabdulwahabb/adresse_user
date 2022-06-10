@@ -14,9 +14,9 @@
         </ul>
     </div>
 @endif
-<form action="{{ url('adresse') }}/{{$adress->id }}" method="POST" class="form-horizontal">
+<form action="{{ url('/adresse') }}" method="POST" class="form-horizontal">
     {{ csrf_field() }}
-    {{ method_field('PATCH')}}
+    {{ method_field('POST')}}
     <div class="form-group">
         <label class=formGroupExampleInput">Bitte wählen Sie Ihr Kontotype aus</label>
         <select class="form-control" name="typ" id="typ" required>

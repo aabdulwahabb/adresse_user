@@ -17,7 +17,7 @@
     @foreach(\App\Models\XentralUser::get() as $user)
 <form action="{{ url('users') }}/{{$user->id }}" method="POST" class="form-horizontal">
     {{ csrf_field() }}
-
+    @endforeach
     <div class="form-group">
         <label class=formGroupExampleInput">Bitte wählen Sie Ihr Kontotype aus</label>
     <select class="form-control" name="typ" id="typ" required>
@@ -85,13 +85,13 @@
             <span class="error">{{ $errors->first('password') }}</span>
         @endif
     </div>
-    @endforeach
         <div class="form-group"></div>
 <!-- Add Button -->
  <div class="form-group">
      <div class="col-sm-offset-3 col-sm-6">
          <button type="submit" class="btn btn-small btn-info">
-             <i class="fa fa-btn fa-plus"></i>Add
+             <i class="fa fa-btn fa-plus"></i>
+             Add
          </button>
      </div>
  </div>

@@ -14,9 +14,9 @@
         </ul>
     </div>
 @endif
-<form action="{{ url('users') }}/{{$user->id }}" method="POST" class="form-horizontal">
+<form action="{{ url('/users') }}" method="POST" class="form-horizontal">
     {{ csrf_field() }}
-    {{ method_field('PATCH')}}
+    {{ method_field('POST')}}
     <div class="form-group">
         <label class="formGroupExampleInput">Username:</label>
         <input type="text" name="username" id="username" required class="form-control" value="{{ $user->username }}">

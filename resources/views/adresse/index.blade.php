@@ -36,8 +36,8 @@
                     <td>{{ $value->email }}</td>
                     @if($value->projekt == 0)
                     <td>alle</td>
-                    @else
-                    <td>-</td>
+                    @elseif(!$value->projekt == 0)
+                    <td>{{ $value->projekt }}</td>
                     @endif
                     <td>{{ $value->ansprechpartner }}</td>
                     <td>{{ $value->telefon }}</td>
@@ -47,9 +47,7 @@
                     <td>
                         <!-- edit this adress (uses the edit method found at GET /adresse/{id}/edit -->
                         <a class="btn btn-small btn-success" href="{{ URL::to('/adresserolle/adresse/' . $value->id) }}">Rolle</a>
-                    </td>
 
-                    <td>
                         <!-- edit this adress (uses the edit method found at GET /adresse/{id}/edit -->
                         <a class="btn btn-danger" href="{{ URL::to('adresse/' . $value->id . '/edit') }}">Bearbeiten</a>
                     </td>

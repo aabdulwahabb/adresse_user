@@ -6,6 +6,8 @@ use App\Models\Adresse;
 use App\Models\UserRight;
 use Illuminate\Http\Request;
 use App\Models\XentralUser;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use View;
 
 class XentralUserController extends Controller
@@ -74,14 +76,14 @@ public function store(Request $request) {
    */
   public function update(Request $request, xentraluser $user)
   {
-    $this->validate($request, [
-        'adresse'       => 'required|numeric',
-        'type'      => 'required',
-        'username'       => 'required',
-       ]);
+      $this->validate($request, [
+          'username'       => 'string|max:255',
+          'password'       => 'min:8|max:255',
+      ]);
 
-       $user->update($request->all());
-       return back();
+      $user->update($request->all());
+      Session::flash('message', 'Successfully updated user!');
+      return redirect::to('/users');
   }
 
   /**

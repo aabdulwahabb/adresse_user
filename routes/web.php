@@ -11,15 +11,18 @@ use App\Http\Controllers\SessionController;
 
 //login
 Route::get('/', [SessionController::class, 'create'])->middleware('guest');
-Route::post('/adresse', [SessionController::class, 'authenticate'])->middleware('guest');
+
+        Route::post('/adresse', [SessionController::class, 'authenticate'])->middleware('guest');
 
 // Adresse Page
 Route::get('/adresse', [AdresseController::class, 'index'])->name('adresse.index');
 Route::get('/adresse/create', [AdresseController::class, 'create'])->name('adresse.create');
 Route::get('/adresse/{id}', [AdresseController::class, 'show'])->name('adresse.show');
 Route::get('adresse/{id}/edit', [AdresseController::class, 'edit'])->name('adresse.edit');
+
 // Store Adresse
-    Route::post('/users/{id}', [AdresseController::class, 'store']);
+        Route::post('/users/{id}', [AdresseController::class, 'store']);
+        Route::post('/adresse',[AdresseController::class, 'update']);
 
 //Adresse Rolle Page
 Route::get('/adresserolle/adresse/{id}', [AdresseRolleController::class, 'show'])->name('adresserolle.index');
@@ -29,10 +32,14 @@ Route::get('/users', [XentralUserController::class, 'index'])->name('users.index
 Route::get('/users/{id}', [XentralUserController::class, 'show'])->name('users.show');
 Route::get('/users/{id}/edit', [XentralUserController::class, 'edit'])->name('user.edit');
 
+// Store User
+        Route::post('/users',[XentralUserController::class, 'update']);
+
 // Projekt Page
 Route::get('/projekte', [ProjektController::class, 'index'])->name('projekte.index');
+
 // Userrights Page
 Route::get('/userrights/users/{id}', [UserRightController::class, 'show'])->name('userrights.index');
 
 //logout
-Route::post('/', [SessionController::class, 'logout'])->middleware('auth');
+        Route::post('/', [SessionController::class, 'logout'])->middleware('auth');

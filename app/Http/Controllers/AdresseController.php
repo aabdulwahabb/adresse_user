@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 use App\Models\Adresse;
 use App\Models\XentralUser;
@@ -9,6 +10,10 @@ use App\Models\Userright;
 use App\Models\AdresseRolle;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use phpDocumentor\Reflection\Types\Compound;
+use Symfony\Component\Console\Input\Input;
 use View;
 
 class AdresseController extends Controller
@@ -22,6 +27,7 @@ class AdresseController extends Controller
     $adresse = Adresse::paginate(10);
     // load the view and pass the adresse
     return View('adresse.index',compact('adresse'));
+
   }
 
 
@@ -46,8 +52,8 @@ class AdresseController extends Controller
                  'name'       => 'required|string|max:255',
                  'email'   => 'required|string|unique:adresse|max:255',
                  'abteilung' => 'nullable',
-                 'telefon' => 'integer|unique:adresse',
-                 'ansprechpartner' => 'string|unique:adresse',
+                 'telefon' => 'nullable|integer|unique:adresse',
+                 'ansprechpartner' => 'nullable|string|unique:adresse',
                  'checkbox' => 'in:Intern, Extern',
                  ]);
                  // store adresse
@@ -67,7 +73,7 @@ class AdresseController extends Controller
                  'rechnung_typ' => 'firma',
                  'rechnung_land' => 'DE',
                  'sprache' => 'deutsch',
-                  'projekt' => 'VM000'
+                 'projekt' => '10'
 
                ]);
 
@@ -117,7 +123,8 @@ class AdresseController extends Controller
                'von' => now(),
                'bis' => date('0000-00-00'),
            ]);
-       return redirect('/adresse')->with('success', 'Adresse wurde erstellt!');;
+       Session::flash('message', 'Successfully created adresse!');
+       return redirect::to('/adresse');
    }
 
   /**
@@ -137,9 +144,7 @@ class AdresseController extends Controller
    */
   public function edit($id)
   {
-      // get the adresse
-      $adress = Adresse::find($id);
-
+      $adress = Adresse::where('id', '=', $id)->first();
   return View('adresse.edit',compact('adress'));
   }
 
@@ -148,14 +153,20 @@ class AdresseController extends Controller
    */
   public function update(Request $request, adresse $adress)
   {
-    $this->validate($request, [
-        'typ'       => 'required',
-        'name'       => 'required',
-        'email'      => 'required|email',
-       ]);
+      // validate adresse
+      $this->validate($request, [
+          'typ'       => 'string',
+          'name'       => 'string|max:255',
+          'email'   => 'string|unique:adresse|max:255',
+          'abteilung' => 'nullable',
+          'telefon' => 'nullable|integer|unique:adresse',
+          'ansprechpartner' => 'nullable|string|unique:adresse',
+          'checkbox' => 'in:Intern, Extern',
+      ]);
 
-       $adress->update($request->all());
-       return back();
+      $adress->update($request->all());
+            Session::flash('message', 'Successfully updated adresse!');
+            return redirect::to('/adresse');
   }
 
   /**
