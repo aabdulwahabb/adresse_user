@@ -52,8 +52,8 @@ class AdresseController extends Controller
                  'name'       => 'required|string|max:255',
                  'email'   => 'required|string|unique:adresse|max:255',
                  'abteilung' => 'nullable',
-                 'telefon' => 'nullable|integer|unique:adresse',
-                 'ansprechpartner' => 'nullable|string|unique:adresse',
+                 'telefon' => 'nullable|unique:adresse',
+                 'ansprechpartner' => 'nullable',
                  'checkbox' => 'in:Intern, Extern',
                  ]);
                  // store adresse
