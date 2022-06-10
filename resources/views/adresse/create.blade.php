@@ -14,7 +14,8 @@
         </ul>
     </div>
 @endif
-<form action="{{ url('/users/{id}') }}" method="POST" class="form-horizontal">
+    @foreach(\App\Models\XentralUser::get() as $user)
+<form action="{{ url('users') }}/{{$user->id }}" method="POST" class="form-horizontal">
     {{ csrf_field() }}
 
     <div class="form-group">
@@ -84,6 +85,7 @@
             <span class="error">{{ $errors->first('password') }}</span>
         @endif
     </div>
+    @endforeach
         <div class="form-group"></div>
 <!-- Add Button -->
  <div class="form-group">

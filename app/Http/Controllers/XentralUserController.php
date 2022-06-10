@@ -15,16 +15,11 @@ class XentralUserController extends Controller
    */
     public function index()
     {
-        $adresse = Adresse::find(1);
-        $useradresse = $adresse->user()->get();
-
-        // get all the $users
+        // get all the user
         $users = XentralUser::paginate(10);
-        return View('users.index',
-            compact('users'))->with(array(
-            "adresse" => $adresse,
-            "useradresse" => $useradresse,
-        ));
+
+        // load the view and pass the users
+        return View('users.index',compact('users'));
     }
 
   /**
@@ -68,8 +63,9 @@ public function store(Request $request) {
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(xentraluser $user)
+  public function edit($id)
   {
+      $user = XentralUser::find($id);
   return View('users.edit',compact('user'));
   }
 

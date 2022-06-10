@@ -18,15 +18,15 @@
     {{ csrf_field() }}
     {{ method_field('PATCH')}}
     <div class="form-group">
-        <label for="formGroupExampleInput">Username:</label>
-        <input type="text" name="username" id="username" required class="form-control" value="{{ old('username') }}">
+        <label class="formGroupExampleInput">Username:</label>
+        <input type="text" name="username" id="username" required class="form-control" value="{{ $user->username }}">
         @if ($errors->has('username'))
             <span class="error">{{ $errors->first('username') }}</span>
         @endif
     </div>
-        <div class="form-group">
-        <label for="formGroupExampleInput">Password:</label>
-        <input type="password" name="password" id="password" required class="form-control" value="{{ old('password') }}">
+    <div class="form-group">
+        <label class="formGroupExampleInput">Password:</label>
+        <input type="password" name="password" id="password" required class="form-control" value="{{ $user->password }}">
         <small class="form-text text-muted">Mindestens 8 Zeichen</small>
         @if ($errors->has('password'))
             <span class="error">{{ $errors->first('password') }}</span>

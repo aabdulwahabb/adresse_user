@@ -18,57 +18,57 @@
     {{ csrf_field() }}
     {{ method_field('PATCH')}}
     <div class="form-group">
-        <select class="form-control" name="typ" id="typ">
-            <option class="form-control" value="{{ old('name') }}">Bitte wählen Sie Ihr Kontotype aus</option>
-            <option name="frau" value="frau">Frau</option>
-            <option name="herr" value="herr">Herr</option>
+        <label class=formGroupExampleInput">Bitte wählen Sie Ihr Kontotype aus</label>
+        <select class="form-control" name="typ" id="typ" required>
+            <option name="typ" value="frau">Frau</option>
+            <option name="typ" value="herr">Herr</option>
         </select>
         <small class="form-text text-muted">z.B. Frau oder Herr</small>
+    </div>
+    <div class="form-group">
         <input type="text" name="name" id="name" required placeholder="Ihr Name"
-               class="form-control" value="{{ old('name') }}">
+               class="form-control" value="{{$adress->name}}">
         <small class="form-text text-muted">Vor und Nachname</small>
         @if ($errors->has('name'))
             <span class="error">{{ $errors->first('name') }}</span>
         @endif
+    </div>
+    <div class="form-group">
         <input type="email" name="email" id="email" required placeholder="Email Adresse"
-               class="form-control" value="{{ old('email') }}">
+               class="form-control" value="{{$adress->email}}">
         <small class="form-text text-muted">Bitte gültige Email</small>
         @if ($errors->has('email'))
             <span class="error">{{ $errors->first('email') }}</span>
         @endif
     </div>
     <div class="form-group">
-        <label for="formGroupExampleInput">Bitte geben Sie Dienstleiter Type</label><br>
-        <input type="radio" id="freifeld1" name="freifeld1" value="{{ old('freifeld1') }}"
-               checked>
-        <label for="formGroupExampleInput">Intern</label>
-        <input type="radio" id="freifeld1" name="freifeld1" value="{{ old('freifeld1') }}"
-               checked>
-        <label for="formGroupExampleInput">Extern</label>
+        <label class="formGroupExampleInput">Telefon:</label>
+        <input type="text" name="telefon" id="telefon" placeholder="Optional"
+               class="form-control" value="{{$adress->telefon}}">
     </div>
     <div class="form-group">
-        <label for="formGroupExampleInput">Team:</label>
-        <select class="form-control" name="typ" id="typ">
-            <option class="form-control">Bitte wählen Sie Ihr Team</option>
+        <label class="formGroupExampleInput">Ansprechpartner:</label>
+        <input type="text" name="ansprechpartner" id="ansprechpartner" placeholder="Optional"
+               class="form-control" value="{{$adress->ansprechpartner}}">
+    </div>
+    <div class="form-group">
+        <label class="formGroupExampleInput">Team:</label>
+        <select class="form-control" name="abteilung" id="abteilung">
+            <option class="form-control" value="{{$adress->abteilung}}">Bitte wählen Sie Ihr Team aus</option>
+            @foreach(\App\Models\Team::get() as $team)
+                <option name="abteilung" id="abteilung">{{$team->name}}</option>
+            @endforeach
         </select>
     </div>
-
     <div class="form-group">
-        <label for="formGroupExampleInput">Telefon:</label>
-        <input type="text" name="telefon" id="telefon" placeholder="Optional"
-               class="form-control" value="{{ old('telefon') }}">
+        <label class="formGroupExampleInput">Bitte geben Sie Dienstleister Type</label><br>
+        <input type="radio" id="checkbox" name="checkbox" value="Intern"
+               checked>
+        <label class="formGroupExampleInput">Intern</label>
+        <input type="radio" id="checkbox" name="checkbox" value="Extern"
+               checked>
+        <label class="formGroupExampleInput">Extern</label>
     </div>
-    <div class="form-group">
-        <label for="formGroupExampleInput">Ansprechpartner:</label>
-        <input type="text" name="ansprechpartner" id="ansprechpartner" placeholder="Optional"
-               class="form-control" value="{{ old('ansprechpartner') }}">
-    </div>
-    <div class="form-group">
-        <label for="formGroupExampleInput">Abteilung:</label>
-        <input type="text" name="abteilung" id="abteilung" placeholder="Optional"
-               class="form-control" value="{{ old('abteilung') }}">
-    </div>
-
     <div class="form-group"></div>
 <!-- Update Button -->
  <div class="form-group">

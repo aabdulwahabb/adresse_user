@@ -45,7 +45,7 @@ class AdresseController extends Controller
                  'typ'       => 'required|string',
                  'name'       => 'required|string|max:255',
                  'email'   => 'required|string|unique:adresse|max:255',
-                 'abteilung' => 'string',
+                 'abteilung' => 'nullable',
                  'telefon' => 'integer|unique:adresse',
                  'ansprechpartner' => 'string|unique:adresse',
                  'checkbox' => 'in:Intern, Extern',
@@ -135,8 +135,11 @@ class AdresseController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(adresse $adress)
+  public function edit($id)
   {
+      // get the adresse
+      $adress = Adresse::find($id);
+
   return View('adresse.edit',compact('adress'));
   }
 
