@@ -17,20 +17,20 @@ Route::get('/', [SessionController::class, 'create'])->middleware('guest');
 // Adresse Page
 Route::get('/adresse', [AdresseController::class, 'index'])->name('adresse.index');
 Route::get('/adresse/create', [AdresseController::class, 'create'])->name('adresse.create');
-Route::get('/adresse/{id}', [AdresseController::class, 'show'])->name('adresse.show');
-Route::get('adresse/{id}/edit', [AdresseController::class, 'edit'])->name('adresse.edit');
+Route::get('/adresse/id={id}', [AdresseController::class, 'show'])->name('adresse.show');
+Route::get('adresse/id={id}/edit', [AdresseController::class, 'edit'])->name('adresse.edit');
 
 // Store Adresse
         Route::post('/users/{id}', [AdresseController::class, 'store']);
         Route::post('/adresse',[AdresseController::class, 'update']);
 
 //Adresse Rolle Page
-Route::get('/adresserolle/adresse/{id}', [AdresseRolleController::class, 'show'])->name('adresserolle.index');
+Route::get('/adresserolle/adresse/id={id}', [AdresseRolleController::class, 'show'])->name('adresserolle.index');
 
 // User Page
 Route::get('/users', [XentralUserController::class, 'index'])->name('users.index');
-Route::get('/users/{id}', [XentralUserController::class, 'show'])->name('users.show');
-Route::get('/users/{id}/edit', [XentralUserController::class, 'edit'])->name('user.edit');
+Route::get('/users/id={id}', [XentralUserController::class, 'show'])->name('users.show');
+Route::get('/users/id={id}/edit', [XentralUserController::class, 'edit'])->name('user.edit');
 
 // Store User
         Route::post('/users',[XentralUserController::class, 'update']);

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     @extends('components.navigation')
-<h1>Edit {{ $user->username }}</h1>
+<h1>Bearbeite User {{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name') }}</h1>
 <!-- if there are creation errors, they will show here -->
 @if (count($errors) > 0)
     <div class="alert alert-danger">

@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Arr;
 
 
+
+
 class XentralUser extends Model
 {
   use HasFactory;
@@ -85,7 +87,7 @@ class XentralUser extends Model
   * @return BelongsTo
   */
  public function adresse(): BelongsTo {
-     return $this->belongsTo(Adresse::class, 'id')->ge();
+     return $this->belongsTo(Adresse::class, 'adresse');
  }
 
     /**

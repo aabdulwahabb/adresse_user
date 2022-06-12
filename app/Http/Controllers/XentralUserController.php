@@ -9,6 +9,8 @@ use App\Models\XentralUser;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use View;
 
 class XentralUserController extends Controller
@@ -16,14 +18,14 @@ class XentralUserController extends Controller
   /**
    * Display a listing of the resource.
    */
-    public function index(Adresse $adresse)
-    {
+ public function index()
+  {
         // get all the user
-     $users = XentralUser::paginate(10);
+  $users = XentralUser::paginate(10);
 
         // load the view and pass the users
-        return View('users.index',compact('users'));
-    }
+  return View('users.index',compact('users'));
+  }
 
   /**
    * Show the form for creating a new resource.

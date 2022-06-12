@@ -23,30 +23,30 @@
         </tr>
     </thead>
     <tbody>
-    @foreach($users as $key => $value)
+    @foreach($users as $user)
         <tr>
-            <td>{{ $value->username }}</td>
-            <td>{{ $value->type }}</td>
-            <td>{{ $value->adresse }}</td>
-            @if($value->activ == 1)
+            <td>{{ $user->username }}</td>
+            <td>{{ $user->type }}</td>
+            <td>{{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name')}}</td>
+            @if($user->activ == 1)
                 <td>ja</td>
-            @elseif($value->activ == 0)
+            @elseif($user->activ == 0)
                 <td>-</td>
             @endif
-            @if($value->externlogin == 1)
+            @if($user->externlogin == 1)
             <td>erlaubt</td>
-            @elseif($value->externlogin == 0)
+            @elseif($user->externlogin == 0)
                 <td>-</td>
             @endif
-            <td> Anzahl Rechte</td>
+            <td>{{ \Illuminate\Support\Facades\DB::table('userrights')->where('user',$user->id)->count('id') }}</td>
 
             <!-- we will also add show, and delete buttons -->
             <td>
                 <!-- show the user (uses the show method found at GET /users/{id} -->
-                <a class="btn btn-small btn-success" href="{{ URL::to('/users/' . $value->id) }}">Mitarbeiter Karte</a>
+                <a class="btn btn-small btn-success" href="{{ URL::to('/users/id=' . $user->id) }}">Mitarbeiter Karte</a>
 
                 <!-- edit this user (uses the edit method found at GET /users/{id}/edit -->
-                <a class="btn btn-danger" href="{{ URL::to('users/' . $value->id . '/edit') }}">Bearbeiten</a>
+                <a class="btn btn-danger" href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
             </td>
         </tr>
     @endforeach

@@ -46,10 +46,10 @@
 
                     <td>
                         <!-- edit this adress (uses the edit method found at GET /adresse/{id}/edit -->
-                        <a class="btn btn-small btn-success" href="{{ URL::to('/adresserolle/adresse/' . $value->id) }}">Rolle</a>
+                        <a class="btn btn-small btn-success" href="{{ URL::to('/adresserolle/adresse/id=' . $value->id) }}">Rolle</a>
 
                         <!-- edit this adress (uses the edit method found at GET /adresse/{id}/edit -->
-                        <a class="btn btn-danger" href="{{ URL::to('adresse/' . $value->id . '/edit') }}">Bearbeiten</a>
+                        <a class="btn btn-danger" href="{{ URL::to('adresse/id=' . $value->id . '/edit') }}">Bearbeiten</a>
                     </td>
                 </tr>
             @endforeach
@@ -59,6 +59,3 @@
     </div>
 @endsection
 @extends('components.footer')
-
-
-
