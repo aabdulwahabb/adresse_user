@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\XentralUser;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use View;
 
 class XentralUserController extends Controller
@@ -15,10 +16,10 @@ class XentralUserController extends Controller
   /**
    * Display a listing of the resource.
    */
-    public function index()
+    public function index(Adresse $adresse)
     {
         // get all the user
-        $users = XentralUser::paginate(10);
+     $users = XentralUser::paginate(10);
 
         // load the view and pass the users
         return View('users.index',compact('users'));

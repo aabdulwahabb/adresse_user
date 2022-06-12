@@ -61,14 +61,13 @@ class Adresse extends Model
   }
 
   /**
-   * Adresse has many users
+   * adresse hasMany user
    *
    * @return HasMany
    */
   public function user(): HasMany {
-      return $this->hasMany(XentralUser::class, 'id');
+      return $this->hasMany(XentralUser::class);
   }
-
     /**
      * Adresse has many  projekt
      *

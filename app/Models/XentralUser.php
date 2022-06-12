@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Arr;
 
@@ -79,12 +80,12 @@ class XentralUser extends Model
  }
 
  /**
-  * User has one adresse
+  * User BelongsTo adresse
   *
   * @return BelongsTo
   */
  public function adresse(): BelongsTo {
-     return $this->belongsTo(Adresse::class);
+     return $this->belongsTo(Adresse::class, 'id')->ge();
  }
 
     /**

@@ -27,7 +27,7 @@
         <tr>
             <td>{{ $value->username }}</td>
             <td>{{ $value->type }}</td>
-            <td>{{ $value->adresse}}</td>
+            <td>{{ $value->adresse }}</td>
             @if($value->activ == 1)
                 <td>ja</td>
             @elseif($value->activ == 0)
