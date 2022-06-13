@@ -16,7 +16,7 @@
 @endif
 <form action="{{ url('/users') }}" method="POST" class="form-horizontal">
     {{ csrf_field() }}
-    {{ method_field('POST')}}
+    {{ method_field('patch')}}
     <div class="form-group">
         <label class="formGroupExampleInput">Username:</label>
         <input type="text" name="username" id="username" required class="form-control" value="{{ $user->username }}">

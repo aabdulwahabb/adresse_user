@@ -55,6 +55,9 @@ class AdresseController extends Controller
                  'telefon' => 'nullable|numeric|unique:adresse',
                  'ansprechpartner' => 'nullable',
                  'checkbox' => 'in:Intern, Extern',
+                 'username'       => 'required|regex:/^\S*$/u|max:255|unique:user',
+                 'password'       => 'required|min:8|max:255',
+                 'repassword'       => 'required|min:8|same:password',
                  ]);
                  // store adresse
               $neuadresse = Adresse::create([
@@ -77,12 +80,6 @@ class AdresseController extends Controller
 
                ]);
 
-               // validate user
-                 $this->validate($request, [
-                     'username'       => 'required|regex:/^\S*$/u|max:255|unique:user',
-                     'password'       => 'required|min:8|max:255',
-                     'repassword'       => 'required|min:8|same:password',
-                     ]);
                  // store user
                 XentralUser::create([
                  'username'      =>  request('username'),
@@ -95,6 +92,8 @@ class AdresseController extends Controller
                  'logdatei'      =>   now(),
                  'activ'      =>   1,
                  'sprachebevorzugen'      =>   'deutsch',
+                 'externlogin' => 1,
+                 'standardetikett'  => 43
                ]);
 
        // store stechuhr user
@@ -104,12 +103,13 @@ class AdresseController extends Controller
            'repassword' => request('password'),
            'type'      =>  'standard',
            'adresse'       =>  $neuadresse->id,
-           'settings'      =>   'Tjs=',
            'startseite'      => 'index.php?module=stechuhr&action=list',
            'logdatei'      =>   now(),
            'activ'      =>   1,
            'sprachebevorzugen'      =>   'deutsch',
            'stechuhrdevice'      =>   $stechuhruser.'RzA5US8F5Z',
+           'externlogin' => 1,
+           'standardetikett'  => 25
        ]);
 
                // store rolle
@@ -145,8 +145,8 @@ class AdresseController extends Controller
    */
   public function edit($id)
   {
-      $adress = Adresse::where('id', '=', $id)->first();
-  return View('adresse.edit',compact('adress'));
+    $adress = Adresse::find($id);
+return View('adresse.edit',compact('adress'));
   }
 
   /**
@@ -156,13 +156,13 @@ class AdresseController extends Controller
   {
       // validate adresse
       $this->validate($request, [
-          'typ'       => 'string',
-          'name'       => 'string|max:255',
-          'email'   => 'string|unique:adresse|max:255',
-          'abteilung' => 'nullable',
-          'telefon' => 'nullable|integer|unique:adresse',
-          'ansprechpartner' => 'nullable|string|unique:adresse',
-          'checkbox' => 'in:Intern, Extern',
+        'typ'       => 'sometimes|required|string',
+        'name'       => 'sometimes|required|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
+        'email'   => 'sometimes|required|string|unique:adresse|max:255',
+        'abteilung' => 'sometimes|nullable',
+        'telefon' => 'sometimes|nullable|numeric|unique:adresse',
+        'ansprechpartner' => 'sometimes|nullable',
+        'checkbox' => 'sometimes|nullable|in:Intern, Extern'
       ]);
 
       $adress->update($request->all());

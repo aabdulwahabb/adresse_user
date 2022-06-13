@@ -16,7 +16,7 @@
 @endif
 <form action="{{ url('/adresse') }}" method="POST" class="form-horizontal">
     {{ csrf_field() }}
-    {{ method_field('POST')}}
+    {{ method_field('put')}}
     <div class="form-group">
         <label class=formGroupExampleInput">Bitte wählen Sie Ihr Kontotype aus</label>
         <select class="form-control" name="typ" id="typ" required>

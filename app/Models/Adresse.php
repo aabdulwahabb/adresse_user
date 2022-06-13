@@ -19,6 +19,7 @@ class Adresse extends Model
   protected $guarded = [];
 
   protected $casts = [
+      'id' => 'integer',
       'name' => 'string'
   ];
 

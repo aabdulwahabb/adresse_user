@@ -19,6 +19,7 @@
             <td>Aktiv</td>
             <td>Extern</td>
             <td>Anzahl Rechte</td>
+            <td>Hardware</td>
             <td>Menü</td>
         </tr>
     </thead>
@@ -39,7 +40,11 @@
                 <td>-</td>
             @endif
             <td>{{ \Illuminate\Support\Facades\DB::table('userrights')->where('user',$user->id)->count('id') }}</td>
-
+            @if($user->standardetikett == 25)
+            <td>Zeiterfassung</td>
+            @else
+            <td></td>
+            @endif
             <!-- we will also add show, and delete buttons -->
             <td>
                 <!-- show the user (uses the show method found at GET /users/{id} -->

@@ -29,7 +29,8 @@ class XentralUser extends Model
  ];
 
  protected $casts = [
-     'username' => 'string'
+     'username' => 'string',
+     'id' => 'integer'
  ];
 
 

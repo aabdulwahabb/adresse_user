@@ -34,11 +34,7 @@
                     <td>{{ $value->plz }}</td>
                     <td>{{ $value->ort }}</td>
                     <td>{{ $value->email }}</td>
-                    @if($value->projekt == 0)
-                    <td>alle</td>
-                    @elseif(!$value->projekt == 0)
-                    <td>{{ $value->projekt }}</td>
-                    @endif
+                    <td>{{ \Illuminate\Support\Facades\DB::table('projekt')->where('id',$value->projekt)->value('abkuerzung') }}</td>
                     <td>{{ $value->ansprechpartner }}</td>
                     <td>{{ $value->telefon }}</td>
                     <td>{{ $value->mobil }}</td>
