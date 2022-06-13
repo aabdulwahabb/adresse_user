@@ -28,7 +28,7 @@
             @if($value->projekt == 0)
                 <td>alle</td>
             @else
-            <td>{{ $projekt->abkuerzung }}</td>
+            <td>{{ \Illuminate\Support\Facades\DB::table('projekt')->where('id',$value->projekt)->value('abkuerzung') }}</td>
             @endif
             <td>{{ $value->von }}</td>
             <td>{{ $value->bis }}</td>

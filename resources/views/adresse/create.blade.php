@@ -19,11 +19,11 @@
     {{ csrf_field() }}
     @endforeach
     <div class="form-group">
-        <label class=formGroupExampleInput">Bitte wählen Sie Ihr Kontotype aus</label>
-    <select class="form-control" name="typ" id="typ" required>
-        <option name="typ" value="frau">Frau</option>
-        <option name="typ" value="herr">Herr</option>
-    </select>
+        <select class="form-control" name="typ" id="typ">
+            <option class="form-control" value="{{ old('typ') }}">Bitte wählen Sie Ihr Kontotype aus</option>
+                <option name="typ" id="typ">Frau</option>
+                <option name="typ" id="typ">Herr</option>
+        </select>
         <small class="form-text text-muted">z.B. Frau oder Herr</small>
     </div>
     <div class="form-group">
@@ -53,13 +53,13 @@
                class="form-control" value="{{ old('ansprechpartner') }}">
     </div>
     <div class="form-group">
-        <label class="formGroupExampleInput">Team:</label>
         <select class="form-control" name="abteilung" id="abteilung">
             <option class="form-control" value="{{ old('abteilung') }}">Bitte wählen Sie Ihr Team aus</option>
             @foreach(\App\Models\Team::get() as $team)
                 <option name="abteilung" id="abteilung">{{$team->name}}</option>
             @endforeach
         </select>
+        <small class="form-text text-muted">Optional</small>
     </div>
     <div class="form-group">
         <label class="formGroupExampleInput">Bitte geben Sie Dienstleister Type</label><br>
@@ -71,18 +71,24 @@
             <label class="formGroupExampleInput">Extern</label>
     </div>
     <div class="form-group">
-        <label class="formGroupExampleInput">Username:</label>
-        <input type="text" name="username" id="username" required class="form-control" value="{{ old('username') }}">
+        <input type="text" name="username" id="username" required class="form-control" value="{{ old('username') }}" placeholder="Username">
+        <small class="form-text text-muted">Bitte Klein Buchstaben benutzen</small>
         @if ($errors->has('username'))
             <span class="error">{{ $errors->first('username') }}</span>
         @endif
     </div>
     <div class="form-group">
-        <label class="formGroupExampleInput">Password:</label>
-        <input type="password" name="password" id="password" required class="form-control" value="{{ old('password') }}">
-        <small class="form-text text-muted">Mindestens 8 Zeichen</small>
+        <input type="password" name="password" id="password" required class="form-control" value="{{ old('password') }}" placeholder="Password">
+        <small class="form-text text-muted">Bitte Mindestens 8 Zeichen vergeben</small>
         @if ($errors->has('password'))
             <span class="error">{{ $errors->first('password') }}</span>
+        @endif
+    </div>
+    <div class="form-group">
+        <input type="password" name="repassword" id="repassword" required class="form-control" value="{{ old('repassword') }}" placeholder="Password Wiederholen">
+        <small class="form-text text-muted">Bitte bestätigen Sie Ihr Password</small>
+        @if ($errors->has('repassword'))
+            <span class="error">{{ $errors->first('repassword') }}</span>
         @endif
     </div>
         <div class="form-group"></div>

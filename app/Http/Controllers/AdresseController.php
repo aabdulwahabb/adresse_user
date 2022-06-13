@@ -49,10 +49,10 @@ class AdresseController extends Controller
              // validate adresse
              $this->validate($request, [
                  'typ'       => 'required|string',
-                 'name'       => 'required|string|max:255',
+                 'name'       => 'required|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
                  'email'   => 'required|string|unique:adresse|max:255',
                  'abteilung' => 'nullable',
-                 'telefon' => 'nullable|unique:adresse',
+                 'telefon' => 'nullable|numeric|unique:adresse',
                  'ansprechpartner' => 'nullable',
                  'checkbox' => 'in:Intern, Extern',
                  ]);
@@ -79,14 +79,15 @@ class AdresseController extends Controller
 
                // validate user
                  $this->validate($request, [
-                     'username'       => 'required|string|max:255',
+                     'username'       => 'required|regex:/^\S*$/u|max:255|unique:user',
                      'password'       => 'required|min:8|max:255',
+                     'repassword'       => 'required|min:8|same:password',
                      ]);
                  // store user
                 XentralUser::create([
                  'username'      =>  request('username'),
                  'password'      =>  request('password'),
-                 'repassword' => request('password'),
+                 'repassword' => request('repassword'),
                  'type'      =>  'standard',
                  'adresse'       =>  $neuadresse->id,
                  'settings'      =>   'Tjs=',

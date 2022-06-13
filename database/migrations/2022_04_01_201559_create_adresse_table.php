@@ -28,7 +28,7 @@ class CreateAdresseTable extends Migration
                 $table->string('angebot_email',128)->default('');
                 $table->string('angebot_fax_cc',128)->default('');
                 $table->string('anschreiben',1024)->nullable();
-                $table->string('ansprechpartner');
+                $table->string('ansprechpartner')->nullable();
                 $table->integer('anzeigesteuerbelege')->default(0);
                 $table->decimal('arbeitszeitprowoche',10,2)->default(0.00);
                 $table->string('art',32)->default('');
