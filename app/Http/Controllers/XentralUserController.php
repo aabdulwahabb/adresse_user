@@ -77,17 +77,17 @@ public function store(Request $request) {
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, xentraluser $user)
-  {
-      $this->validate($request, [
-          'username'       => 'string|max:255',
-          'password'       => 'min:8|max:255',
-      ]);
+    public function update(Request $request, xentraluser $user)
+    {
 
-      $user->update($request->all());
-      Session::flash('message', 'Successfully updated user!');
-      return redirect::to('/users');
-  }
+
+
+        $user->update($request->all());
+        //  Xentraluser::where('id', $user->id)->update($request->except(['_token', '_method']));
+
+        Session::flash('message', 'Successfully updated adresse!');
+        return redirect()->route('users.index');
+    }
 
   /**
    * Remove the specified resource from storage.

@@ -22,7 +22,7 @@ Route::get('adresse/id={id}/edit', [AdresseController::class, 'edit'])->name('ad
 
 // Store Adresse
         Route::post('/users/{id}', [AdresseController::class, 'store']);
-        Route::put('/adresse',[AdresseController::class, 'update']);
+        Route::put('adresse', [AdresseController::class, 'update']);
 
 //Adresse Rolle Page
 Route::get('/adresserolle/adresse/id={id}', [AdresseRolleController::class, 'show'])->name('adresserolle.index');

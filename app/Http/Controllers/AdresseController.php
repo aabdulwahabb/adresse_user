@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use phpDocumentor\Reflection\Types\Compound;
 use Symfony\Component\Console\Input\Input;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use View;
 
 class AdresseController extends Controller
@@ -54,7 +56,7 @@ class AdresseController extends Controller
                  'abteilung' => 'nullable',
                  'telefon' => 'nullable|numeric|unique:adresse',
                  'ansprechpartner' => 'nullable',
-                 'checkbox' => 'in:Intern, Extern',
+                 'freifeld1' => 'in:Intern, Extern',
                  'username'       => 'required|regex:/^\S*$/u|max:255|unique:user',
                  'password'       => 'required|min:8|max:255',
                  'repassword'       => 'required|min:8|same:password',
@@ -67,7 +69,7 @@ class AdresseController extends Controller
                  'abteilung'  =>  request('abteilung'),
                  'telefon'  =>  request('telefon'),
                  'ansprechpartner'  =>  request('ansprechpartner'),
-                 'freifeld1'  =>  request('checkbox'),
+                 'freifeld1'  =>  request('freifeld1'),
                  'bundesstaat' => 'NRW',
                  'firma' => 1,
                  'logdatei' => now(),
@@ -154,20 +156,10 @@ return View('adresse.edit',compact('adress'));
    */
   public function update(Request $request, adresse $adress)
   {
-      // validate adresse
-      $this->validate($request, [
-        'typ'       => 'sometimes|required|string',
-        'name'       => 'sometimes|required|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
-        'email'   => 'sometimes|required|string|unique:adresse|max:255',
-        'abteilung' => 'sometimes|nullable',
-        'telefon' => 'sometimes|nullable|numeric|unique:adresse',
-        'ansprechpartner' => 'sometimes|nullable',
-        'checkbox' => 'sometimes|nullable|in:Intern, Extern'
-      ]);
-
-      $adress->update($request->all());
-            Session::flash('message', 'Successfully updated adresse!');
-            return redirect::to('/adresse');
+     // $adress->update($request->all());
+          Adresse::where('id', $adress->id)->update($request->except(['_token', '_method']));
+     Session::flash('message', 'Successfully updated adresse!');
+     return redirect()->route('adresse.index');
   }
 
   /**
