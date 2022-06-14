@@ -56,7 +56,7 @@ class AdresseController extends Controller
                  'abteilung' => 'nullable',
                  'telefon' => 'nullable|numeric|unique:adresse',
                  'ansprechpartner' => 'nullable',
-                 'freifeld1' => 'in:Intern, Extern',
+                 'dienstleister' => 'sometimes|in:Intern, Extern',
                  'username'       => 'required|regex:/^\S*$/u|max:255|unique:user',
                  'password'       => 'required|min:8|max:255',
                  'repassword'       => 'required|min:8|same:password',
@@ -69,7 +69,7 @@ class AdresseController extends Controller
                  'abteilung'  =>  request('abteilung'),
                  'telefon'  =>  request('telefon'),
                  'ansprechpartner'  =>  request('ansprechpartner'),
-                 'freifeld1'  =>  request('freifeld1'),
+                 'freifeld1'  =>  request('dienstleister'),
                  'bundesstaat' => 'NRW',
                  'firma' => 1,
                  'logdatei' => now(),
@@ -154,10 +154,30 @@ return View('adresse.edit',compact('adress'));
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, adresse $adress)
+  public function update(Request $request)
   {
      // $adress->update($request->all());
-          Adresse::where('id', $adress->id)->update($request->except(['_token', '_method']));
+    // Adresse::where('id', $adress->id)->update($request->except(['_token', '_method']));
+
+      $this->validate($request, [
+          'typ'       => 'sometimes|string',
+          'name'       => 'sometimes|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
+          'email'   => 'sometimes|string|max:255',
+          'abteilung' => 'sometimes|nullable',
+          'telefon' => 'sometimes|nullable|numeric',
+          'ansprechpartner' => 'sometimes|nullable',
+          'dienstleister' => 'sometimes|in:Intern, Extern',
+      ]);
+      $adress = Adresse::find($request->id);
+      $adress->typ = $request->typ;
+      $adress->name = $request->name;
+      $adress->email = $request->email;
+      $adress->telefon = $request->telefon;
+      $adress->ansprechpartner = $request->ansprechpartner;
+      $adress->abteilung = $request->abteilung;
+      $adress->freifeld1 = $request->dienstleister;
+      $adress->save();
+
      Session::flash('message', 'Successfully updated adresse!');
      return redirect()->route('adresse.index');
   }

@@ -39,19 +39,15 @@ class XentralUserController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-   /*
-public function store(Request $request) {
-    $this->validate($request, [
-       'username' => 'required|min:5|max:255',
-       'password' => 'required|min:8|max:255',
-    ]);
-    $newuser = new XentralUser();
-    $newuser->username = request('username');
-    $newuser->password = request('password');
-    $newuser->save();
 
-    return redirect('/');
-  }
+ /*public function store(Request $request)
+{
+    $this->validate($request, [
+        'username'       => 'required|regex:/^\S*$/u|max:255|unique:user',
+        'password'       => 'required|min:8|max:255',
+        'repassword'       => 'required|min:8|same:password',
+    ]);
+}*/
 
   /**
    * Display the specified resource.
@@ -77,14 +73,21 @@ public function store(Request $request) {
   /**
    * Update the specified resource in storage.
    */
-    public function update(Request $request, xentraluser $user)
+
+    public function update(Request $request)
     {
 
+        $this->validate($request, [
+            'username'       => 'sometimes|regex:/^\S*$/u|max:255',
+            'password'       => 'sometimes|min:8|max:255',
+            'repassword'       => 'sometimes|min:8|same:password',
+        ]);
 
-
-        $user->update($request->all());
-        //  Xentraluser::where('id', $user->id)->update($request->except(['_token', '_method']));
-
+        $user = XentralUser::find($request->id);
+        $user->username = $request->username;
+        $user->password = $request->password;
+        $user->repassword = $request->repassword;
+        $user->save();
         Session::flash('message', 'Successfully updated adresse!');
         return redirect()->route('users.index');
     }

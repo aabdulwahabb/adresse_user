@@ -15,8 +15,8 @@
     </div>
 @endif
 <form action="{{ url('/users') }}" method="POST" class="form-horizontal">
-    {{ csrf_field() }}
-    {{ method_field('put')}}
+   @csrf
+    <input type="hidden" name="id" value="{{$user->id}}">
     <div class="form-group">
         <label class="formGroupExampleInput">Username:</label>
         <input type="text" name="username" id="username" required class="form-control" value="{{ $user->username }}">
@@ -30,6 +30,13 @@
         <small class="form-text text-muted">Mindestens 8 Zeichen</small>
         @if ($errors->has('password'))
             <span class="error">{{ $errors->first('password') }}</span>
+        @endif
+    </div>
+    <div class="form-group">
+        <input type="password" name="repassword" id="repassword" required class="form-control" value="{{ old('repassword') }}" placeholder="Password Wiederholen">
+        <small class="form-text text-muted">Bitte bestätigen Sie Ihr Password</small>
+        @if ($errors->has('repassword'))
+            <span class="error">{{ $errors->first('repassword') }}</span>
         @endif
     </div>
     <div class="form-group">

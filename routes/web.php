@@ -22,7 +22,7 @@ Route::get('adresse/id={id}/edit', [AdresseController::class, 'edit'])->name('ad
 
 // Store Adresse
         Route::post('/users/{id}', [AdresseController::class, 'store']);
-        Route::put('adresse', [AdresseController::class, 'update']);
+        Route::post('adresse', [AdresseController::class, 'update']);
 
 //Adresse Rolle Page
 Route::get('/adresserolle/adresse/id={id}', [AdresseRolleController::class, 'show'])->name('adresserolle.index');
@@ -33,7 +33,7 @@ Route::get('/users/id={id}', [XentralUserController::class, 'show'])->name('user
 Route::get('/users/id={id}/edit', [XentralUserController::class, 'edit'])->name('user.edit');
 
 // Store User
-        Route::put('/users',[XentralUserController::class, 'update']);
+        Route::post('/users',[XentralUserController::class, 'update']);
 
 // Projekt Page
 Route::get('/projekte', [ProjektController::class, 'index'])->name('projekte.index');

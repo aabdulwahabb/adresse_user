@@ -15,8 +15,8 @@
     </div>
 @endif
 <form action="{{ url('/adresse') }}" method="POST" class="form-horizontal">
-    {{ csrf_field() }}
-    {{ method_field('PUT')}}
+    @csrf
+    <input type="hidden" name="id" value="{{$adress->id}}">
     <div class="form-group">
         <label class=formGroupExampleInput">Bitte wählen Sie Ihr Kontotype aus</label>
         <select class="form-control" name="typ" id="typ" required>
@@ -62,10 +62,10 @@
     </div>
     <div class="form-group">
         <label class="formGroupExampleInput">Bitte geben Sie Dienstleister Type</label><br>
-        <input type="radio" id="freifeld1" name="freifeld1" value="Intern"
+        <input type="radio" id="dienstleister" name="dienstleister" value="Intern"
                checked>
         <label class="formGroupExampleInput">Intern</label>
-        <input type="radio" id="freifeld1" name="freifeld1" value="Extern"
+        <input type="radio" id="dienstleister" name="dienstleister" value="Extern"
                checked>
         <label class="formGroupExampleInput">Extern</label>
     </div>
