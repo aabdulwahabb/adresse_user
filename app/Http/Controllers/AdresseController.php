@@ -50,7 +50,7 @@ class AdresseController extends Controller
    {
              // validate adresse
              $this->validate($request, [
-                 'typ'       => 'required|string',
+                 'typ'       => 'sometimes|string',
                  'name'       => 'required|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
                  'email'   => 'required|string|unique:adresse|max:255',
                  'abteilung' => 'nullable',
@@ -78,12 +78,11 @@ class AdresseController extends Controller
                  'rechnung_typ' => 'firma',
                  'rechnung_land' => 'DE',
                  'sprache' => 'deutsch',
-                 'projekt' => '10'
-
+                 'projekt' => 10
                ]);
 
                  // store user
-                XentralUser::create([
+               $newuser = XentralUser::create([
                  'username'      =>  request('username'),
                  'password'      =>  request('password'),
                  'repassword' => request('repassword'),
@@ -127,7 +126,7 @@ class AdresseController extends Controller
                'bis' => date('0000-00-00'),
            ]);
        Session::flash('message', 'Successfully created adresse!');
-       return redirect::to('/adresse');
+       return redirect::to('/users/id='.$newuser->id);
    }
 
   /**

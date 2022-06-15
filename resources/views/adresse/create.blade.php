@@ -16,7 +16,7 @@
 @endif
     @foreach(\App\Models\XentralUser::get() as $user)
 <form action="{{ url('users') }}/{{$user->id }}" method="POST" class="form-horizontal">
-    {{ csrf_field() }}
+    @csrf
     @endforeach
     <div class="form-group">
         <select class="form-control" name="typ" id="typ">

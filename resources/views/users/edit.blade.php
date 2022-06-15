@@ -18,11 +18,19 @@
    @csrf
     <input type="hidden" name="id" value="{{$user->id}}">
     <div class="form-group">
-        <label class="formGroupExampleInput">Username:</label>
+    @if($user->standardetikett == 25)
+        <label class="formGroupExampleInput">Mitarbeiternummer:</label>
         <input type="text" name="username" id="username" required class="form-control" value="{{ $user->username }}">
         @if ($errors->has('username'))
             <span class="error">{{ $errors->first('username') }}</span>
         @endif
+        @else
+            <label class="formGroupExampleInput">Username:</label>
+            <input type="text" name="username" id="username" required class="form-control" value="{{ $user->username }}">
+            @if ($errors->has('username'))
+                <span class="error">{{ $errors->first('username') }}</span>
+            @endif
+    @endif
     </div>
     <div class="form-group">
         <label class="formGroupExampleInput">Password:</label>
@@ -33,8 +41,9 @@
         @endif
     </div>
     <div class="form-group">
-        <input type="password" name="repassword" id="repassword" required class="form-control" value="{{ old('repassword') }}" placeholder="Password Wiederholen">
-        <small class="form-text text-muted">Bitte bestätigen Sie Ihr Password</small>
+        <label class="formGroupExampleInput">Password Wiederholen:</label>
+        <input type="password" name="repassword" id="repassword" required class="form-control" value="{{ $user->repassword }}">
+        <small class="form-text text-muted">Mindestens 8 Zeichen</small>
         @if ($errors->has('repassword'))
             <span class="error">{{ $errors->first('repassword') }}</span>
         @endif

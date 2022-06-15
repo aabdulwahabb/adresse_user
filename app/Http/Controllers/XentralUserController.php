@@ -79,8 +79,8 @@ class XentralUserController extends Controller
 
         $this->validate($request, [
             'username'       => 'sometimes|regex:/^\S*$/u|max:255',
-            'password'       => 'sometimes|min:8|max:255',
-            'repassword'       => 'sometimes|min:8|same:password',
+            'password'       => 'sometimes|required|min:8|max:255',
+            'repassword'       => 'sometimes|required_with:password|min:8|same:password',
         ]);
 
         $user = XentralUser::find($request->id);
