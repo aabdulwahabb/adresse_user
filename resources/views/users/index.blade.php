@@ -13,11 +13,10 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <td>Login</td>
+            <td>Username</td>
             <td>Typ</td>
-            <td>Beschreibung</td>
+            <td>Name</td>
             <td>Aktiv</td>
-            <td>Extern</td>
             <td>Anzahl Rechte</td>
             <td>Hardware</td>
             <td>Menü</td>
@@ -34,11 +33,6 @@
             @elseif($user->activ == 0)
                 <td>-</td>
             @endif
-            @if($user->externlogin == 1)
-            <td>erlaubt</td>
-            @elseif($user->externlogin == 0)
-                <td>-</td>
-            @endif
             <td>{{ \Illuminate\Support\Facades\DB::table('userrights')->where('user',$user->id)->count('id') }}</td>
             @if($user->standardetikett == 25)
             <td>Zeiterfassung</td>
@@ -48,7 +42,7 @@
             <!-- we will also add show, and delete buttons -->
             <td>
                 <!-- show the user (uses the show method found at GET /users/{id} -->
-                <a class="btn btn-small btn-success" href="{{ URL::to('/users/id=' . $user->id) }}">Mitarbeiter Karte</a>
+                <a class="btn btn-small btn-info" href="{{ URL::to('/users/id=' . $user->id) }}">Mitarbeiter Karte</a>
 
                 <!-- edit this user (uses the edit method found at GET /users/{id}/edit -->
                 <a class="btn btn-danger" href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
