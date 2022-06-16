@@ -53,7 +53,6 @@
               class="form-control" value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('ansprechpartner')}}">
    </div>
    <div class="form-group">
-       <label class="formGroupExampleInput">Team:</label>
        <select class="form-control" name="abteilung" id="abteilung">
            <option class="form-control" value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('abteilung')}}">Bitte wählen Sie Ihr Team aus</option>
            @foreach(\App\Models\Team::get() as $team)
@@ -61,16 +60,6 @@
            @endforeach
        </select>
    </div>
-   <div class="form-group">
-       <label class="formGroupExampleInput">Bitte geben Sie Dienstleister Type</label><br>
-       <input type="radio" id="dienstleister" name="dienstleister" value="Intern"
-              checked>
-       <label class="formGroupExampleInput">Intern</label>
-       <input type="radio" id="dienstleister" name="dienstleister" value="Extern"
-              checked>
-       <label class="formGroupExampleInput">Extern</label>
-   </div>
-
     <input type="hidden" name="id" value="{{$user->id}}">
     <div class="form-group">
     @if($user->standardetikett == 25)
@@ -104,15 +93,18 @@
         @endif
     </div>
 </div>
+<div class="form-group"></div>
 <!-- Update Button -->
- <div class="form-group">
-     <div class="col-sm-offset-3 col-sm-6">
-         <button type="submit" class="btn btn-small btn-success">
-             <i class="fa fa-btn fa-plus">update</i>
-         </button>
-     </div>
+ <div class="text-center">
+ <button type="submit" class="btn btn-small btn-success">
+     <i class="fa fa-btn fa-plus"></i>
+     Akualisieren
+ </button>
+ <a class="btn btn-danger" href="{{ URL::to('/users') }}">Abbrechen</a>
+ <div class="form-group"></div>
  </div>
 </form>
 </div>
+<div class="form-group"></div>
 @endsection
 @extends('components.footer')

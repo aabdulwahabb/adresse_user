@@ -62,15 +62,6 @@
         <small class="form-text text-muted">Optional</small>
     </div>
     <div class="form-group">
-        <label class="formGroupExampleInput">Bitte geben Sie Dienstleister Type</label><br>
-        <input type="radio" id="dienstleister" name="dienstleister" value="Intern"
-               checked>
-        <label class="formGroupExampleInput">Intern</label>
-            <input type="radio" id="dienstleister" name="dienstleister" value="Extern"
-                   checked>
-            <label class="formGroupExampleInput">Extern</label>
-    </div>
-    <div class="form-group">
         <input type="text" name="username" id="username" required class="form-control" value="{{ old('username') }}" placeholder="Username">
         <small class="form-text text-muted">Bitte Klein Buchstaben benutzen</small>
         @if ($errors->has('username'))
@@ -91,17 +82,18 @@
             <span class="error">{{ $errors->first('repassword') }}</span>
         @endif
     </div>
-        <div class="form-group"></div>
+    <div class="form-group"></div>
 <!-- Add Button -->
- <div class="form-group">
-     <div class="col-sm-offset-3 col-sm-6">
-         <button type="submit" class="btn btn-small btn-info">
-             <i class="fa fa-btn fa-plus"></i>
-             Add
-         </button>
-     </div>
- </div>
+<div class="text-center">
+<button type="submit" class="btn btn-small btn-info">
+    <i class="fa fa-btn fa-plus"></i>
+    Einfügen
+</button>
+<a class="btn btn-danger" href="{{ URL::to('/users') }}">Abbrechen</a>
+<div class="form-group"></div>
+</div>
 </form>
 </div>
+<div class="form-group"></div>
 @endsection
 @extends('components.footer')

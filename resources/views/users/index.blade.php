@@ -7,7 +7,7 @@
 
 <!-- will be used to show any messages -->
 @if (Session::has('message'))
-    <div class="alert alert-info">{{ Session::get('message') }}</div>
+    <div class="alert alert-info" id="flashmessage">{{ Session::get('message') }}</div>
 @endif
 
 <table class="table table-striped table-bordered">
@@ -55,3 +55,11 @@
 </div>
 @endsection
 @extends('components.footer')
+
+
+<script>
+setTimeout(function () {
+        $("#flashmessage").hide();
+    }, 5000);
+
+  </script>
