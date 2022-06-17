@@ -3,6 +3,8 @@
 @section('content')
 <div class="container">
     @extends('components.navigation')
+    <div class="form-group"></div><br><br>
+
 <h1>All the Users</h1>
 
 <!-- will be used to show any messages -->
@@ -10,16 +12,28 @@
     <div class="alert alert-info" id="flashmessage">{{ Session::get('message') }}</div>
 @endif
 
-<table class="table table-striped table-bordered">
-    <thead>
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <thead class="thead-dark">
         <tr>
-            <td>Username</td>
-            <td>Typ</td>
-            <td>Name</td>
-            <td>Aktiv</td>
-            <td>Anzahl Rechte</td>
-            <td>Hardware</td>
-            <td>Menü</td>
+            <td class="th-sm"><strong>Username</strong></td>
+            <td class="th-sm"><strong>Typ</strong></td>
+            <td class="th-sm"><strong>Name</strong></td>
+
+            <td class="th-sm"><strong>
+                <a class="btn btn-secondary dropdown-toggle"
+                   href="#" role="button" id="activ" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Aktiv
+                </a>
+                <p class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" type="submit" href="/users" id="activ">ja</a>
+                        <a class="dropdown-item" type="submit" href="/users" id="activ">nein</a>
+                </p>
+                </strong></td>
+
+            <td class="th-sm"><strong>Anzahl Rechte</strong></td>
+            <td class="th-sm"><strong>Hardware</strong></td>
+            <td class="th-sm"><strong>Menü</strong></td>
         </tr>
     </thead>
     <tbody>
@@ -28,11 +42,13 @@
             <td>{{ $user->username }}</td>
             <td>{{ $user->type }}</td>
             <td>{{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name')}}</td>
+
             @if($user->activ == 1)
                 <td>ja</td>
             @elseif($user->activ == 0)
-                <td>-</td>
+                <td>nein</td>
             @endif
+
             <td>{{ \Illuminate\Support\Facades\DB::table('userrights')->where('user',$user->id)->count('id') }}</td>
             @if($user->standardetikett == 25)
             <td>Zeiterfassung</td>
@@ -51,7 +67,7 @@
     @endforeach
     </tbody>
 </table>
-    {!! $users->render() !!}
+    {!! $users->links() !!}
 </div>
 @endsection
 @extends('components.footer')
@@ -61,5 +77,11 @@
 setTimeout(function () {
         $("#flashmessage").hide();
     }, 5000);
+
+// Basic example
+$(document).ready(function () {
+    $('#dtBasicExample').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+});
 
   </script>

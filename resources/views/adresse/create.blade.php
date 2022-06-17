@@ -1,8 +1,9 @@
 <!-- resources/views/adresse/create.blade.php -->
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+    <a class="container">
         @extends('components.navigation')
+        <div class="form-group"></div><br><br>
         <h1>Create Adresse, Rolle, Xentral and Stechuhr User</h1>
         <!-- if there are creation errors, they will show here -->
         @if ($errors->any())
@@ -114,12 +115,12 @@
                 </div>
                 <div class="form-group"></div>
                 <!-- Add Button -->
-                <div class="text-center">
-                    <button type="submit" class="btn btn-small btn-info">
+                <div class="text-left">
+                    <div class="text-center"></div><a class="btn btn-danger" href="{{ URL::to('/users') }}">Abbrechen</a>
+                    <button type="submit" class="btn btn-small btn-info mr-sm-5">
                         <i class="fa fa-btn fa-plus"></i>
                         Einfügen
                     </button>
-                    <a class="btn btn-danger" href="{{ URL::to('/users') }}" style="float: left">Abbrechen</a>
                 </div>
             </form>
     </div>

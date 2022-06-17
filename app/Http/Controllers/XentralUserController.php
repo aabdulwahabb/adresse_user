@@ -61,6 +61,22 @@ class XentralUserController extends Controller
         return View('users.show', compact('user'));
     }
 
+    public function filter(Request $request)
+    {
+        $users = XentralUser::paginate(10);
+        $user = XentralUser::find($request->id);
+
+        if ($request->activ == 'ja') {
+            $users = XentralUser::where('active', 1)->get();
+        }
+
+        if ($request->activ == 'ja') {
+            $users = XentralUser::where('active', 0)->get();
+        }
+
+        return view('users.index', compact('user', 'users'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

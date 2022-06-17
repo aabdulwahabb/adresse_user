@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         @extends('components.navigation')
+        <div class="form-group"></div><br><br>
         <h1>Bearbeite
             User {{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name') }}</h1>
         <!-- if there are creation errors, they will show here -->
@@ -133,12 +134,13 @@
                     </div>
                     <div class="form-group"></div>
                     <!-- Update Button -->
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-small btn-success">
+                    <div class="text-left">
+                    <div class="text-left">
+                        <div class="text-center"></div><a class="btn btn-danger" href="{{ URL::to('/users') }}">Abbrechen ohne zu speichern</a>
+                        <button type="submit" class="btn btn-small btn-success mr-sm-5">
                             <i class="fa fa-btn fa-plus"></i>
-                            Akualisieren
+                            Speichern
                         </button>
-                        <a class="btn btn-danger" href="{{ URL::to('/users') }}" style="float: left">Abbrechen</a>
                     </div>
             </div>
         </form>

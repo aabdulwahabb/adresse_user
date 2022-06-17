@@ -164,7 +164,6 @@ class AdresseController extends Controller
             'abteilung' => 'sometimes|nullable',
             'telefon' => 'sometimes|nullable|numeric',
             'ansprechpartner' => 'sometimes|nullable',
-            'dienstleister' => 'sometimes|in:Intern, Extern',
         ]);
         $adress = Adresse::find($request->id);
         $adress->typ = $request->typ;
@@ -173,7 +172,6 @@ class AdresseController extends Controller
         $adress->telefon = $request->telefon;
         $adress->ansprechpartner = $request->ansprechpartner;
         $adress->abteilung = $request->abteilung;
-        $adress->freifeld1 = $request->dienstleister;
         $adress->save();
 
         Session::flash('message', 'Successfully updated adresse!');
