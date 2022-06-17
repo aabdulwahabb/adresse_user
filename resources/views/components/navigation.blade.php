@@ -1,13 +1,9 @@
-<nav class="navbar navbar-inverse">
-    <ul class="nav navbar-nav">
-
-      <li><div class="form-group">
-        <a class="btn btn-small btn-success" href="{{ URL::to('adresse/create') }}" style="float: left;">+Neu</a>
-        <li><a href="{{ URL::to('users/') }}">Alle Users</a>
-          </div>
-   <li><div class="form-group">
-     <a class="btn btn-small btn-danger" href="{{ URL::to('/') }}" style="float: right;">Logout</a>
-   </button>
-       </div>
-    </ul>
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+    <a class="btn btn-outline-success mr-sm-2" href="{{ URL::to('adresse/create') }}">+Neu</a>
+    <a class="btn btn-outline-success my-2 my-sm-0" href="{{ URL::to('/users') }}">Startseite</a>
+    <form class="form-inline">
+        <a class="btn btn-outline-success mr-sm-2" href="{{ URL::to('/') }}" type="submit">Abmelden</a>
+        <input class="form-control mr-sm-2" type="search" placeholder="Suche" aria-label="Suche">
+        <a class="btn btn-outline-success my-2 my-sm-0" type="submit">Suchen</a>
+    </form>
 </nav>

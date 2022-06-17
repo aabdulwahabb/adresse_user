@@ -7,9 +7,6 @@
     @if (Session::has('message'))
         <div class="alert alert-info" id="flashmessage">{{ Session::get('message') }}</div>
     @endif
-    <h2 class="text-right">
-      <a class="btn btn-danger" href="{{ URL::to('/users') }}">Abbrechen</a>
-    </h2>
 <h1>{{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name') }}</h1>
     <div class="jumbotron text-center">
         <p>
@@ -21,6 +18,10 @@
             <strong>Dienstleister:</strong>{{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('freifeld1')}} User <br>
 
         </p>
+    </div>
+    <div class="text-left">
+        <a class="btn btn-small btn-info" href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
+            <a class="btn btn-danger" href="{{ URL::to('/users') }}" style="float: right">Abbrechen</a>
     </div>
 </div>
 @endsection
