@@ -29,12 +29,12 @@ Route::get('/adresserolle/adresse/id={id}', [AdresseRolleController::class, 'sho
 
 // User Page
 Route::get('/users', [XentralUserController::class, 'index'])->name('users.index');
-Route::post('/users', [XentralUserController::class, 'filter'])->name('users.index');
 Route::get('/users/id={id}', [XentralUserController::class, 'show'])->name('users.show');
 Route::get('/users/id={id}/edit', [XentralUserController::class, 'edit'])->name('user.edit');
 
 // Store User
         Route::post('/users',[XentralUserController::class, 'update']);
+        Route::post('/users', [XentralUserController::class, 'index'])->name('users.index');
 
 // Projekt Page
 Route::get('/projekte', [ProjektController::class, 'index'])->name('projekte.index');

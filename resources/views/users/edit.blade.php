@@ -1,9 +1,9 @@
 <!-- resources/views/adresse/edit.blade.php -->
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+    <section class="container">
         @extends('components.navigation')
-        <div class="form-group"></div><br><br>
+        <div class="form-group"></div>
         <h1>Bearbeite
             User {{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name') }}</h1>
         <!-- if there are creation errors, they will show here -->
@@ -20,9 +20,10 @@
             @csrf
 
             <input type="hidden" name="id" value="{{$user->adresse}}">
-            <div class="form-group">
-                <label class="control-label col-sm-2">Type:</label>
-                <div class="col-sm-5">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                <label>Type:</label>
                     <select class="form-control" name="typ" id="typ" required>
                         <option class="form-control" value="{{ old('typ') }}">Bitte wählen Sie Ihr Kontotype aus
                         </option>
@@ -32,9 +33,9 @@
                     <small class="form-text text-muted">z.B. Frau oder Herr</small>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Vollständige Name</label>
-                <div class="col-sm-5">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Vollständige Name</label>
                     <input type="text" name="name" id="name" required placeholder="Ihr Name"
                            class="form-control"
                            value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name')}}">
@@ -44,37 +45,38 @@
                     @endif
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Email-Adresse:</label>
-                <div class="col-sm-5">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Email-Adresse:</label>
                     <input type="email" name="email" id="email" required placeholder="Email Adresse"
-                           class="form-control"
-                           value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('email')}}">
+                           class="form-control" value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('email')}}">
                     <small class="form-text text-muted">Bitte gültige Email</small>
                     @if ($errors->has('email'))
                         <span class="error">{{ $errors->first('email') }}</span>
                     @endif
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Telefon:</label>
-                <div class="col-sm-5">
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Telefon:</label>
                     <input type="text" name="telefon" id="telefon" placeholder="Optional"
                            class="form-control"
                            value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('telefon')}}">
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Ansprechpartner:</label>
-                <div class="col-sm-5">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Ansprechpartner:</label>
                     <input type="text" name="ansprechpartner" id="ansprechpartner" placeholder="Optional"
                            class="form-control"
                            value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('ansprechpartner')}}">
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Ihr Team:</label>
-                <div class="col-sm-5">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Ihr Team:</label>
                     <select class="form-control" name="abteilung" id="abteilung">
                         <option class="form-control"
                                 value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('abteilung')}}">
@@ -87,32 +89,31 @@
                     <small class="form-text text-muted">Optional</small>
                 </div>
             </div>
+          </div>
             <input type="hidden" name="id" value="{{$user->id}}">
-            <div class="form-group">
-                @if($user->standardetikett == 25)
-                    <label class="control-label col-sm-2">Mitarbeiternummer:</label>
-                    <div class="col-sm-5">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+            @if($user->standardetikett == 25)
+                    <label>Mitarbeiternummer:</label>
+                    @else
+                    <label>Benutzername:</label>
+                    @endif
                         <input type="text" name="username" id="username" required class="form-control"
                                value="{{ $user->username }}">
                         <small class="form-text text-muted">Bitte klein Buchstaben benutzen</small>
                         @if ($errors->has('username'))
+                        @if($user->standardetikett == 25)
                             <span class="error">{{ $errors->first('username') }}</span>
+                            @else
+                            <span class="error">{{ $errors->first('mitarbeiternummer') }}</span>
+                            @endif
                         @endif
-                        @else
-                            <label class="control-label col-sm-2">Username:</label>
-                            <div class="col-sm-5">
-                                <input type="text" name="username" id="username" required class="form-control"
-                                       value="{{ $user->username }}">
-                                <small class="form-text text-muted">Bitte klein Buchstaben benutzen</small>
-                                @if ($errors->has('username'))
-                                    <span class="error">{{ $errors->first('username') }}</span>
-                                @endif
-                                @endif
-                            </div>
+                      </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2">Passwort:</label>
-                        <div class="col-sm-5">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Passwort:</label>
                             <input type="password" name="password" id="password" required class="form-control"
                                    value="{{ $user->password }}">
                             <small class="form-text text-muted">Bitte Mindestens 8 Zeichen vergeben</small>
@@ -121,9 +122,9 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2">Passwort wiederholen:</label>
-                        <div class="col-sm-5">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Passwort wiederholen:</label>
                             <input type="password" name="repassword" id="repassword" required class="form-control"
                                    value="{{ $user->repassword }}">
                             <small class="form-text text-muted">Bitte bestätigen Sie Ihr Password</small>
@@ -132,19 +133,20 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group"></div>
+                  </div>
                     <!-- Update Button -->
-                    <div class="text-left">
-                    <div class="text-left">
-                        <div class="text-center"></div><a class="btn btn-danger" href="{{ URL::to('/users') }}">Abbrechen ohne zu speichern</a>
-                        <button type="submit" class="btn btn-small btn-success mr-sm-5">
-                            <i class="fa fa-btn fa-plus"></i>
-                            Speichern
-                        </button>
+              <div class="form-group"></div>
+                  <div class="row ml-sm-5">
+                      <div class="col-md-3">
+                          <button type="submit" class="form-control btn btn-small btn-success mr-sm-5">
+                             <i class="fa fa-btn fa-plus"></i>Speichern</button>
+                      </div>
+                      <div class="col-md-3">
+                        <a class="form-control btn btn-small btn-danger"
+                        href="{{ URL::to('/users') }}"><i class="fa fa-btn fa-plus"></i>Abbrechen ohne speichern</a>
                     </div>
-            </div>
+                  </div>
         </form>
-    </div>
-    <div class="form-group"></div>
+  </section>
 @endsection
 @extends('components.footer')

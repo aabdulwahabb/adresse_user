@@ -1,11 +1,20 @@
 <!-- resources/views/users/index.blade.php -->
 @extends('layouts.app')
 @section('content')
-<div class="container">
+<section class="container">
     @extends('components.navigation')
     <div class="form-group"></div><br><br>
-
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
 <h1>All the Users</h1>
+<form class="form-inline">
+  <input class="form-control mr-sm-1" type="search" placeholder="Suche" aria-label="Suche">
+  <button class="btn btn-small btn-light mr-sm-1" type="submit">Suchen</button>
+  </form>
+</div>
+</div>
+</div>
 
 <!-- will be used to show any messages -->
 @if (Session::has('message'))
@@ -58,17 +67,17 @@
             <!-- we will also add show, and delete buttons -->
             <td>
                 <!-- show the user (uses the show method found at GET /users/{id} -->
-                <a class="btn btn-small btn-info" href="{{ URL::to('/users/id=' . $user->id) }}">Mitarbeiter Karte</a>
+                <a class="btn btn-small btn-dark" href="{{ URL::to('/users/id=' . $user->id) }}">Mitarbeiter Karte</a>
 
                 <!-- edit this user (uses the edit method found at GET /users/{id}/edit -->
-                <a class="btn btn-danger" href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
+                <a class="btn btn-dark" href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
             </td>
         </tr>
     @endforeach
     </tbody>
 </table>
+</section>
     {!! $users->links() !!}
-</div>
 @endsection
 @extends('components.footer')
 

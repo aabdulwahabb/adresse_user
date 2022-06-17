@@ -1,10 +1,10 @@
 <!-- resources/views/adresse/create.blade.php -->
 @extends('layouts.app')
 @section('content')
-    <a class="container">
+    <section class="container">
         @extends('components.navigation')
-        <div class="form-group"></div><br><br>
-        <h1>Create Adresse, Rolle, Xentral and Stechuhr User</h1>
+        <div class="form-group"></div>
+         <h1>Create Adresse, Rolle, Xentral and Stechuhr User</h1>
         <!-- if there are creation errors, they will show here -->
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -19,9 +19,10 @@
             <form action="{{ url('users') }}/{{$user->id }}" method="POST" class="form-horizontal">
                 @csrf
                 @endforeach
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Type:</label>
-                    <div class="col-sm-5">
+               <div class="row">
+                 <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Type:</label>
                         <select class="form-control" name="typ" id="typ">
                             <option class="form-control" value="{{ old('typ') }}">Bitte wählen Sie Ihr Kontotype aus
                             </option>
@@ -31,9 +32,9 @@
                         <small class="form-text text-muted">z.B. Frau oder Herr</small>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Vollständige Name:</label>
-                    <div class="col-sm-5">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Vollständige Name:</label>
                         <input type="text" name="name" id="name" required placeholder="Ihre Name"
                                class="form-control" value="{{ old('name') }}">
                         <small class="form-text text-muted">Vor und Nachname</small>
@@ -42,9 +43,9 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Email-Adresse:</label>
-                    <div class="col-sm-5">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Email-Adresse:</label>
                         <input type="email" name="email" id="email" required placeholder="Email Adresse"
                                class="form-control" value="{{ old('email') }}">
                         <small class="form-text text-muted">Bitte gültige Email</small>
@@ -53,23 +54,25 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Telefon:</label>
-                    <div class="col-sm-5">
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Telefon:</label>
                         <input type="text" name="telefon" id="telefon" placeholder="Optional"
                                class="form-control" value="{{ old('telefon') }}">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Ansprechpartner:</label>
-                    <div class="col-sm-5">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Ansprechpartner:</label>
                         <input type="text" name="ansprechpartner" id="ansprechpartner" placeholder="Optional"
                                class="form-control" value="{{ old('ansprechpartner') }}">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Ihr Team:</label>
-                    <div class="col-sm-5">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Ihr Team:</label>
                         <select class="form-control" name="abteilung" id="abteilung">
                             <option class="form-control" value="{{ old('abteilung') }}">Bitte wählen Sie Ihr Team aus
                             </option>
@@ -80,9 +83,11 @@
                         <small class="form-text text-muted">Optional</small>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Benutzername:</label>
-                    <div class="col-sm-5">
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Benutzername:</label>
                         <input type="text" name="username" id="username" required class="form-control"
                                value="{{ old('username') }}" placeholder="Username">
                         <small class="form-text text-muted">Bitte klein Buchstaben benutzen</small>
@@ -91,9 +96,9 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Passwort:</label>
-                    <div class="col-sm-5">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Passwort:</label>
                         <input type="password" name="password" id="password" required class="form-control"
                                value="{{ old('password') }}" placeholder="Password">
                         <small class="form-text text-muted">Bitte Mindestens 8 Zeichen vergeben</small>
@@ -102,9 +107,9 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Passwort Wiederholen:</label>
-                    <div class="col-sm-5">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Passwort Wiederholen:</label>
                         <input type="password" name="repassword" id="repassword" required class="form-control"
                                value="{{ old('repassword') }}" placeholder="Password Wiederholen">
                         <small class="form-text text-muted">Bitte bestätigen Sie Ihr Password</small>
@@ -113,17 +118,20 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group"></div>
+              </div>
                 <!-- Add Button -->
-                <div class="text-left">
-                    <div class="text-center"></div><a class="btn btn-danger" href="{{ URL::to('/users') }}">Abbrechen</a>
-                    <button type="submit" class="btn btn-small btn-info mr-sm-5">
-                        <i class="fa fa-btn fa-plus"></i>
-                        Einfügen
-                    </button>
+                <div class="form-group"></div>
+                <div class="row ml-sm-5">
+                  <div class="col-md-3">
+                      <button type="submit" class="form-control btn btn-small btn-info mr-sm-5">
+                        <i class="fa fa-btn fa-plus"></i>Einfügen</button>
+                  </div>
+                  <div class="col-md-3">
+                    <a class="form-control btn btn-small btn-danger"
+                    href="{{ URL::to('/users') }}"><i class="fa fa-btn fa-plus"></i>Abbrechen</a>
                 </div>
+              </div>
             </form>
-    </div>
-    <div class="form-group"></div>
+    </section>
 @endsection
 @extends('components.footer')
