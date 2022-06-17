@@ -8,10 +8,11 @@
         <div class="alert alert-info" id="flashmessage">{{ Session::get('message') }}</div>
     @endif
     <div class="form-group"></div><br><br>
-    <div class="card bg-light mb-3" style="max-width: 18rem;">
-        <div class="card-header">Mitarbeiter Karte</div>
-        <div class="card-body">
-            <h5 class="card-title">{{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name') }}</h5>
+    <div class="card border-dark mb-3" style="max-width: 25rem; margin-left: 31%;
+    margin-right: 18%;">
+  <div class="card-header">Mitarbeiter Karte</div>
+  <div class="card-body text-dark">
+<h5 class="card-title">{{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name') }}</h5>
         <p class="card-text">
             <strong>Username:</strong> {{ \Illuminate\Support\Facades\DB::table('user')->where('adresse',$user->adresse)->wherenot('standardetikett',25)->value('username') }}<br>
             <strong>Password:</strong> {{ $user->password }}<br>
@@ -23,11 +24,10 @@
         </p>
     </div>
     </div>
-    <div class="text-left">
+      <div class="text-center">
         <a class="btn btn-small btn-info" href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
-            <a class="btn btn-danger" href="{{ URL::to('/users') }}" style="float: right">Abbrechen</a>
-    </div>
-</div>
+        <a class="btn btn-danger" href="{{ URL::to('/users') }}">Abbrechen</a>
+      </div>
 @endsection
 @extends('components.footer')
 

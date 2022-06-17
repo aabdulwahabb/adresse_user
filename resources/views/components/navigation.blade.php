@@ -12,8 +12,6 @@
     </div>
   </div>
     <form class="form-inline">
-        <button class="btn btn-danger mr-sm-5" href="{{ URL::to('/') }}" type="submit">Abmelden</button>
-        <input class="form-control mr-sm-1" type="search" placeholder="Suche" aria-label="Suche">
-        <button class="btn btn-small btn-light mr-sm-1" type="submit">Suchen</button>
+        <button class="btn btn-danger mr-sm-1" href="{{ URL::to('/') }}" type="submit">Abmelden</button>
     </form>
 </nav>

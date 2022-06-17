@@ -135,7 +135,6 @@ class AdresseController extends Controller
     {
         // get the adresse
         $adress = Adresse::find($id);
-
         // show the view and pass the user to it
         return View('adresse.show', compact('adress'));
     }
@@ -148,15 +147,11 @@ class AdresseController extends Controller
         $adress = Adresse::find($id);
         return View('adresse.edit', compact('adress'));
     }
-
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request)
     {
-        // $adress->update($request->all());
-        // Adresse::where('id', $adress->id)->update($request->except(['_token', '_method']));
-
         $this->validate($request, [
             'typ' => 'sometimes|string',
             'name' => 'sometimes|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
@@ -175,7 +170,7 @@ class AdresseController extends Controller
         $adress->save();
 
         Session::flash('message', 'Successfully updated adresse!');
-        return redirect()->route('adresse.index');
+        return redirect()->route('users.index');
     }
 
     /**

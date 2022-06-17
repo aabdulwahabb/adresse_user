@@ -3,19 +3,30 @@
 @section('content')
 <section class="container">
     @extends('components.navigation')
-    <div class="form-group"></div><br><br>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-group">
-<h1>All the Users</h1>
-<form class="form-inline">
-  <input class="form-control mr-sm-1" type="search" placeholder="Suche" aria-label="Suche">
-  <button class="btn btn-small btn-light mr-sm-1" type="submit">Suchen</button>
-  </form>
-</div>
-</div>
-</div>
-
+    <div class="form-group"></div><br>
+    <!-- main content -->
+    <div class="container" role="main">
+        <div class="row">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+              <h2>Alle Login Benutzern</h2>
+          </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+               <form action="" method="GET" class="form-main  form-inline nofloat-xs pull-right pull-left-sm">
+                <div class="col-md-10 col-sm-10 col-xs-12">
+                    <label class="sr-only" for="search">Suche</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-search" name="search" id="search" placeholder="Suche">
+                        <span class="input-group-addon group-icon"><span class="glyphicon glyphicon-user"></span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <button type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span><span class="hidden-sm hidden-xs">Suchen</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- will be used to show any messages -->
 @if (Session::has('message'))
     <div class="alert alert-info" id="flashmessage">{{ Session::get('message') }}</div>
@@ -67,10 +78,10 @@
             <!-- we will also add show, and delete buttons -->
             <td>
                 <!-- show the user (uses the show method found at GET /users/{id} -->
-                <a class="btn btn-small btn-dark" href="{{ URL::to('/users/id=' . $user->id) }}">Mitarbeiter Karte</a>
+                <a class="btn btn-small btn-info" href="{{ URL::to('/users/id=' . $user->id) }}">Mitarbeiter Karte</a>
 
                 <!-- edit this user (uses the edit method found at GET /users/{id}/edit -->
-                <a class="btn btn-dark" href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
+                <a class="btn btn-warning" href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
             </td>
         </tr>
     @endforeach

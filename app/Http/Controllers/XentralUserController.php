@@ -60,23 +60,6 @@ class XentralUserController extends Controller
         // show the view and pass the user to it
         return View('users.show', compact('user'));
     }
-
-    public function filter(Request $request)
-    {
-        $users = XentralUser::paginate(10);
-        $user = XentralUser::find($request->id);
-
-        if ($request->activ == 'ja') {
-            $users = XentralUser::where('active', 1)->get();
-        }
-
-        if ($request->activ == 'ja') {
-            $users = XentralUser::where('active', 0)->get();
-        }
-
-        return view('users.index', compact('user', 'users'));
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -94,6 +77,12 @@ class XentralUserController extends Controller
     {
 
         $this->validate($request, [
+          'typ' => 'sometimes|string',
+          'name' => 'sometimes|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
+          'email' => 'sometimes|string|max:255',
+          'abteilung' => 'sometimes|nullable',
+          'telefon' => 'sometimes|nullable|numeric',
+          'ansprechpartner' => 'sometimes|nullable',
             'username' => 'sometimes|regex:/^\S*$/u|max:255',
             'password' => 'sometimes|required|min:8|max:255',
             'repassword' => 'sometimes|required_with:password|min:8|same:password',
@@ -103,9 +92,17 @@ class XentralUserController extends Controller
         $user->username = $request->username;
         $user->password = $request->password;
         $user->repassword = $request->repassword;
+        $adress = Adresse::find($request->id);
+        $adress->typ = $request->typ;
+        $adress->name = $request->name;
+        $adress->email = $request->email;
+        $adress->telefon = $request->telefon;
+        $adress->ansprechpartner = $request->ansprechpartner;
+        $adress->abteilung = $request->abteilung;
+        $adress->save();
         $user->save();
         Session::flash('message', 'Successfully updated adresse!');
-        return redirect()->route('users.index');
+        return redirect::to('/users/id=' . $user->id);
     }
 
     /**

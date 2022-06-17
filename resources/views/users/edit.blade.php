@@ -18,7 +18,6 @@
         @endif
         <form action="{{ url('/users') }}" method="POST" class="form-horizontal">
             @csrf
-
             <input type="hidden" name="id" value="{{$user->adresse}}">
             <div class="row">
               <div class="col-md-4">
@@ -90,7 +89,7 @@
                 </div>
             </div>
           </div>
-            <input type="hidden" name="id" value="{{$user->id}}">
+          <input type="hidden" name="id" value="{{$user->id}}">
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
@@ -138,12 +137,12 @@
               <div class="form-group"></div>
                   <div class="row ml-sm-5">
                       <div class="col-md-3">
-                          <button type="submit" class="form-control btn btn-small btn-success mr-sm-5">
-                             <i class="fa fa-btn fa-plus"></i>Speichern</button>
+                          <button type="submit" class="form-control btn btn-small btn-success">
+                             Speichern</button>
                       </div>
                       <div class="col-md-3">
                         <a class="form-control btn btn-small btn-danger"
-                        href="{{ URL::to('/users') }}"><i class="fa fa-btn fa-plus"></i>Abbrechen ohne speichern</a>
+                        href="{{ URL::to('/users') }}">Abbrechen ohne speichern</a>
                     </div>
                   </div>
         </form>
