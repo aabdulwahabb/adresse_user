@@ -93,6 +93,7 @@
 @extends('components.footer')
 
 
+
 <script>
 setTimeout(function () {
         $("#flashmessage").hide();

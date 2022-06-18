@@ -124,7 +124,7 @@ class AdresseController extends Controller
             'von' => now(),
             'bis' => date('0000-00-00'),
         ]);
-        Session::flash('message', 'Successfully created adresse!');
+        Session::flash('message', 'Successfully created Benutzer!');
         return redirect::to('/users/id=' . $newuser->id);
     }
 

@@ -12,6 +12,6 @@
     </div>
   </div>
     <form class="form-inline">
-        <button class="btn btn-danger mr-sm-1" href="{{ URL::to('/') }}" type="submit">Abmelden</button>
+        <a class="btn btn-danger mr-sm-1" href="{{ URL::to('/') }}">Abmelden</a>
     </form>
 </nav>
