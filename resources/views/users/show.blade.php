@@ -7,8 +7,9 @@
     @if (Session::has('message'))
         <div class="alert alert-info" id="flashmessage">{{ Session::get('message') }}</div>
     @endif
+    <br><br><br><br><br><br><br><br>
     <div class="form-group"></div><br><br>
-    <div class="card border-dark mb-3" style="max-width: 25rem; margin-left: 31%;
+    <div class="card border-dark mb-5" style="max-width:25rem; margin-left: 31%;
     margin-right: 18%;">
   <div class="card-header">Mitarbeiter Karte</div>
   <div class="card-body text-dark">
@@ -25,8 +26,8 @@
     </div>
     </div>
       <div class="text-center">
-        <a class="btn btn-small btn-info" href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
-        <a class="btn btn-danger" href="{{ URL::to('/users') }}">Abbrechen</a>
+        <a class="btn btn-small btn-info mr-sm-3" href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
+        <a class="btn btn-danger ml-sm-3" href="{{ URL::to('/users') }}">Abbrechen</a>
       </div>
 @endsection
 @extends('components.footer')

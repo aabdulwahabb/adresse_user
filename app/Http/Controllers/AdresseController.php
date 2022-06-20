@@ -148,32 +148,6 @@ class AdresseController extends Controller
         return View('adresse.edit', compact('adress'));
     }
     /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request)
-    {
-        $this->validate($request, [
-            'typ' => 'sometimes|string',
-            'name' => 'sometimes|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
-            'email' => 'sometimes|string|max:255',
-            'abteilung' => 'sometimes|nullable',
-            'telefon' => 'sometimes|nullable|numeric',
-            'ansprechpartner' => 'sometimes|nullable',
-        ]);
-        $adress = Adresse::find($request->id);
-        $adress->typ = $request->typ;
-        $adress->name = $request->name;
-        $adress->email = $request->email;
-        $adress->telefon = $request->telefon;
-        $adress->ansprechpartner = $request->ansprechpartner;
-        $adress->abteilung = $request->abteilung;
-        $adress->save();
-
-        Session::flash('message', 'Successfully updated adresse!');
-        return redirect()->route('users.index');
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
     public function destroy(adresse $adress)

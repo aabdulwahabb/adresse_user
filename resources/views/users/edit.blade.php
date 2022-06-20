@@ -24,7 +24,7 @@
                 <div class="form-group">
                 <label>Type:</label>
                     <select class="form-control" name="typ" id="typ" required>
-                        <option class="form-control" value="{{ old('typ') }}">Bitte wählen Sie Ihr Kontotype aus
+                        <option class="form-control" value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('typ')}}">Bitte wählen Sie Ihr Kontotype aus
                         </option>
                         <option name="typ" value="frau">Frau</option>
                         <option name="typ" value="herr">Herr</option>

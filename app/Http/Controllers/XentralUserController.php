@@ -21,7 +21,7 @@ class XentralUserController extends Controller
     public function index()
     {
         // get all the user
-        $users = XentralUser::paginate(10);
+        $users = XentralUser::paginate(14);
 
         // load the view and pass the users
         return View('users.index', compact('users'));
@@ -77,7 +77,7 @@ class XentralUserController extends Controller
     {
 
         $this->validate($request, [
-          'typ' => 'sometimes|string',
+          'typ' => 'sometimes',
           'name' => 'sometimes|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
           'email' => 'sometimes|string|max:255',
           'abteilung' => 'sometimes|nullable',

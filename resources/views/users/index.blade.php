@@ -46,17 +46,19 @@
                 <td class="th-sm"><strong>Typ</strong></td>
                 <td class="th-sm"><strong>Name</strong></td>
 
-                <td class="th-sm"><strong>
-                        <a class="btn btn-secondary dropdown-toggle"
-                           href="#" role="button" id="activ" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
+                <td>
+                    <strong>
+                       <div>
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Aktiv
                         </a>
-                        <p class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" type="submit" href="/users" id="activ">ja</a>
-                            <a class="dropdown-item" type="submit" href="/users" id="activ">nein</a>
-                        </p>
-                    </strong></td>
+                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="/users" id="activ">ja</a>
+                            <a class="dropdown-item" href="/users" id="activ">nein</a>
+                         </div>
+                       </div>
+                    </strong>
+                </td>
 
                 <td class="th-sm"><strong>Anzahl Rechte</strong></td>
                 <td class="th-sm"><strong>Hardware</strong></td>
