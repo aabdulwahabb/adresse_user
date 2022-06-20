@@ -97,8 +97,8 @@ class AdresseController extends Controller
         ]);
 
         // store stechuhr user
-        XentralUser::create([
-            $stechuhruser = 'username' => '100' . random_int(100, 999),
+         XentralUser::create([
+            'username' => '100' . random_int(100, 999),
             'password' => request('password'),
             'repassword' => request('password'),
             'type' => 'standard',
@@ -107,9 +107,9 @@ class AdresseController extends Controller
             'logdatei' => now(),
             'activ' => 1,
             'sprachebevorzugen' => 'deutsch',
-            'stechuhrdevice' => $stechuhruser . 'RzA5US8F5Z',
             'externlogin' => 1,
-            'standardetikett' => 25
+            'standardetikett' => 25,
+            'stechuhrdevice' => 'RzA5US8F5Z',
         ]);
 
         // store rolle

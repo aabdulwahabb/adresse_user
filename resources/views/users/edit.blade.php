@@ -115,6 +115,7 @@
                         <label>Passwort:</label>
                             <input type="password" name="password" id="password" required class="form-control"
                                    value="{{ $user->password }}">
+                          <input type="checkbox"  onclick="myFunction()"> Einblinden
                             <small class="form-text text-muted">Bitte Mindestens 8 Zeichen vergeben</small>
                             @if ($errors->has('password'))
                                 <span class="error">{{ $errors->first('password') }}</span>
@@ -126,6 +127,7 @@
                         <label>Passwort wiederholen:</label>
                             <input type="password" name="repassword" id="repassword" required class="form-control"
                                    value="{{ $user->repassword }}">
+                          <input type="checkbox"  onclick="Function()"> Einblinden
                             <small class="form-text text-muted">Bitte bestätigen Sie Ihr Password</small>
                             @if ($errors->has('repassword'))
                                 <span class="error">{{ $errors->first('repassword') }}</span>

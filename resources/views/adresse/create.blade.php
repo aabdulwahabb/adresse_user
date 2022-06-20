@@ -99,9 +99,10 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Passwort:</label>
-                        <input type="password" name="password" id="password" required class="form-control"
+                        <input type="password" name="password" id="password" required class="form-control password-field"
                                value="{{ old('password') }}" placeholder="Password">
-                        <small class="form-text text-muted">Bitte Mindestens 8 Zeichen vergeben *</small>
+                      <input type="checkbox"  onclick="myFunction()"> Einblinden
+                      <small class="form-text text-muted">Bitte Mindestens 8 Zeichen vergeben *</small>
                         @if ($errors->has('password'))
                             <span class="error">{{ $errors->first('password') }}</span>
                         @endif
@@ -112,6 +113,7 @@
                     <label>Passwort Wiederholen:</label>
                         <input type="password" name="repassword" id="repassword" required class="form-control"
                                value="{{ old('repassword') }}" placeholder="Password Wiederholen">
+                      <input type="checkbox"  onclick="Function()"> Einblinden
                         <small class="form-text text-muted">Bitte bestätigen Sie Ihr Password *</small>
                         @if ($errors->has('repassword'))
                             <span class="error">{{ $errors->first('repassword') }}</span>
