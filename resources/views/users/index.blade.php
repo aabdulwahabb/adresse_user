@@ -46,18 +46,15 @@
                 <td class="th-sm"><strong>Typ</strong></td>
                 <td class="th-sm"><strong>Name</strong></td>
 
-                <td>
-                    <strong>
-                       <div>
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Aktiv
-                        </a>
-                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="/users" id="activ">ja</a>
-                            <a class="dropdown-item" href="/users" id="activ">nein</a>
-                         </div>
-                       </div>
-                    </strong>
+                <td class="th-sm">
+                  <strong>
+                    <select name="status" id="status" class="form-control custom-control">
+
+                          <option value="">status</option>
+                          <option value="1">Active</option>
+                          <option value="0">Inactive</option>
+                    </select>
+                  </strong>
                 </td>
 
                 <td class="th-sm"><strong>Anzahl Rechte</strong></td>
@@ -72,11 +69,7 @@
                     <td>{{ $user->type }}</td>
                     <td>{{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name')}}</td>
 
-                    @if($user->activ == 1)
-                        <td>ja</td>
-                    @elseif($user->activ == 0)
-                        <td>nein</td>
-                    @endif
+                    <td>{{ $user->activ == 0 ? 'Inactive' : 'Active' }} </td>
 
                     <td>{{ \Illuminate\Support\Facades\DB::table('userrights')->where('user',$user->id)->count('id') }}</td>
                     @if($user->standardetikett == 25)
@@ -102,17 +95,3 @@
     {!! $users->links() !!}
 @endsection
 @extends('components.footer')
-
-
-<script>
-    setTimeout(function () {
-        $("#flashmessage").hide();
-    }, 5000);
-
-    // Basic example
-    $(document).ready(function () {
-        $('#dtBasicExample').DataTable();
-        $('.dataTables_length').addClass('bs-select');
-    });
-
-</script>

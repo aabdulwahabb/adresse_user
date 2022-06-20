@@ -15,6 +15,21 @@
        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script>
+
+        // set time success message
+        setTimeout(function () {
+            $("#flashmessage").hide();
+        }, 5000);
+
+        // Basic example
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+</script>
+
+<script>
+        //password ein-ausblenden
             function myFunction() {
                 var x = document.getElementById("password");
                 if (x.type === "password") {
@@ -31,7 +46,61 @@
                     x.type = "password";
                 }
             }
-        </script>
+</script>
+
+<script>
+            // Filter Aktive Inaktive
+         $(document).ready(function(){
+
+             $(document).on('click', '.relative', function(event){
+
+                 let status = $('#status').children("option:selected").val();
+
+                 if(status === undefined){
+                     status = "";
+                 }
+
+                 event.preventDefault();
+                 let page = $(this).attr('href').split('page=')[1];
+                 history.pushState(null,null,'?page=' + page + '&status=' + status );
+                 fetch_data(page);
+             });
+
+             function fetch_data(page)
+             {
+                 let _token = $("input[name=_token]").val();
+                 let status = $('#status').children("option:selected").val();
+
+                 if(status === undefined){
+                     status = "";
+                 }
+
+                 $.ajax({
+                     url:"/?page=" + page + '&status=' + status,
+                     method:"GET",
+                     data:{_token:_token, page:page},
+                     success:function(data){
+                         $('.data').html(data);
+                     }
+                 });
+             }
+
+             $(document).on('change','#status',function(){
+                 let status = $(this).val();
+                 let page = 1;
+                 history.pushState(null,null,'?page=' + page + '&status=' + status );
+                 $.ajax({
+                     url:"/?page=" + page + '&status=' + status,
+                     method:"GET",
+                     data:{status:status},
+                     success:function(data){
+                         $('.data').html(data);
+                     }
+                 });
+             });
+
+         });
+  </script>
 
        <style>
            .field-icon {
