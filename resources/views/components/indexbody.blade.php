@@ -4,7 +4,7 @@
         <div class="col-md-8 col-sm-8 col-xs-12">
             <h2>Alle Login Benutzern</h2>
         </div>
-        <form action="{{ url('/users') }}" method="POST"
+        <form action="{{ url('/users') }}" method="GET"
               class="form-main form-inline nofloat-xs pull-right pull-left-sm">
             @csrf
                 <div class="row">

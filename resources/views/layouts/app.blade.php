@@ -110,8 +110,6 @@
                position: relative;
                z-index: 2;
            }
-       </style>
-       <style>
            .pagination{
                float: right;
                margin-right: 20px;

@@ -30,7 +30,7 @@ Route::get('/adresserolle/adresse/id={id}', [AdresseRolleController::class, 'sho
 
 // User Page
 Route::get('/users', [XentralUserController::class, 'index'])->name('users.index'); // Startseite
-// Route::post('/users', [SearchController::class, 'search'])->name('search'); // Search
+Route::post('/users', [SearchController::class, 'index'])->name('search'); // Search
 Route::get('/users/id={id}', [XentralUserController::class, 'show'])->name('users.show'); // Mitarbeiterkarte
 Route::get('/users/id={id}/edit', [XentralUserController::class, 'edit'])->name('user.edit'); // Bearbeiten
 
