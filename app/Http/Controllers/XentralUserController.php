@@ -18,29 +18,27 @@ class XentralUserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(XentralUser $users, Request $request)
+    public function index( XentralUser $users, Request $request)
     {
-      // get all the user
+        if ($request->ajax() && $request->status != null) {
+            return view('users.index', [
+                'users' => $users->where('activ', $request->status)->Paginate(10)
+            ])->render();
+        }
 
-      if($request->ajax() && $request->status != null)
-       {
-           return view('users.index', [
-               'users' => $users->where('activ',$request->status)->Paginate(10)
-           ])->render();
-       }
-
-       if($request->ajax())
-     {
-         return view('users.index', [
-             'users' => $users->Paginate(10)
-         ])->render();
-     }
+        if ($request->ajax()) {
+            return view('users.index', [
+                'users' => $users->Paginate(10)
+            ])->render();
+        }
 
         // load the view and pass the users
         return view('users.index',[
-              'users' => $users->Paginate(10)
-          ]);
+            'users' => $users->Paginate(10)
+        ]);
+
     }
+
 
     /**
      * Show the form for creating a new resource.

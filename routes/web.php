@@ -6,7 +6,9 @@ use App\Http\Controllers\AdresseRolleController;
 use App\Http\Controllers\XentralUserController;
 use App\Http\Controllers\UserRightController;
 use App\Http\Controllers\ProjektController;
+use App\Http\Controllers\FillterController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\SearchController;
 
 
 //login
@@ -27,12 +29,15 @@ Route::get('adresse/id={id}/edit', [AdresseController::class, 'edit'])->name('ad
 Route::get('/adresserolle/adresse/id={id}', [AdresseRolleController::class, 'show'])->name('adresserolle.index');
 
 // User Page
-Route::get('/users', [XentralUserController::class, 'index'])->name('users.index');
-Route::get('/users/id={id}', [XentralUserController::class, 'show'])->name('users.show');
-Route::get('/users/id={id}/edit', [XentralUserController::class, 'edit'])->name('user.edit');
+Route::get('/users', [XentralUserController::class, 'index'])->name('users.index'); // Startseite
+// Route::post('/users', [SearchController::class, 'search'])->name('search'); // Search
+Route::get('/users/id={id}', [XentralUserController::class, 'show'])->name('users.show'); // Mitarbeiterkarte
+Route::get('/users/id={id}/edit', [XentralUserController::class, 'edit'])->name('user.edit'); // Bearbeiten
 
 // Store User
         Route::post('/users',[XentralUserController::class, 'update']);
+
+
 // Projekt Page
 Route::get('/projekte', [ProjektController::class, 'index'])->name('projekte.index');
 
