@@ -11,9 +11,12 @@
         @if (Session::has('message'))
             <div class="alert alert-info" id="flashmessage">{{ Session::get('message') }}</div>
         @endif
+        @if (Session::has('status'))
+            <div class="alert alert-warning" id="flashmessage">{{ Session::get('status') }}</div>
+        @endif
 
         @include('components.searchandfilter')
     </section>
-    {!! $users->links() !!}
+    {{ $users}}
 @endsection
 @extends('components.footer')

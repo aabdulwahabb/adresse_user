@@ -1,5 +1,5 @@
 @foreach(\App\Models\XentralUser::get() as $user)
-    <form action="{{ url('users') }}/{{$user->id }}" method="POST" class="form-horizontal">
+    <form action="{{ url('/users') }}/{{$user->id }}" method="POST" class="form-horizontal">
         @csrf
         @endforeach
         <div class="row">

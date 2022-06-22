@@ -7,7 +7,7 @@
     <div class="card-body text-dark">
         <h5 class="card-title">{{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name') }}</h5>
         <p class="card-text">
-            <strong>Username: </strong> {{ \Illuminate\Support\Facades\DB::table('user')->where('adresse',$user->adresse)->wherenot('standardetikett',25)->value('username') }}
+            <strong>Username: </strong> {{ \Illuminate\Support\Facades\DB::table('user')->where('adresse',$user->adresse)->whereNot('standardetikett',25)->value('username') }}
             <br>
             <strong>Password: </strong> {{ $user->password }}<br>
             <strong>Type: </strong>{{ $user->type }} User <br>
