@@ -9,10 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Arr;
-use Spatie\Searchable\Searchable;
-use Spatie\Searchable\SearchResult;
 
-class Adresse extends Model implements Searchable
+class Adresse extends Model
 {
   use HasFactory;
 
@@ -26,16 +24,6 @@ class Adresse extends Model implements Searchable
   ];
 
     protected $fillable = ['typ', 'name', 'email', 'abteilung', 'ansprechpartner', 'freifeld1', 'telefon'];
-
-    public function getSearchResult(): SearchResult
-    {
-        $url = route('users.index', $this->id);
-
-        return new SearchResult(
-            $this->name,
-            $url
-        );
-    }
 
   /**
    * Index for Meilisearch

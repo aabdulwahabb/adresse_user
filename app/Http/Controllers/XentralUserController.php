@@ -26,28 +26,14 @@ class XentralUserController extends Controller
         return View('users.index', compact('users'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        // load the create form (app/views/adresse/create.blade.php)
-        return View('adresse.create');
+        // load the create form (app/views/users/create.blade.php)
+        return View('users.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-
-    /*public function store(Request $request)
-   {
-       $this->validate($request, [
-           'username'       => 'required|regex:/^\S*$/u|max:255|unique:user',
-           'password'       => 'required|min:8|max:255',
-           'repassword'       => 'required|min:8|same:password',
-       ]);
-   }*/
 
     /**
      * Display the specified resource.
@@ -119,7 +105,7 @@ class XentralUserController extends Controller
         XentralUser::create([
             'username' => '100' . random_int(100, 999),
             'password' => request('password'),
-            'repassword' => request('password'),
+            'repassword' => request('repassword'),
             'type' => 'standard',
             'adresse' => $neuadresse->id,
             'startseite' => 'index.php?module=stechuhr&action=list',

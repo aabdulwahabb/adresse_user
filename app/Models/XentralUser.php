@@ -10,13 +10,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Arr;
-use Spatie\Searchable\Searchable;
-use Spatie\Searchable\SearchResult;
 
 
 
 
-class XentralUser extends Model implements Searchable
+class XentralUser extends Model
 {
   use HasFactory;
 
@@ -38,17 +36,6 @@ class XentralUser extends Model implements Searchable
     protected $fillable = [
         'username', 'adresse'
     ];
-
-    public function getSearchResult(): SearchResult
-    {
-        $url = route('users.index', $this->id);
-
-        return new SearchResult(
-            $this->username,
-            $url
-        );
-    }
-
 
  /**
   * Index for Meilisearch

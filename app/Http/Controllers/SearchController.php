@@ -19,7 +19,7 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
-        $input = $request->input('search');
+        $input = $request->search;
         if (!empty($input))
         {
             $users = XentralUser::join('adresse', 'user.adresse', 'adresse.id')
