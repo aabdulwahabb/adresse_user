@@ -45,49 +45,25 @@
     @endforeach
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <script>
-
-        $(document).ready(function(){
-
-            $(document).on('click', '.relative', function(event){
-
-                let status = $('#status').children("option:selected").val();
-
-            });
-
-            function fetch_data(page)
-            {
-                let _token = $("input[name=_token]").val();
-                let status = $('#status').children("option:selected").val();
-
-                if(status === undefined){
-                    status = "";
-                }
-
-                $.ajax({
-                    url:"/users",
-                    method:"GET",
-                    data:{_token:_token, page:page},
-                    success:function(data){
-                        $('.data').html(data);
-                    }
-                });
-            }
-
-            $(document).on('change','#status',function(){
-                let status = $(this).val();
-                $.ajax({
-                    url:"/users",
-                    method:"GET",
-                    data:{status:status},
-                    success:function(data){
-                        $('.data').html(data);
-                    }
-                });
+        $(document).ready(function() {
+            $('#status').on('change', function() {
+                getFilterData();
             });
         });
+        function getFilterData() {
+
+            $.ajax({
+                type: "GET",
+                data: {
+                    upazila_id: $("[name=status]").val(),
+                },
+                url: "{{url('/status')}}",
+                success:function(data) {
+                    $("#user").html(data);
+                }
+            });
+        }
     </script>
 
     </tbody>

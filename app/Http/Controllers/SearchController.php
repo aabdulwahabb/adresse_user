@@ -20,23 +20,17 @@ class SearchController extends Controller
     public function search(Request $request)
     {
         $input = $request->search;
-        if (!empty($input))
-        {
+        if (!empty($input)) {
             $users = XentralUser::join('adresse', 'user.adresse', 'adresse.id')
-            ->where('username', 'LIKE', '%' . $input . '%')
-            ->orWhere('name', 'LIKE', '%' . $input . '%')->paginate(10);
-            if(count($users) > 0)
-            {
+                ->where('username', 'LIKE', '%' . $input . '%')
+                ->orWhere('name', 'LIKE', '%' . $input . '%')->paginate(10);
+            if (count($users) > 0) {
                 return View('users.index', compact('users'));
-            }
-            else
-            {
+            } else {
                 Session::flash('status', 'Kein Ergebnis gefunden. Versuchen Sie bitte erneut!');
-                    return redirect::to('/users');
+                return redirect::to('/users');
             }
-        }
-        else
-        {
+        } else {
             $users = XentralUser::paginate(10);
             return View('users.index', compact('users'));
         }
@@ -44,22 +38,16 @@ class SearchController extends Controller
 
     public function fillter(Request $request)
     {
-        $filter = $request->status;
-        if($request->ajax() && $filter != null)
-        {
-            $users = XentralUser::where('activ', $filter)
-                ->paginate(10);
-            return View('users.index', compact('users'));
+        if (request()->ajax()) {
+            if ($request->status) {
+                $users = DB::table('user')
+                    ->where('activ', 'LIKE', $request->status)->paginate(10);
+                return View('users.index', compact('users'));
+            }
         }
-        if($request->ajax())
-        {
-            $users = XentralUser::
-            where('activ', $filter)
-                ->paginate(10);
-            return View('users.index', compact('users'));
-        }
-
         $users = XentralUser::paginate(10);
-            return View('users.index', compact('users'));
+        return View('users.index', compact('users'));
     }
 }
+
+
