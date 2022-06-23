@@ -24,7 +24,7 @@ class SearchController extends Controller
         {
             $users = XentralUser::join('adresse', 'user.adresse', 'adresse.id')
             ->where('username', 'LIKE', '%' . $input . '%')
-            ->orWhere('name', 'LIKE', '%' . $input . '%')->get();
+            ->orWhere('name', 'LIKE', '%' . $input . '%')->paginate(10);
             if(count($users) > 0)
             {
                 return View('users.index', compact('users'));
@@ -40,5 +40,26 @@ class SearchController extends Controller
             $users = XentralUser::paginate(10);
             return View('users.index', compact('users'));
         }
+    }
+
+    public function fillter(Request $request)
+    {
+        $filter = $request->status;
+        if($request->ajax() && $filter != null)
+        {
+            $users = XentralUser::where('activ', $filter)
+                ->paginate(10);
+            return View('users.index', compact('users'));
+        }
+        if($request->ajax())
+        {
+            $users = XentralUser::
+            where('activ', $filter)
+                ->paginate(10);
+            return View('users.index', compact('users'));
+        }
+
+        $users = XentralUser::paginate(10);
+            return View('users.index', compact('users'));
     }
 }

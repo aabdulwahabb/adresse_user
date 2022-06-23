@@ -4,18 +4,13 @@
         <td class="th-sm"><strong>Username</strong></td>
         <td class="th-sm"><strong>Typ</strong></td>
         <td class="th-sm"><strong>Name</strong></td>
-
         <td class="th-sm">
-            <strong>
-                <select name="status" id="status" class="form-control custom-control">
-
-                    <option value="">status</option>
-                    <option value="1">Active</option>
-                    <option value="0">Inactive</option>
+                <select name="status" id="status" class="btn btn-light dropdown-toggle">
+                    <option class="dropdown-menu" value="">Status</option>
+                    <option class="dropdown-item" value="1">Active</option>
+                    <option class="dropdown-item" value="0">Inactive</option>
                 </select>
-            </strong>
         </td>
-
         <td class="th-sm"><strong>Anzahl Rechte</strong></td>
         <td class="th-sm"><strong>Hardware</strong></td>
         <td class="th-sm"><strong>Menü</strong></td>
@@ -48,5 +43,54 @@
             </td>
         </tr>
     @endforeach
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+
+        $(document).ready(function(){
+
+            $(document).on('click', '.relative', function(event){
+
+                let status = $('#status').children("option:selected").val();
+
+            });
+
+            function fetch_data(page)
+            {
+                let _token = $("input[name=_token]").val();
+                let status = $('#status').children("option:selected").val();
+
+                if(status === undefined){
+                    status = "";
+                }
+
+                $.ajax({
+                    url:"/users",
+                    method:"GET",
+                    data:{_token:_token, page:page},
+                    success:function(data){
+                        $('.data').html(data);
+                    }
+                });
+            }
+
+            $(document).on('change','#status',function(){
+                let status = $(this).val();
+                $.ajax({
+                    url:"/users",
+                    method:"GET",
+                    data:{status:status},
+                    success:function(data){
+                        $('.data').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+
     </tbody>
 </table>
+
+

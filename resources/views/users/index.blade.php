@@ -17,6 +17,6 @@
 
         @include('components.searchandfilter')
     </section>
-    {{ $users}}
+    {{ $users->links() }}
 @endsection
 @extends('components.footer')
