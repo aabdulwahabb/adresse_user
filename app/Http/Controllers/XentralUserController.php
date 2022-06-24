@@ -843,20 +843,20 @@ class XentralUserController extends Controller
             'repassword' => 'sometimes|required_with:password|min:8|same:password',
         ]);
 
-        $adress = Adresse::find($request->id);
-        $adress->typ = $request->input('typ');
-        $adress->name = $request->input('name');
-        $adress->email = $request->input('email');
-        $adress->abteilung = $request->input('abteilung');
-        $adress->telefon = $request->input('telefon');
-        $adress->ansprechpartner = $request->input('ansprechpartner');
-        $adress->update();
+        $adress = Adresse::find($request->id)->updateOrCreate(
+          ['typ' => request('typ')],
+          ['name' => request('name')],
+          ['email' => request('email')],
+          ['abteilung' => request('abteilung')],
+          ['telefon' => request('telefon')],
+          ['ansprechpartner' => request('ansprechpartner')]
+        );
 
-        $user = XentralUser::find($request->id);
-        $user->username = $request->input('username');
-        $user->password = $request->input('password');
-        $user->repassword = $request->input('repassword');
-        $user->update();
+        $user = XentralUser::find($request->id)->updateOrCreate(
+        ['username' => request('username')],
+        ['password' => request('password')],
+        ['repassword' => request('repassword')]
+      );
         Session::flash('message', 'Benutzer wurde erfolgreich bearbeitet!');
         return redirect::to('/users/id=' . $user->id);
     }

@@ -1,38 +1,38 @@
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead class="thead-dark">
     <tr>
-        <td class="th-sm"><strong>Username</strong></td>
-        <td class="th-sm"><strong>Typ</strong></td>
-        <td class="th-sm"><strong>Name</strong></td>
-        <td class="th-sm">
+        <td class="th-sm text-center"><strong>Username</strong></td>
+        <td class="th-sm text-center"><strong>Typ</strong></td>
+        <td class="th-sm text-center"><strong>Name</strong></td>
+        <td class="th-sm text-center">
                 <select name="status" id="status" class="btn btn-light dropdown-toggle">
                     <option class="dropdown-menu" value="">Status</option>
                     <option class="dropdown-item" value="1">Active</option>
                     <option class="dropdown-item" value="0">Inactive</option>
                 </select>
         </td>
-        <td class="th-sm"><strong>Anzahl Rechte</strong></td>
-        <td class="th-sm"><strong>Hardware</strong></td>
-        <td class="th-sm"><strong>Menü</strong></td>
+        <td class="th-sm text-center"><strong>Anzahl Rechte</strong></td>
+        <td class="th-sm text-center"><strong>Hardware</strong></td>
+        <td class="th-sm text-center"><strong>Menü</strong></td>
     </tr>
     </thead>
     <tbody>
     @foreach($users as $user)
         <tr>
-            <td>{{ $user->username }}</td>
-            <td>{{ $user->type }}</td>
-            <td>{{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name')}}</td>
+            <td class="text-center">{{ $user->username }}</td>
+            <td class="text-center">{{ $user->type }}</td>
+            <td class="text-center">{{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name')}}</td>
 
-            <td>{{ $user->activ == 0 ? 'Inactive' : 'Active' }} </td>
+            <td class="text-center">{{ $user->activ == 0 ? 'Inactive' : 'Active' }} </td>
 
-            <td>{{ \Illuminate\Support\Facades\DB::table('userrights')->where('user',$user->id)->count('id') }}</td>
+            <td class="text-center">{{ \Illuminate\Support\Facades\DB::table('userrights')->where('user',$user->id)->count('id') }}</td>
             @if($user->standardetikett == 25)
-                <td>Zeiterfassung</td>
+                <td class="text-center">Zeiterfassung</td>
             @else
-                <td></td>
+                <td class="text-center"></td>
             @endif
             <!-- we will also add show, and delete buttons -->
-            <td>
+            <td class="text-center">
                 <!-- show the user (uses the show method found at GET /users/{id} -->
                 <a class="btn btn-small btn-info" href="{{ URL::to('/users/id=' . $user->id) }}">Mitarbeiter
                     Karte</a>
@@ -68,5 +68,3 @@
 
     </tbody>
 </table>
-
-
