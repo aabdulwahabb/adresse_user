@@ -33,9 +33,6 @@ class XentralUser extends Model
      'id' => 'integer'
  ];
 
-    protected $fillable = [
-        'username', 'adresse'
-    ];
 
  /**
   * Index for Meilisearch

@@ -1,5 +1,6 @@
-<form action="{{ url('/update') }}" method="POST" class="form-horizontal">
+<form action="{{ url('/update/'.$user->id) }}" method="POST" class="form-horizontal">
     @csrf
+    @method('PUT')
     <input type="hidden" name="id" value="{{$user->adresse}}">
     <div class="row">
         <div class="col-md-4">

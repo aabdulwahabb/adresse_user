@@ -23,7 +23,6 @@ class Adresse extends Model
       'name' => 'string'
   ];
 
-    protected $fillable = ['typ', 'name', 'email', 'abteilung', 'ansprechpartner', 'freifeld1', 'telefon'];
 
   /**
    * Index for Meilisearch
