@@ -40,7 +40,7 @@ Route::post('/search', [SearchController::class, 'search'])->name('search'); // 
 Route::get('/status', [SearchController::class, 'fillter'])->name('status'); // status aktiv Inaktiv
 
 // Update User
-Route::put('/update/{id}',[XentralUserController::class, 'update']); // Update
+Route::put('/users/id={id}',[XentralUserController::class, 'update']); // Update
 
 //logout
 Route::post('/', [SessionController::class, 'logout'])->middleware('auth');

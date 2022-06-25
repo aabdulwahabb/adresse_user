@@ -843,7 +843,7 @@ class XentralUserController extends Controller
             'repassword' => 'sometimes|required_with:password|min:8|same:password',
         ]);
 
-        $adress = Adresse::find($request->id)->updateOrCreate(
+        $adress = Adresse::find($request->id)->update(
           ['typ' => request('typ')],
           ['name' => request('name')],
           ['email' => request('email')],
@@ -852,7 +852,7 @@ class XentralUserController extends Controller
           ['ansprechpartner' => request('ansprechpartner')]
         );
 
-        $user = XentralUser::find($request->id)->updateOrCreate(
+        $user = XentralUser::find($request->id)->update(
         ['username' => request('username')],
         ['password' => request('password')],
         ['repassword' => request('repassword')]
