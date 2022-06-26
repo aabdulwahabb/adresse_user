@@ -16,38 +16,36 @@ class SearchController extends Controller
     /**
      * Display a listing of the resource.
      */
-
     public function search(Request $request)
     {
-        $input = $request->search;
-        if (!empty($input)) {
-            $users = XentralUser::join('adresse', 'user.adresse', 'adresse.id')
-                ->where('username', 'LIKE', '%' . $input . '%')
-                ->orWhere('name', 'LIKE', '%' . $input . '%')->paginate(10);
-            if (count($users) > 0) {
-                return View('users.index', compact('users'));
-            } else {
-                Session::flash('status', 'Kein Ergebnis gefunden. Versuchen Sie bitte erneut!');
-                return redirect::to('/users');
-            }
-        } else {
-            $users = XentralUser::paginate(10);
-            return View('users.index', compact('users'));
+      if ($request->ajax()) {
+            $data = XentralUser::select('*')->join('adresse', 'user.adresse', 'adresse.id');
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('activ', function($row){
+                         if($row->activ){
+                            return '<span class="badge badge-primary">Active</span>';
+                         }else{
+                            return '<span class="badge badge-danger">Deactive</span>';
+                         }
+                    })
+                    ->filter(function ($instance) use ($request) {
+                        if ($request->get('activ') == '0' || $request->get('activ') == '1') {
+                            $instance->where('activ', $request->get('activ'));
+                        }
+                        if (!empty($request->get('search'))) {
+                             $instance->where(function($w) use($request){
+                                $search = $request->get('search');
+                                $w->orWhere('username', 'LIKE', "%$search%")
+                                ->orWhere('name', 'LIKE', "%$search%");
+                            });
+                        }
+                    })
+                    ->rawColumns(['activ'])
+                    ->make(true);
         }
-    }
 
-    public function fillter(Request $request)
-    {
-        if (request()->ajax()) {
-            if ($request->status) {
-                $users = DB::table('user')
-                    ->where('activ', 'LIKE', $request->status)->paginate(10);
-                return View('users.index', compact('users'));
-            }
-        }
         $users = XentralUser::paginate(10);
         return View('users.index', compact('users'));
     }
 }
-
-

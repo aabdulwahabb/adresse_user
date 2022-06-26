@@ -6,7 +6,14 @@
         <div class="form-group"></div>
         <br>
         <!-- Titel and Search Imput -->
-            @include('components.indexbody')
+        <!-- main content -->
+        <div class="container" role="main">
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <h2>Alle Login Benutzern</h2>
+                </div>
+            </div>
+        </div>
         <!-- will be used to show any messages -->
         @if (Session::has('message'))
             <div class="alert alert-info" id="flashmessage">{{ Session::get('message') }}</div>
@@ -17,6 +24,5 @@
 
         @include('components.searchandfilter')
     </section>
-    {{ $users->links() }}
 @endsection
 @extends('components.footer')

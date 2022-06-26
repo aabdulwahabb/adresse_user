@@ -5,11 +5,12 @@
         <td class="th-sm text-center"><strong>Typ</strong></td>
         <td class="th-sm text-center"><strong>Name</strong></td>
         <td class="th-sm text-center">
-                <select name="status" id="status" class="btn btn-light dropdown-toggle">
-                    <option class="dropdown-menu" value="">Status</option>
-                    <option class="dropdown-item" value="1">Active</option>
-                    <option class="dropdown-item" value="0">Inactive</option>
-                </select>
+             <select name="activ" id='activ' class="btn btn-light dropdown-toggle">
+                 <option value="">Status</option>
+                 <option value="1">Active</option>
+                 <option value="0">Deactive</option>
+             </select>
+
         </td>
         <td class="th-sm text-center"><strong>Anzahl Rechte</strong></td>
         <td class="th-sm text-center"><strong>Hardware</strong></td>
@@ -23,7 +24,7 @@
             <td class="text-center">{{ $user->type }}</td>
             <td class="text-center">{{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name')}}</td>
 
-            <td class="text-center">{{ $user->activ == 0 ? 'Inactive' : 'Active' }} </td>
+            <td class="text-center">{{ $user->activ == 1 ? 'Active' : 'Dective' }} </td>
 
             <td class="text-center">{{ \Illuminate\Support\Facades\DB::table('userrights')->where('user',$user->id)->count('id') }}</td>
             @if($user->standardetikett == 25)
@@ -43,28 +44,34 @@
             </td>
         </tr>
     @endforeach
+    </tbody>
 
+    <script type="text/javascript">
+      $(function () {
 
-    <script>
-        $(document).ready(function() {
-            $('#status').on('change', function() {
-                getFilterData();
-            });
-        });
-        function getFilterData() {
-
-            $.ajax({
-                type: "GET",
-                data: {
-                    upazila_id: $("[name=status]").val(),
-                },
-                url: "{{url('/status')}}",
-                success:function(data) {
-                    $("#user").html(data);
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+              url: "{{ url('/status') }}",
+              data: function (d) {
+                    d.activ = $('#activ').val(),
+                    d.search = $('input[type="search"]').val()
                 }
-            });
-        }
+            },
+            columns: [
+                {data: 'username', name: 'username'},
+                {data: 'type', name: 'type'},
+                {data: 'name', name: 'name'},
+                {data: 'activ', name: 'activ'},
+            ]
+        });
+
+        $('#activ').change(function(){
+            table.draw();
+        });
+
+      });
     </script>
 
-    </tbody>
 </table>

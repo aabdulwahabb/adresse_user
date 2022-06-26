@@ -36,8 +36,7 @@ Route::get('/users/id={id}/edit', [XentralUserController::class, 'edit'])->name(
 
 // Store adresse and user, adresse_rolle, userright
 Route::post('/users', [XentralUserController::class, 'store']); // store
-Route::post('/search', [SearchController::class, 'search'])->name('search'); // Search
-Route::get('/status', [SearchController::class, 'fillter'])->name('status'); // status aktiv Inaktiv
+Route::get('/status', [SearchController::class, 'search'])->name('status'); // Search status aktiv Inaktiv
 
 // Update User
 Route::put('/users/id={id}',[XentralUserController::class, 'update']); // Update
