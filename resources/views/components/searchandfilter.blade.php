@@ -4,14 +4,7 @@
         <td class="th-sm text-center"><strong>Username</strong></td>
         <td class="th-sm text-center"><strong>Typ</strong></td>
         <td class="th-sm text-center"><strong>Name</strong></td>
-        <td class="th-sm text-center">
-             <select name="activ" id='activ' class="btn btn-light dropdown-toggle">
-                 <option value="">Status</option>
-                 <option value="1">Active</option>
-                 <option value="0">Deactive</option>
-             </select>
-
-        </td>
+        <td class="th-sm text-center"><strong>Active</strong></td>
         <td class="th-sm text-center"><strong>Anzahl Rechte</strong></td>
         <td class="th-sm text-center"><strong>Hardware</strong></td>
         <td class="th-sm text-center"><strong>Menü</strong></td>
@@ -24,7 +17,7 @@
             <td class="text-center">{{ $user->type }}</td>
             <td class="text-center">{{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name')}}</td>
 
-            <td class="text-center">{{ $user->activ == 1 ? 'Active' : 'Dective' }} </td>
+            <td class="text-center">{{ $user->activ == 1 ? 'ja' : 'nein' }} </td>
 
             <td class="text-center">{{ \Illuminate\Support\Facades\DB::table('userrights')->where('user',$user->id)->count('id') }}</td>
             @if($user->standardetikett == 25)
