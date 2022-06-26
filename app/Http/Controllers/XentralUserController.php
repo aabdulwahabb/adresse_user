@@ -22,7 +22,7 @@ class XentralUserController extends Controller
      */
     public function index()
     {
-        $users = XentralUser::paginate(10);
+        $users = XentralUser::all();
         return View('users.index', compact('users'));
     }
 

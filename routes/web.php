@@ -10,10 +10,6 @@ use App\Http\Controllers\ProjektController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SearchController;
 
-//login
-Route::get('/', [SessionController::class, 'create'])->middleware('guest');
-Route::post('/adresse', [SessionController::class, 'authenticate'])->middleware('guest');
-
 /*
 // Adresse Page
 Route::get('/adresse', [AdresseController::class, 'index'])->name('adresse.index'); // index adresse
@@ -26,6 +22,14 @@ Route::get('/projekte', [ProjektController::class, 'index'])->name('projekte.ind
 // Userrights Page
 Route::get('/userrights/users/{id}', [UserRightController::class, 'show'])->name('userrights.index');
 */
+
+
+//login logout
+Route::get('/login', [SessionController::class, 'index'])->name('auth.login');
+Route::post('/users', [SessionController::class, 'login'])->name('login');
+Route::get('/users', [SessionController::class, 'login'])->name('users.index')->middleware('is_admin');
+Route::get('/logout', [SessionController::class, 'logout'])->name('logout');
+
 
 // User Page
 Route::get('/users', [XentralUserController::class, 'index'])->name('users.index'); // Startseite
@@ -40,6 +44,3 @@ Route::get('/status', [SearchController::class, 'search'])->name('status'); // S
 
 // Update User
 Route::put('/users/id={id}',[XentralUserController::class, 'update']); // Update
-
-//logout
-Route::post('/', [SessionController::class, 'logout'])->middleware('auth');
