@@ -9,43 +9,48 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Spatie\Searchable\Search;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 
 class SearchController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function search(Request $request)
-    {
-      if ($request->ajax()) {
-            $data = XentralUser::select('*')->join('adresse', 'user.adresse', 'adresse.id');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('activ', function($row){
-                         if($row->activ){
-                            return '<span class="badge badge-primary">Active</span>';
-                         }else{
-                            return '<span class="badge badge-danger">Deactive</span>';
-                         }
-                    })
-                    ->filter(function ($instance) use ($request) {
-                        if ($request->get('activ') == '0' || $request->get('activ') == '1') {
-                            $instance->where('activ', $request->get('activ'));
-                        }
-                        if (!empty($request->get('search'))) {
-                             $instance->where(function($w) use($request){
-                                $search = $request->get('search');
-                                $w->orWhere('username', 'LIKE', "%$search%")
-                                ->orWhere('name', 'LIKE', "%$search%");
-                            });
-                        }
-                    })
-                    ->rawColumns(['activ'])
-                    ->make(true);
-        }
+    use AuthenticatesUsers;
+    protected $redirectTo = '/users';
 
-        $users = XentralUser::paginate(10);
-        return View('users.index', compact('users'));
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+
+     */
+
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+
+    public function login(Request $request)
+    {
+        $input = $request->all();
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
+        {
+            return redirect::to('/users');
+        }else{
+            Session::flash('message', 'Benutzername und Passeort sind ungültig');
+            return redirect::to('/login');
+        }
     }
 }
