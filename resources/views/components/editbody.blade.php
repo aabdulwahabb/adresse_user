@@ -29,7 +29,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label>Email-Adresse:</label>
+                <label>Email:</label>
                 <input type="email" name="email" id="email" required placeholder="Email Adresse"
                        class="form-control" value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('email')}}">
                 <small class="form-text text-muted">Bitte gültige Email</small>
@@ -58,7 +58,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label>Ihr Team:</label>
+                <label>Team:</label>
                 <select class="form-control" name="abteilung" id="abteilung">
                     <option class="form-control"
                             value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('abteilung')}}">
@@ -98,7 +98,6 @@
                 <label>Passwort:</label>
                 <input type="password" name="password" id="password" required class="form-control"
                        value="{{ $user->password }}">
-                <input type="checkbox"  onclick="myFunction()"> Einblinden
                 <small class="form-text text-muted">Bitte Mindestens 8 Zeichen vergeben</small>
                 @if ($errors->has('password'))
                     <span class="error">{{ $errors->first('password') }}</span>
@@ -110,7 +109,6 @@
                 <label>Passwort wiederholen:</label>
                 <input type="password" name="repassword" id="repassword" required class="form-control"
                        value="{{ $user->repassword }}">
-                <input type="checkbox"  onclick="Function()"> Einblinden
                 <small class="form-text text-muted">Bitte bestätigen Sie Ihr Password</small>
                 @if ($errors->has('repassword'))
                     <span class="error">{{ $errors->first('repassword') }}</span>

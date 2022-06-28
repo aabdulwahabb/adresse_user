@@ -6,10 +6,8 @@ use App\Http\Controllers\AdresseRolleController;
 use App\Http\Controllers\XentralUserController;
 use App\Http\Controllers\UserRightController;
 use App\Http\Controllers\ProjektController;
-// use App\Http\Controllers\FillterController;
-use App\Http\Controllers\SessionController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\Auth\LoginController;
 /*
 // Adresse Page
 Route::get('/adresse', [AdresseController::class, 'index'])->name('adresse.index'); // index adresse
@@ -22,14 +20,6 @@ Route::get('/projekte', [ProjektController::class, 'index'])->name('projekte.ind
 // Userrights Page
 Route::get('/userrights/users/{id}', [UserRightController::class, 'show'])->name('userrights.index');
 */
-
-
-//login logout
-Route::get('admin/users', [HomeController::class, 'index'])->name('admin.home')->middleware('is_admin');
-
-Route::get('/login', [LoginController::class, 'index'])->name('auth.login');
-Route::post('/users', [LoginController::class, 'login'])->name('login');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 // User Page
@@ -46,6 +36,7 @@ Route::get('/status', [SearchController::class, 'search'])->name('status'); // S
 // Update User
 Route::put('/users/id={id}',[XentralUserController::class, 'update']); // Update
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+

@@ -1,12 +1,12 @@
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead class="thead-dark">
     <tr>
-        <td class="th-sm text-center"><strong>Username</strong></td>
+        <td class="th-sm text-center"><strong>Benutzername</strong></td>
         <td class="th-sm text-center"><strong>Typ</strong></td>
         <td class="th-sm text-center"><strong>Name</strong></td>
-        <td class="th-sm text-center"><strong>Active</strong></td>
+        <td class="th-sm text-center"><strong>Aktiv</strong></td>
         <td class="th-sm text-center"><strong>Anzahl Rechte</strong></td>
-        <td class="th-sm text-center"><strong>Hardware</strong></td>
+        <td class="th-sm text-center"><strong>Stechuhr</strong></td>
         <td class="th-sm text-center"><strong>Menü</strong></td>
     </tr>
     </thead>

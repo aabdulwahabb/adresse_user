@@ -28,7 +28,7 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Email-Adresse:</label>
+                    <label>Email:</label>
                     <input type="email" name="email" id="email" required placeholder="Email Adresse"
                            class="form-control" value="{{ old('email') }}">
                     <small class="form-text text-muted">Bitte gültige Email *</small>
@@ -55,7 +55,7 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Ihr Team:</label>
+                    <label>Team:</label>
                     <select class="form-control" name="abteilung" id="abteilung">
                         <option class="form-control" value="{{ old('abteilung') }}">Bitte wählen Sie Ihr Team aus
                         </option>
@@ -84,7 +84,7 @@
                     <label>Passwort:</label>
                     <input type="password" name="password" id="password" required class="form-control password-field"
                            value="{{ old('password') }}" placeholder="Password">
-                    <input type="checkbox"  onclick="myFunction()"> Einblinden
+                    <input type="checkbox"  onclick="myFunction()"> Einblenden
                     <small class="form-text text-muted">Bitte Mindestens 8 Zeichen vergeben *</small>
                     @if ($errors->has('password'))
                         <span class="error">{{ $errors->first('password') }}</span>
@@ -96,7 +96,6 @@
                     <label>Passwort Wiederholen:</label>
                     <input type="password" name="repassword" id="repassword" required class="form-control"
                            value="{{ old('repassword') }}" placeholder="Password Wiederholen">
-                    <input type="checkbox"  onclick="Function()"> Einblinden
                     <small class="form-text text-muted">Bitte bestätigen Sie Ihr Password *</small>
                     @if ($errors->has('repassword'))
                         <span class="error">{{ $errors->first('repassword') }}</span>

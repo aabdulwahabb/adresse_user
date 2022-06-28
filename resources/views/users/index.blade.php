@@ -10,7 +10,7 @@
         <div class="container" role="main">
             <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <h2>Alle Login Benutzern</h2>
+                    <h2>Angelegte Benutzern</h2>
                 </div>
             </div>
         </div>

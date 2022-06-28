@@ -20,9 +20,13 @@ use App\Models\Team;
 use App\Models\TracyUser;
 use App\Models\Item;
 use App\Models\Adresse;
+use App\Models\User;
 use App\Models\UserRight;
 use App\Models\XentralUser;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Testing\Fluent\Concerns\Has;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -108,6 +112,16 @@ class DatabaseSeeder extends Seeder
                     //Create Teams
                     Team::factory(5)
                         ->create();
+
+            User::create([
+                'name'    => 'Abdulwahab Alhasan',
+                'username'    => 'aalhasan',
+                'email'    => 'abdul@gmail.com',
+                'email_verified_at'    => now(),
+                'is_admin'    => 1,
+                'password'   =>  Hash::make('password'),
+                'remember_token' => Hash::make(Str::random(10)),
+            ]);
         }
     }
 }

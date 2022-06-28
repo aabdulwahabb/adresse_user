@@ -12,6 +12,6 @@
     </div>
   </div>
     <form class="form-inline">
-        <a class="btn btn-danger mr-sm-1" href="{{ URL::to('/logout') }}">Abmelden</a>
+        <a class="btn btn-outline-danger mr-sm-1" href="{{ URL::to('/login') }}">Abmelden</a>
     </form>
 </nav>

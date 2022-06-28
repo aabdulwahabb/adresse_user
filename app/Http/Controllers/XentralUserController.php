@@ -13,15 +13,11 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\Console\Input\Input;
 use View;
 
 class XentralUserController extends Controller
 {
-
-  public function __construct()
-	{
-	    $this->middleware('auth');
-	}
     /**
      * Display a listing of the resource.
      */
@@ -93,8 +89,8 @@ class XentralUserController extends Controller
         // store user
         $newuser = new XentralUser([
             'username' => $request->get('username'),
-            'password' => $request->get('password'),
-            'repassword' => $request->get('repassword'),
+            'password' => Hash::make($request->get('password')),
+            'repassword' => Hash::make($request->get('repassword')),
             'type' => 'standard',
             'adresse' => $neuadresse->id,
             'settings' => 'Tjs=',
@@ -109,8 +105,8 @@ class XentralUserController extends Controller
         // store stechuhr user
         $stechuhr = new XentralUser([
             'username' => '100' . random_int(100, 999),
-            'password' => $request->get('password'),
-            'repassword' => $request->get('repassword'),
+            'password' => Hash::make($request->get('password')),
+            'repassword' => Hash::make($request->get('repassword')),
             'type' => 'standard',
             'adresse' => $neuadresse->id,
             'startseite' => 'index.php?module=stechuhr&action=list',
@@ -836,19 +832,18 @@ class XentralUserController extends Controller
 
     public function update(Request $request)
     {
-
         $this->validate($request, [
-          'typ' => 'sometimes',
-          'name' => 'sometimes|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
-          'abteilung' => 'sometimes|nullable',
-          'telefon' => 'sometimes|nullable|numeric',
-          'ansprechpartner' => 'sometimes|nullable',
+            'typ' => 'sometimes',
+            'name' => 'sometimes|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
+            'abteilung' => 'sometimes|nullable',
+            'telefon' => 'sometimes|nullable|numeric',
+            'ansprechpartner' => 'sometimes|nullable',
             'username' => 'sometimes|regex:/^\S*$/u|max:255',
-            'password' => 'sometimes|required|min:8|max:255',
-            'repassword' => 'sometimes|required_with:password|min:8|same:password',
+            'password' => 'sometimes|required|string|min:8',
+            'repassword' => 'sometimes|required_with:password|same:password',
         ]);
-
-        $adress = Adresse::find($request->id)->update(
+        
+        Adresse::find($request->id)->update(
           ['typ' => request('typ')],
           ['name' => request('name')],
           ['email' => request('email')],
@@ -859,8 +854,8 @@ class XentralUserController extends Controller
 
         $user = XentralUser::find($request->id)->update(
         ['username' => request('username')],
-        ['password' => request('password')],
-        ['repassword' => request('repassword')]
+        ['password' => Hash::make(request('password'))],
+        ['repassword' => Hash::make(request('repassword'))]
       );
         Session::flash('message', 'Benutzer wurde erfolgreich bearbeitet!');
         return redirect::to('/users/id=' . $user->id);

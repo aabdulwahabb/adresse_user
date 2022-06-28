@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -28,8 +28,41 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/users';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
+    function checklogin(Request $request)
+    {
+        $this->validate($request, [
+            'username'   => 'required|string',
+            'password'  => 'required|alphaNum|min:3'
+        ]);
+
+        $user_data = array(
+            'username'  => $request->get('username'),
+            'password' => $request->get('password')
+        );
+
+        if(Auth::attempt($user_data))
+        {
+            return redirect('/users')->with('success', 'Sie haben sich erfolgreich angemeldet!');
+        }
+        else
+        {
+            return back()->with('error', 'Falsche Zugangsdaten!');
+        }
+
+    }
+
+    function successlogin()
+    {
+        return view('users.index');
+    }
+
+    function logout()
+    {
+        Auth::logout();
+        return redirect('/login')->with('message', 'Sie haben Siech erfolgreich abgemeldet!');
+    }
     /**
      * Create a new controller instance.
      *
@@ -38,34 +71,5 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }
-
-    public function login(Request $request)
-    {
-        $input = $request->all();
-
-        $this->validate($request, [
-            'username' => 'required|string',
-            'password' => 'required',
-        ]);
-
-        if(auth()->attempt(array('username' => $input['username'], 'password' => $input['password'])))
-        {
-            if (auth()->user()->is_admin == 1) {
-                return redirect()->route('users');
-            }else{
-                return redirect()->route('login');
-            }
-        }else{
-            return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
-        }
-
-    }
-
-    public function logout()
-    {
-      Session::flash('message', 'Benutzer wurde erflogreich abgemeldet');
-      return redirect::to('/login');
     }
 }

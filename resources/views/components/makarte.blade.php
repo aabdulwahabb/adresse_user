@@ -23,5 +23,5 @@
 <div class="text-center">
     <a class="btn btn-small btn-info mr-sm-3"
        href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
-    <a class="btn btn-danger ml-sm-3" href="{{ URL::to('/users') }}">Abbrechen</a>
+    <a class="btn btn-dark ml-sm-3" href="{{ URL::to('/users') }}">abschließen</a>
 </div>
