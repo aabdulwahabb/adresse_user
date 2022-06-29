@@ -120,12 +120,34 @@
     <div class="form-group"></div>
     <div class="row ml-sm-5">
         <div class="col-md-3">
-            <button type="submit" class="form-control btn btn-small btn-success">
+            <button type="button" class="form-control btn btn-small btn-success" data-toggle="modal" data-target="#demoModal">
                 Speichern</button>
         </div>
         <div class="col-md-3">
             <a class="form-control btn btn-small btn-danger"
-               href="{{ URL::to('/users') }}">Abbrechen ohne speichern</a>
+               href="{{ URL::to('/users') }}"><i class="fa fa-btn fa-plus"
+               data-toggle="modal" data-target="#demoModal"></i>Abbrechen ohne zu speichern</a>
         </div>
     </div>
+
+    <!-- Modal Example Start-->
+    <div class="modal fade" id="demoModal" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="demoModalLabel">Benutzer Bearbeiten</h5>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Sind alle Änderungen richtig?</strong><br>
+                        <small class="form-text text-muted text-danger">Stellen Sie bitte sicher dass alle Daten vor speichern richtig sind, sonst können Sie korrigieren!</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal"><span aria-hidden="true">&times;</span> nein, Korrigieren</button>
+                    <button type="submit" class="btn btn-success"> ja, Änderung speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Example End-->
+
 </form>

@@ -5,7 +5,7 @@
         @extends('components.navigation')
         <div class="form-group"></div>
         <h1>Bearbeite
-            User {{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name') }}</h1>
+            Benutzer {{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name') }}</h1>
         <!-- if there are creation errors, they will show here -->
         @if (count($errors) > 0)
             <div class="alert alert-danger">

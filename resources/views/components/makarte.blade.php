@@ -21,7 +21,28 @@
     </div>
 </div>
 <div class="text-center">
-    <a class="btn btn-small btn-info mr-sm-3"
+    <a type="button" class="btn btn-small btn-info mr-sm-3"
        href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
-    <a class="btn btn-dark ml-sm-3" href="{{ URL::to('/users') }}">abschließen</a>
+    <a type="button" class="btn btn-small btn-warning ml-sm-3" data-toggle="modal" data-target="#demoModal">Abschließen</a>
+
+    <!-- Modal Example Start-->
+    <div class="modal fade" id="demoModal" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="demoModalLabel">Benutzer Anlegen</h5>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Sind alle Eingabe richtig?</strong><br>
+                        <small class="form-text text-muted text-danger">Stellen Sie bitte sicher dass alle Daten vor speichern richtig sind, sonst können Sie korrigieren!</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><span aria-hidden="true">&times;</span> nein, Korrigieren</button>
+                    <a type="button" href="{{ URL::to('/users') }}" class="btn btn-primary">Ja, zurück zur Startseite</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Example End-->
+
 </div>

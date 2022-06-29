@@ -842,7 +842,7 @@ class XentralUserController extends Controller
             'password' => 'sometimes|required|string|min:8',
             'repassword' => 'sometimes|required_with:password|same:password',
         ]);
-        
+
         Adresse::find($request->id)->update(
           ['typ' => request('typ')],
           ['name' => request('name')],

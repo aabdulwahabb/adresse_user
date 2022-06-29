@@ -2,7 +2,7 @@
     <form action="{{ url('/users') }}" method="POST" class="form-horizontal">
         @csrf
         @endforeach
-        <div class="row">
+<div class="row">
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Type:</label>
@@ -18,7 +18,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Vollständige Name:</label>
-                    <input type="text" name="name" id="name" required placeholder="Ihre Name"
+                    <input type="text" name="name" id="name" required placeholder="Name"
                            class="form-control" value="{{ old('name') }}">
                     <small class="form-text text-muted">Vor und Nachname bitte *</small>
                     @if ($errors->has('name'))
@@ -67,6 +67,26 @@
                 </div>
             </div>
         </div>
+
+      <div class="row">
+        <div class="col-md-4">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="intern" checked>
+                <label class="form-check-label" for="flexRadioDefault1">
+                    <p>Intern
+                        <small class="form-text text-muted">z.B. wenn direkt durch versandmanufaktur ist</small></p>
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="extern" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                   <p>Extern
+                   <small class="form-text text-muted">z.B. wenn leiharbeiter ist</small></p>
+                </label>
+            </div>
+        </div>
+      </div><br>
+
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
@@ -107,12 +127,36 @@
         <div class="form-group"></div>
         <div class="row ml-sm-5">
             <div class="col-md-3">
-                <button type="submit" class="form-control btn btn-small btn-info mr-sm-5">
+                <button type="button" class="form-control btn btn-small btn-info mr-sm-5"
+                        data-toggle="modal" data-target="#demoModal">
                     Einfügen</button>
             </div>
             <div class="col-md-3">
                 <a class="form-control btn btn-small btn-danger"
-                   href="{{ URL::to('/users') }}"><i class="fa fa-btn fa-plus"></i>Abbrechen</a>
+                   href="{{ URL::to('/users') }}"><i class="fa fa-btn fa-plus"
+                   data-toggle="modal" data-target="#demoModal"></i>Abbrechen</a>
             </div>
         </div>
+        <!-- Modal Example Start-->
+        <div class="modal fade" id="demoModal" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content text-center">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="demoModalLabel">Benutzer Anlegen</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Sind alle Eingabe richtig?</strong><br>
+                            <small class="form-text text-muted text-danger">Stellen Sie bitte sicher dass alle Daten vor speichern richtig sind, sonst können Sie korrigieren!</small><br>
+                            <small class="form-text text-danger">Notieren bitte alle Wichtige Daten wie Benutzername und Passwort</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal"><span aria-hidden="true">&times;</span> nein, Korrigieren</button>
+                        <button type="submit" class="btn btn-success"> ja, Speichern</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Example End-->
     </form>
+
+
