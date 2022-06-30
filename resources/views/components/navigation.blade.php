@@ -10,6 +10,11 @@
         <a class="btn btn-small btn-info" href="{{ URL::to('/users') }}">Startseite</a>
       </div>
     </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <a class="btn btn-small btn-warning" href="{{ URL::to('/users/setting') }}">Einstellung</a>
+      </div>
+    </div>
   </div>
     <form class="form-inline">
         <a class="btn btn-outline-danger mr-sm-1" href="{{ URL::to('/login') }}">Abmelden</a>

@@ -37,6 +37,15 @@ class XentralUserController extends Controller
     }
 
     /**
+     * Show the form for User Setting.
+     */
+    public function setting()
+    {
+        // load the create form (app/views/users/setting.blade.php)
+        return View('users.setting');
+    }
+
+    /**
      * Display the specified resource.
      */
     public function show($id)
@@ -62,6 +71,7 @@ class XentralUserController extends Controller
             'abteilung' => 'nullable',
             'telefon' => 'nullable|numeric',
             'ansprechpartner' => 'nullable',
+            'freifeld1' => 'required|in:intern,extern',
             'username' => 'required|regex:/^\S*$/u|max:255|unique:user',
             'password' => 'required|min:8|max:255',
             'repassword' => 'required|min:8|same:password',
@@ -74,7 +84,7 @@ class XentralUserController extends Controller
             'abteilung' => $request->get('abteilung'),
             'telefon' => $request->get('telefon'),
             'ansprechpartner' => $request->get('ansprechpartner'),
-            'freifeld1' => 'intern',
+            'freifeld1' => $request->get('freifeld1'),
             'bundesstaat' => 'NRW',
             'firma' => 1,
             'logdatei' => now(),
@@ -91,6 +101,7 @@ class XentralUserController extends Controller
             'username' => $request->get('username'),
             'password' => Hash::make($request->get('password')),
             'repassword' => Hash::make($request->get('repassword')),
+            'remember_token' => Hash::make($request->get('password')),
             'type' => 'standard',
             'adresse' => $neuadresse->id,
             'settings' => 'Tjs=',
@@ -102,11 +113,13 @@ class XentralUserController extends Controller
             'standardetikett' => 43
         ]);
         $newuser->save();
+        $manummer = '110' . random_int(100, 999);
         // store stechuhr user
         $stechuhr = new XentralUser([
-            'username' => '100' . random_int(100, 999),
+            'username' => $manummer,  // nummernkreis in setting request setzten
             'password' => Hash::make($request->get('password')),
             'repassword' => Hash::make($request->get('repassword')),
+            'remember_token' => Hash::make($request->get('password')),
             'type' => 'standard',
             'adresse' => $neuadresse->id,
             'startseite' => 'index.php?module=stechuhr&action=list',
@@ -115,7 +128,7 @@ class XentralUserController extends Controller
             'sprachebevorzugen' => 'deutsch',
             'externlogin' => 1,
             'standardetikett' => 25,
-            'stechuhrdevice' => 'RzA5US8F5Z',
+            'stechuhrdevice' => $manummer . 'RzA5US8F5Z',
         ]);
         $stechuhr->save();
         // store rolle
@@ -808,8 +821,22 @@ class XentralUserController extends Controller
                    'permission' => 1,
                 ]);
                 $userrights->save();
+              }
             }
-        }
+                $stechuhrrechte = [
+                  "welcome" => ['login', 'logout', 'start', 'startseite', 'settings', ],
+                  "stechuhr" => ['change', 'list', 'change', 'list', 'change', 'list', 'change', 'list']
+                ];
+                foreach ($stechuhrrechte as $moduls => $stechrechts){
+                  foreach ($stechrechts as $stechrecht) {
+                  $userrightes = new UserRight([
+                       'user' => $stechuhr->id,
+                       'module' => $moduls,
+                       'action' => $stechrecht,
+                       'permission' => 1,
+                    ]);
+                    $userrightes->save();                  }
+                }
 
         Session::flash('message', 'Benutzer wurde erflogreich angelegt');
         return redirect::to('/users/id=' . $newuser->id);
@@ -849,13 +876,15 @@ class XentralUserController extends Controller
           ['email' => request('email')],
           ['abteilung' => request('abteilung')],
           ['telefon' => request('telefon')],
-          ['ansprechpartner' => request('ansprechpartner')]
+          ['ansprechpartner' => request('ansprechpartner')],
+          ['freifeld1' => request('freifeld1')]
         );
 
         $user = XentralUser::find($request->id)->update(
         ['username' => request('username')],
         ['password' => Hash::make(request('password'))],
-        ['repassword' => Hash::make(request('repassword'))]
+        ['repassword' => Hash::make(request('repassword'))],
+        ['remember_token' => Hash::make(request('password'))]
       );
         Session::flash('message', 'Benutzer wurde erfolgreich bearbeitet!');
         return redirect::to('/users/id=' . $user->id);

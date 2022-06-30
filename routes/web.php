@@ -24,6 +24,7 @@ Route::get('/userrights/users/{id}', [UserRightController::class, 'show'])->name
 
 // User Page
 Route::get('/users', [XentralUserController::class, 'index'])->name('users.index'); // Startseite
+Route::get('/users/setting', [XentralUserController::class, 'setting'])->name('users.setting'); // Setting
 Route::get('/users/create', [XentralUserController::class, 'create'])->name('adresse.create'); // create user adresse and rolle and userright
 Route::get('/users/id={id}', [XentralUserController::class, 'show'])->name('users.show'); // Mitarbeiterkarte
 Route::get('/users/id={id}/edit', [XentralUserController::class, 'edit'])->name('user.edit'); // Bearbeiten
@@ -35,8 +36,3 @@ Route::get('/status', [SearchController::class, 'search'])->name('status'); // S
 
 // Update User
 Route::put('/users/id={id}',[XentralUserController::class, 'update']); // Update
-
-
-
-
-

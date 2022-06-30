@@ -20,7 +20,7 @@ class XentralUser extends Model
 
  protected $table = 'user';
  public $timestamps = false;
- protected $guarded = [];
+ protected $guarded = ['id'];
 
  protected $hidden = [
    'password',
@@ -83,12 +83,12 @@ class XentralUser extends Model
  }
 
  /**
-  * User BelongsTo adresse
+  * User hasOne adresse
   *
-  * @return BelongsTo
+  * @return HasOne
   */
- public function adresse(): BelongsTo {
-     return $this->belongsTo(Adresse::class, 'adresse');
+ public function adresse(): HasOne {
+     return $this->hasOne(Adresse::class);
  }
 
     /**
