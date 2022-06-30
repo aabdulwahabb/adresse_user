@@ -1,7 +1,7 @@
 <form action="{{ url('/users/id='.$user->id) }}" method="POST" class="form-horizontal">
     @csrf
     @method('PUT')
-    <input type="hidden" name="id" value="{{$user->adresse}}">
+    <input type="hidden" name="adresse_id" id="adresse_id" value="{{$user->adresse}}">
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -18,7 +18,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label>Vollständige Name</label>
-                <input type="text" name="name" id="name" required placeholder="Ihr Name"
+                <input type="text" name="name" id="name" required placeholder="Name"
                        class="form-control"
                        value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name')}}">
                 <small class="form-text text-muted">Vor und Nachname <span class="text-rigt text-danger" style="font-size:17px">*</span></small>
@@ -92,7 +92,7 @@
       </div>
     </div><br>
 
-    <input type="hidden" name="id" value="{{$user->id}}">
+    <input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -149,7 +149,7 @@
         </div>
         <div class="col-md-3">
             <a class="form-control btn btn-small btn-danger"
-               href="{{ URL::to('/users') }}"><i class="fa fa-btn fa-plus"
+               href="{{ url()->previous() }}"><i class="fa fa-btn fa-plus"
                data-toggle="modal" data-target="#demoModal"></i>Abbrechen ohne zu speichern</a>
         </div>
     </div>

@@ -16,7 +16,7 @@ class Adresse extends Model
 
   protected $table = 'adresse';
   public $timestamps = false;
-  protected $guarded = ['id'];
+  protected $guarded = [];
 
   protected $casts = [
       'id' => 'integer',
@@ -62,12 +62,12 @@ class Adresse extends Model
   }
 
   /**
-   * adresse belongsTo user
+   * adresse hasMany user
    *
    * @return BelongsTo
    */
-  public function user(): BelongsTo {
-      return $this->belongsTo(XentralUser::class, 'adresse');
+  public function user(): HasMany {
+      return $this->hasMany(XentralUser::class, 'adresse');
   }
     /**
      * Adresse has many  projekt

@@ -133,7 +133,7 @@
             </div>
             <div class="col-md-3">
                 <a class="form-control btn btn-small btn-danger"
-                   href="{{ URL::to('/users') }}"><i class="fa fa-btn fa-plus"
+                   href="{{ url()->previous() }}"><i class="fa fa-btn fa-plus"
                    data-toggle="modal" data-target="#demoModal"></i>Abbrechen</a>
             </div>
         </div>

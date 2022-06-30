@@ -838,7 +838,7 @@ class XentralUserController extends Controller
                     $userrightes->save();                  }
                 }
 
-        Session::flash('message', 'Benutzer wurde erflogreich angelegt');
+        Session::flash('success', 'Benutzer wurde erflogreich angelegt');
         return redirect::to('/users/id=' . $newuser->id);
     }
 
@@ -859,6 +859,7 @@ class XentralUserController extends Controller
 
     public function update(Request $request)
     {
+      if (trim($request->password != "")) {
         $this->validate($request, [
             'typ' => 'sometimes',
             'name' => 'sometimes|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
@@ -869,25 +870,35 @@ class XentralUserController extends Controller
             'password' => 'sometimes|required|string|min:8',
             'repassword' => 'sometimes|required_with:password|same:password',
         ]);
+}else{
+          $this->validate($request, [
+            'typ' => 'sometimes',
+            'name' => 'sometimes|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
+            'abteilung' => 'sometimes|nullable',
+            'telefon' => 'sometimes|nullable|numeric',
+            'ansprechpartner' => 'sometimes|nullable',
+            'username' => 'sometimes|regex:/^\S*$/u|max:255',
+            ]);
+}
 
-        Adresse::find($request->id)->update(
-          ['typ' => request('typ')],
-          ['name' => request('name')],
-          ['email' => request('email')],
-          ['abteilung' => request('abteilung')],
-          ['telefon' => request('telefon')],
-          ['ansprechpartner' => request('ansprechpartner')],
-          ['freifeld1' => request('freifeld1')]
-        );
+        $adresse = Adresse::find($request->adresse_id);
+          $adresse->typ = $request->typ;
+          $adresse->name = $request->name;
+          $adresse->email = $request->email;
+          $adresse->abteilung = $request->abteilung;
+          $adresse->telefon = $request->telefon;
+          $adresse->ansprechpartner = $request->ansprechpartner;
+          $adresse->freifeld1 = $request->freifeld1;
+           $adresse->save();
 
-        $user = XentralUser::find($request->id)->update(
-        ['username' => request('username')],
-        ['password' => Hash::make(request('password'))],
-        ['repassword' => Hash::make(request('repassword'))],
-        ['remember_token' => Hash::make(request('password'))]
-      );
+      $user = XentralUser::find($request->user_id);
+        $user->username = $request->username;
+        $user->password = Hash::make($request->password);
+        $user->repassword = Hash::make($request->repassword);
+        $user->remember_token = Hash::make($request->password);
+          $user->save();
+
         Session::flash('message', 'Benutzer wurde erfolgreich bearbeitet!');
         return redirect::to('/users/id=' . $user->id);
-    }
-
+  }
 }
