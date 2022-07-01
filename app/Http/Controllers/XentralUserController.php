@@ -857,18 +857,19 @@ class XentralUserController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function update(Request $request)
+    public function update(Request $request, XentralUser $user)
     {
-        $this->validate($request, [
-            'typ' => 'sometimes',
-            'name' => 'sometimes|string|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
-            'abteilung' => 'sometimes|nullable',
-            'telefon' => 'sometimes|nullable|numeric',
-            'ansprechpartner' => 'sometimes|alpha|nullable',
-            'username' => 'sometimes|string|regex:/^\S*$/u|max:255',
-            'password' => 'sometimes|required|string|min:8',
-            'repassword' => 'sometimes|required_with:password|same:password',
-        ]);
+          $this->validate($request, [
+              'typ' => 'sometimes',
+              'name' => 'sometimes|string|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
+              'abteilung' => 'sometimes|nullable',
+              'telefon' => 'sometimes|nullable|numeric',
+              'ansprechpartner' => 'sometimes|alpha|nullable',
+              'username' => 'sometimes|string|regex:/^\S*$/u|max:255',
+              'password' => 'sometimes|required|string|min:8',
+              'repassword' => 'sometimes|required_with:password|same:password',
+          ]);
+
 
         $adresse = Adresse::find($request->adresse_id);
           $adresse->typ = $request->typ;
