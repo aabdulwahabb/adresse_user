@@ -20,45 +20,44 @@
         @if (Session::has('status'))
             <div class="alert alert-warning" id="flashmessage">{{ Session::get('status') }}</div>
         @endif
-<br><br>
-<form class="form-inline" action="#">
-     <div class="form-group mb-3 ml-sm-5">
-       <label for="staticEmail2" class="col-md-8 col-sm-8">Nächste Mitarbeiternummer:</label>
-     </div>
-    <div class="col-xs-4 mb-2 mr-sm-3">
-      <input type="text" class="form-control" name="nummernkreis"
-      id="nummernkreis" placeholder="{letzte MA Nr. +1}">
-    </div>
-    <button type="button" class="btn btn-success mb-2"data-toggle="modal" data-target="#demoModal">Nummernkreis bearbeiten</button>
-
-    <!-- Modal Example Start-->
-    <div class="modal fade" id="demoModal" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content text-center">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="demoModalLabel">Xentral Mitarbeiternummer Nummernkreis</h5>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Sind alle Änderungen richtig?</strong><br>
-                        <small class="form-text text-muted text-danger">Stellen Sie bitte sicher dass alle Daten vor speichern richtig sind, sonst können Sie korrigieren!</small></p>
-                </div>
-                <div class="col-md-4 mb-2">
+        <br><br>
+        <!-- Tittle and Input -->
+        <form class="form-inline" action="#" method="POST">
+            @csrf
+            <div class="row">
+                <div class="col-md-4">
                     <div class="form-group">
-                    <label>Neue Nummer:</label>
-                  <input type="text" class="form-control" name="newnummer"
-                  id="newnummer" placeholder="{die neue nummer}">
+                        <label for="staticEmail2" class="col-md-8 col-sm-8">Nächste Mitarbeiternummer:</label>
+                    </div>
                 </div>
-              </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal"><span aria-hidden="true">&times;</span> nein, Korrigieren</button>
-                    <button type="submit" class="btn btn-success"> ja, Änderung speichern</button>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="nummernkreis"
+                               id="nummernkreis" placeholder="{letzte MA Nr. +1}">
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Modal Example End-->
-  </form>
+            <!-- Tittle and Input -->
 
-     </section>
+            <!-- Update Button -->
+            <div class="row" style="position: absolute; bottom: 75px; width: 100%;">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <a class="form-control btn btn-small btn-danger"
+                           href="{{ url('/users')}}"><i class="fa fa-btn fa-plus"></i>Abbrechen ohne speichern</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button type="submit" class="form-control btn btn-small btn-success">
+                            Speichern
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Update Button -->
+        </form>
+
+    </section>
 @endsection
 @extends('components.footer')

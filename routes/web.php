@@ -35,4 +35,4 @@ Route::post('/users', [XentralUserController::class, 'store']); // store
 Route::get('/status', [SearchController::class, 'search'])->name('status'); // Search status aktiv Inaktiv
 
 // Update User
-Route::put('/users/id={id}',[XentralUserController::class, 'update']); // Update
+Route::put('/users',[XentralUserController::class, 'update']); // Update

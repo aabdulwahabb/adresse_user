@@ -66,13 +66,13 @@ class XentralUserController extends Controller
         // validate adresse
         $this->validate($request, [
             'typ' => 'required',
-            'name' => 'required|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
+            'name' => 'required|string|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
             'email' => 'required|string|max:255',
             'abteilung' => 'nullable',
             'telefon' => 'nullable|numeric',
-            'ansprechpartner' => 'nullable',
+            'ansprechpartner' => 'nullable|alpha',
             'freifeld1' => 'required|in:intern,extern',
-            'username' => 'required|regex:/^\S*$/u|max:255|unique:user',
+            'username' => 'required|string|regex:/^\S*$/u|max:255|unique:user',
             'password' => 'required|min:8|max:255',
             'repassword' => 'required|min:8|same:password',
         ]);
@@ -838,7 +838,7 @@ class XentralUserController extends Controller
                     $userrightes->save();                  }
                 }
 
-        Session::flash('success', 'Benutzer wurde erflogreich angelegt');
+        Session::flash('message', 'Benutzer wurde erflogreich angelegt!');
         return redirect::to('/users/id=' . $newuser->id);
     }
 
@@ -859,27 +859,16 @@ class XentralUserController extends Controller
 
     public function update(Request $request)
     {
-      if (trim($request->password != "")) {
         $this->validate($request, [
             'typ' => 'sometimes',
-            'name' => 'sometimes|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
+            'name' => 'sometimes|string|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
             'abteilung' => 'sometimes|nullable',
             'telefon' => 'sometimes|nullable|numeric',
-            'ansprechpartner' => 'sometimes|nullable',
-            'username' => 'sometimes|regex:/^\S*$/u|max:255',
+            'ansprechpartner' => 'sometimes|alpha|nullable',
+            'username' => 'sometimes|string|regex:/^\S*$/u|max:255',
             'password' => 'sometimes|required|string|min:8',
             'repassword' => 'sometimes|required_with:password|same:password',
         ]);
-}else{
-          $this->validate($request, [
-            'typ' => 'sometimes',
-            'name' => 'sometimes|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
-            'abteilung' => 'sometimes|nullable',
-            'telefon' => 'sometimes|nullable|numeric',
-            'ansprechpartner' => 'sometimes|nullable',
-            'username' => 'sometimes|regex:/^\S*$/u|max:255',
-            ]);
-}
 
         $adresse = Adresse::find($request->adresse_id);
           $adresse->typ = $request->typ;
@@ -899,6 +888,6 @@ class XentralUserController extends Controller
           $user->save();
 
         Session::flash('message', 'Benutzer wurde erfolgreich bearbeitet!');
-        return redirect::to('/users/id=' . $user->id);
+        return redirect::to('/users/');
   }
 }

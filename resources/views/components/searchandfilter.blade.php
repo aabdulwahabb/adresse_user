@@ -40,31 +40,31 @@
     </tbody>
 
     <script type="text/javascript">
-      $(function () {
+        $(function () {
 
-        var table = $('.data-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-              url: "{{ url('/status') }}",
-              data: function (d) {
-                    d.activ = $('#activ').val(),
-                    d.search = $('input[type="search"]').val()
-                }
-            },
-            columns: [
-                {data: 'username', name: 'username'},
-                {data: 'type', name: 'type'},
-                {data: 'name', name: 'name'},
-                {data: 'activ', name: 'activ'},
-            ]
+            var table = $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ url('/status') }}",
+                    data: function (d) {
+                        d.activ = $('#activ').val(),
+                            d.search = $('input[type="search"]').val()
+                    }
+                },
+                columns: [
+                    {data: 'username', name: 'username'},
+                    {data: 'type', name: 'type'},
+                    {data: 'name', name: 'name'},
+                    {data: 'activ', name: 'activ'},
+                ]
+            });
+
+            $('#activ').change(function () {
+                table.draw();
+            });
+
         });
-
-        $('#activ').change(function(){
-            table.draw();
-        });
-
-      });
     </script>
 
 </table>

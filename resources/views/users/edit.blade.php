@@ -17,6 +17,6 @@
             </div>
         @endif
         @include('components.editbody')
-  </section>
+    </section>
 @endsection
 @extends('components.footer')
