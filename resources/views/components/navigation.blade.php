@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <a class="btn btn-small btn-warning" href="{{ URL::to('/users/setting') }}">Einstellung</a>
+                <a class="btn btn-small btn-warning" href="{{ URL::to('/users/setting') }}">Einstellungen</a>
             </div>
         </div>
     </div>

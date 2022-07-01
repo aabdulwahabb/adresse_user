@@ -1,4 +1,4 @@
-<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+<table id="dtBasicExample" class="table table-striped table-bordered table-sm">
     <thead class="thead-dark">
     <tr>
         <td class="th-sm text-center"><strong>Benutzername</strong></td>

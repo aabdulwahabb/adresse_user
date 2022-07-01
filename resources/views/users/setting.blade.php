@@ -9,7 +9,7 @@
         <div class="container" role="main">
             <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <h2>Benutzern Einstellung</h2>
+                    <h2>Verwaltung Einstellungen</h2>
                 </div>
             </div>
         </div>
