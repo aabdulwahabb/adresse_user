@@ -73,7 +73,7 @@ class XentralUserController extends Controller
             'ansprechpartner' => 'nullable|alpha',
             'freifeld1' => 'required|in:intern,extern',
             'username' => 'required|string|regex:/^\S*$/u|max:255|unique:user',
-            'password' => 'required|min:8|max:255',
+            'password' => 'required|string|same:repassword|min:8',
             'repassword' => 'required|min:8|same:password',
         ]);
         // store adresse
@@ -857,7 +857,7 @@ class XentralUserController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function update(Request $request, XentralUser $user)
+    public function update(Request $request)
     {
           $this->validate($request, [
               'typ' => 'sometimes',
@@ -866,7 +866,7 @@ class XentralUserController extends Controller
               'telefon' => 'sometimes|nullable|numeric',
               'ansprechpartner' => 'sometimes|alpha|nullable',
               'username' => 'sometimes|string|regex:/^\S*$/u|max:255',
-              'password' => 'sometimes|required|string|min:8',
+              'password' => 'sometimes|required|string|same:repassword|min:8',
               'repassword' => 'sometimes|required_with:password|same:password',
           ]);
 
