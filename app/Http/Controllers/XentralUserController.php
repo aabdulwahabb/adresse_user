@@ -81,7 +81,7 @@ class XentralUserController extends Controller
         $this->validate($request, [
             'typ' => 'required',
             'name' => 'required|string|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
-            'email' => 'required|string|max:255',
+            'email' => 'required|string|max:255|unique:adresse',
             'abteilung' => 'nullable',
             'telefon' => 'nullable|numeric',
             'ansprechpartner' => 'nullable|alpha',
