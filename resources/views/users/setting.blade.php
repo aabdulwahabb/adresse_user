@@ -22,8 +22,9 @@
         @endif
         <br><br>
         <!-- Tittle and Input -->
-        <form class="form-inline" action="#" method="POST">
-            @csrf
+        <form action="{{ url('/users/setting') }}" method="POST" class="form-horizontal">
+          @csrf
+          @method('PUT')
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -32,7 +33,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="nummernkreis"
+                        <input type="text" class="form-control" name="nummernkreis" value="{{ intval($lastmanummer->username) +1 }}"
                                id="nummernkreis" placeholder="{letzte MA Nr. +1}">
                     </div>
                 </div>
@@ -40,14 +41,14 @@
             <!-- Tittle and Input -->
 
             <!-- Update Button -->
-            <div class="row" style="position: absolute; bottom: 75px; width: 100%;">
-                <div class="col-md-4">
+            <div class="row" style="position: absolute; bottom: 50px; width: 100%;">
+                <div class="col-md-3">
                     <div class="form-group">
                         <a class="form-control btn btn-small btn-danger"
                            href="{{ url('/users')}}"><i class="fa fa-btn fa-plus"></i>Abbrechen ohne speichern</a>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <div class="form-group">
                         <button type="submit" class="form-control btn btn-small btn-success">
                             Speichern

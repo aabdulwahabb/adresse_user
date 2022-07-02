@@ -4,7 +4,7 @@
     <section class="container">
         @extends('components.navigation')
         <div class="form-group"></div>
-        <h1>Create Adresse, Rolle, Xentral and Stechuhr User</h1>
+        <h1>Login und Stechuhr Benutzer Erstellen</h1>
         <!-- if there are creation errors, they will show here -->
         @if ($errors->any())
             <div class="alert alert-danger">

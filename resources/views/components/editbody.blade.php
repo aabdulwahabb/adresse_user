@@ -158,7 +158,7 @@
     <!-- Update Button -->
     <div class="form-group"></div>
     <div class="row" style="position: absolute; bottom: 75px; width: 100%;">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="form-group">
                 <a class="form-control btn btn-small btn-danger"
                    href="{{ url('/users')}}"><i class="fa fa-btn fa-plus"></i>Abbrechen ohne speichern</a>
