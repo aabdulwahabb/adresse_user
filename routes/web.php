@@ -23,10 +23,11 @@ Route::get('/userrights/users/{id}', [UserRightController::class, 'show'])->name
 */
 
 // Login
-Route::get('/login', [LoginController::class, 'loginview'])->name('users.login');
-Route::post('/users/checklogin', [LoginController::class, 'checklogin']);
-Route::get('/users', [LoginController::class, 'successlogin']);
-Route::get('/logout', [LoginController::class, 'loginview'])->name('users.logout');
+Route::namespace('Auth')->group(function () {
+  Route::get('/login',[LoginController::class, 'show_login_form'])->name('show_login_form');
+  Route::post('/users/login',[LoginController::class, 'process_login'])->name('process_login');
+  Route::get('users/logout',[LoginController::class, 'logout'])->name('logout');
+});
 
 
 // User Page

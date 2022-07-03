@@ -30,7 +30,7 @@
                       </div>
                       @endif
 
-                        <form method="POST" action="{{ url('/users/checklogin') }}">
+                        <form method="POST" action="{{ url('/users/login') }}">
                             @csrf
                             <div class="row mb-3">
                                 <label for="username"

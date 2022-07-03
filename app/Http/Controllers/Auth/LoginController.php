@@ -3,61 +3,50 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validate;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+use App\Models\User;
+use App\Models\XentralUser;
+
+
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-public function loginview()
-{
-    return view('auth.login');
-}
-
-public function checklogin(Request $request)
+    public function __construct()
     {
-        $this->validate($request, [
-            'username'   => 'required|string',
-            'password'  => 'required|alphaNum|min:3'
+        $this->middleware('guest')->except('logout');
+    }
+
+    public function show_login_form()
+    {
+        return view('auth.login');
+    }
+    public function process_login(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required'
         ]);
 
-        $user_data = array(
-            'username'  => $request->get('username'),
-            'password' => $request->get('password')
-        );
+        $credentials = $request->except(['_token']);
 
-        if(Auth::attempt($user_data))
-        {
-            return redirect('/users')->with('message', 'Sie haben sich erfolgreich angemeldet!');
-        }
-        else
-        {
-            return redirect('/login')->with('error', 'Falsche Zugangsdaten!');
-        }
+        $user = User::where('username',$request->username)->first();
 
+        if (auth()->attempt($credentials)) {
+
+            return redirect()->route('/users');
+
+        }else{
+            session()->flash('message', 'Invalid credentials');
+            return redirect()->back();
+        }
     }
 
-public function successlogin()
+    public function logout()
     {
-        return view('users.index');
-    }
-
-public function logout()
-    {
-        Auth::logout();
-        return redirect('/login')->with('message', 'Sie haben Siech erfolgreich abgemeldet!');
+        \Auth::logout();
+        return redirect::to('/login');
     }
 }
