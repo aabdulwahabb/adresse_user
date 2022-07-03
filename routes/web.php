@@ -8,6 +8,7 @@ use App\Http\Controllers\UserRightController;
 use App\Http\Controllers\ProjektController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Auth\LoginController;
 /*
 // Adresse Page
 Route::get('/adresse', [AdresseController::class, 'index'])->name('adresse.index'); // index adresse
@@ -20,6 +21,12 @@ Route::get('/projekte', [ProjektController::class, 'index'])->name('projekte.ind
 // Userrights Page
 Route::get('/userrights/users/{id}', [UserRightController::class, 'show'])->name('userrights.index');
 */
+
+// Login
+Route::get('/login', [LoginController::class, 'loginview'])->name('users.login');
+Route::post('/users/checklogin', [LoginController::class, 'checklogin']);
+Route::get('/users', [LoginController::class, 'successlogin']);
+Route::get('/logout', [LoginController::class, 'loginview'])->name('users.logout');
 
 
 // User Page

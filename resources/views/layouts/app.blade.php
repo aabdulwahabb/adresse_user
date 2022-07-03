@@ -27,7 +27,7 @@
         // set time success message
         setTimeout(function () {
             $("#flashmessage").hide();
-        }, 5000);
+        }, 7000);
 
         // Basic example
         $(document).ready(function () {

@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validate;
 
 class LoginController extends Controller
 {
@@ -21,16 +22,12 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+public function loginview()
+{
+    return view('auth.login');
+}
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    function checklogin(Request $request)
+public function checklogin(Request $request)
     {
         $this->validate($request, [
             'username'   => 'required|string',
@@ -44,32 +41,23 @@ class LoginController extends Controller
 
         if(Auth::attempt($user_data))
         {
-            return redirect('/users')->with('success', 'Sie haben sich erfolgreich angemeldet!');
+            return redirect('/users')->with('message', 'Sie haben sich erfolgreich angemeldet!');
         }
         else
         {
-            return back()->with('error', 'Falsche Zugangsdaten!');
+            return redirect('/login')->with('error', 'Falsche Zugangsdaten!');
         }
 
     }
 
-    function successlogin()
+public function successlogin()
     {
         return view('users.index');
     }
 
-    function logout()
+public function logout()
     {
         Auth::logout();
         return redirect('/login')->with('message', 'Sie haben Siech erfolgreich abgemeldet!');
-    }
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
     }
 }

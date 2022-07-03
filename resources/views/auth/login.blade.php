@@ -7,8 +7,30 @@
                 <div class="card">
                     <div class="card-header">{{ __('Login') }}</div>
 
+                    @if(isset(Auth::user()->username))
+                      <script> window.location = "/users"; </script>
+                    @endif
+
                     <div class="card-body">
-                        <form method="POST" action="{{ url('/users') }}">
+                      @if($message = Session::get('error'))
+                      <div class="alert alert-danger alert-block">
+                        <button type="button" class="close" data-dismiss="alert">
+                        x</button>
+                        <strong>{{ $message }}</strong>
+                      </div>
+                      @endif
+
+                      @if(count($errors) > 0)
+                      <div class="alert alert-danger">
+                        <ul>
+                          @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                          @endforeach
+                        </ul>
+                      </div>
+                      @endif
+
+                        <form method="POST" action="{{ url('/users/checklogin') }}">
                             @csrf
                             <div class="row mb-3">
                                 <label for="username"
@@ -59,7 +81,7 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary" value="Login">
                                         {{ __('Login') }}
                                     </button>
 

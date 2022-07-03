@@ -5,7 +5,11 @@
         @extends('components.navigation')
         <!-- will be used to show any messages -->
         @if (Session::has('message'))
-            <div class="alert alert-info" id="flashmessage">{{ Session::get('message') }}</div>
+            <div class="alert alert-info" id="flashmessage">
+              <button type="button" class="close" data-dismiss="alert">
+              x</button>
+              <strong>{{ Session::get('message') }}</strong>
+            </div>
         @endif
         @include('components.makarte')
         @endsection
