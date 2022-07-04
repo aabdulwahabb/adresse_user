@@ -1,4 +1,9 @@
 <nav class="navbar navbar-dark bg-dark justify-content-between">
+  @guest
+  <form class="form-inline">
+      <a class="btn btn-outline-info mr-sm-1" href="{{ url('/login') }}">Anmelden</a>
+  </form>
+  @else
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -19,4 +24,5 @@
     <form class="form-inline">
         <a class="btn btn-outline-danger mr-sm-1" href="{{ url('users/logout') }}">Abmelden</a>
     </form>
+    @endguest
 </nav>

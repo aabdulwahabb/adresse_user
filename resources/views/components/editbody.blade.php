@@ -8,7 +8,7 @@
                 <label>Type:</label>
                 <select class="form-control" name="typ" id="typ" required>
                     <option class="form-control"
-                            value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('typ')}}">
+                            value="{{\App\Models\Adresse::where('id',$user->adresse)->value('typ')}}">
                         Bitte wählen Sie Ihr Kontotype aus
                     </option>
                     <option name="typ" value="frau">Frau</option>
@@ -23,7 +23,7 @@
                 <label>Vollständige Name</label>
                 <input type="text" name="name" id="name" required placeholder="Name"
                        class="form-control"
-                       value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name')}}">
+                       value="{{App\Models\Adresse::where('id',$user->adresse)->value('name')}}">
                 <small class="form-text text-muted">Vor und Nachname <span class="text-rigt text-danger"
                                                                            style="font-size:17px">*</span></small>
                 @if ($errors->has('name'))
@@ -36,7 +36,7 @@
                 <label>Email:</label>
                 <input type="email" name="email" id="email" required placeholder="Email Adresse"
                        class="form-control"
-                       value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('email')}}">
+                       value="{{\App\Models\Adresse::where('id',$user->adresse)->value('email')}}">
                 <small class="form-text text-muted">Bitte gültige Email <span class="text-rigt text-danger"
                                                                               style="font-size:17px">*</span></small>
                 @if ($errors->has('email'))
@@ -51,7 +51,7 @@
                 <label>Telefon:</label>
                 <input type="text" name="telefon" id="telefon" placeholder="Optional"
                        class="form-control"
-                       value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('telefon')}}">
+                       value="{{\App\Models\Adresse::where('id',$user->adresse)->value('telefon')}}">
             </div>
         </div>
         <div class="col-md-4">
@@ -59,7 +59,7 @@
                 <label>Ansprechpartner:</label>
                 <input type="text" name="ansprechpartner" id="ansprechpartner" placeholder="Optional"
                        class="form-control"
-                       value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('ansprechpartner')}}">
+                       value="{{\App\Models\Adresse::where('id',$user->adresse)->value('ansprechpartner')}}">
             </div>
         </div>
         <div class="col-md-4">
@@ -67,7 +67,7 @@
                 <label>Team:</label>
                 <select class="form-control" name="abteilung" id="abteilung">
                     <option class="form-control"
-                            value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('abteilung')}}">
+                            value="{{\App\Models\Adresse::where('id',$user->adresse)->value('abteilung')}}">
                         Bitte wählen Sie Ihr Team aus
                     </option>
                     @foreach(\App\Models\Team::get() as $team)
@@ -83,7 +83,7 @@
         <div class="col-md-4">
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="freifeld1" id="freifeld1"
-                       value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('freifeld1')}}"
+                       value="{{\App\Models\Adresse::where('id',$user->adresse)->value('freifeld1')}}"
                        checked>
                 <label class="form-check-label" for="flexRadioDefault1">
                     <p>Intern
@@ -92,7 +92,7 @@
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="freifeld1" id="freifeld1"
-                       value="{{\Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('freifeld1')}}"
+                       value="{{\App\Models\Adresse::where('id',$user->adresse)->value('freifeld1')}}"
                        checked>
                 <label class="form-check-label" for="flexRadioDefault2">
                     <p>Extern

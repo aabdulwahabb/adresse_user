@@ -24,7 +24,11 @@ class XentralUserController extends Controller
     public function index()
     {
         $users = XentralUser::all();
+          if(Auth::check()){
         return View('users.index', compact('users'));
+      }
+      Session::flash('status', 'Sie dürfen nicht zugreifen!');
+      return redirect::to('/login');
     }
 
     /**
@@ -32,8 +36,12 @@ class XentralUserController extends Controller
      */
     public function create()
     {
+      if(Auth::check()){
         // load the create form (app/views/users/create.blade.php)
         return View('users.create');
+      }
+      Session::flash('status', 'Sie dürfen nicht zugreifen!');
+      return redirect::to('/login');
     }
 
     /**
@@ -43,8 +51,13 @@ class XentralUserController extends Controller
     {
       $lastmanummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
       $manummer = intval($lastmanummer->username) +1;
+
+      if(Auth::check()){
         // load the create form (app/views/users/setting.blade.php)
         return View('users.setting', compact('lastmanummer'));
+      }
+      Session::flash('status', 'Sie dürfen nicht zugreifen!');
+      return redirect::to('/login');
     }
 
     // set nummernkreis der Mitarbeiternummer
@@ -67,8 +80,12 @@ class XentralUserController extends Controller
         // get the user
         $user = XentralUser::find($id);
 
+        if(Auth::check()){
         // show the view and pass the user to it
         return View('users.show', compact('user'));
+      }
+      Session::flash('status', 'Sie dürfen nicht zugreifen!');
+      return redirect::to('/login');
     }
 
     /**
@@ -875,7 +892,12 @@ class XentralUserController extends Controller
     public function edit($id)
     {
         $user = XentralUser::find($id);
+
+        if(Auth::check()){
         return View('users.edit', compact('user'));
+      }
+      Session::flash('status', 'Sie dürfen nicht zugreifen!');
+      return redirect::to('/login');
     }
 
     /**

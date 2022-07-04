@@ -25,8 +25,8 @@ Route::get('/userrights/users/{id}', [UserRightController::class, 'show'])->name
 // Login
 Route::namespace('Auth')->group(function () {
   Route::get('/login',[LoginController::class, 'show_login_form'])->name('show_login_form');
-  Route::post('/users/login',[LoginController::class, 'process_login'])->name('process_login');
-  Route::get('users/logout',[LoginController::class, 'logout'])->name('logout');
+  Route::post('/users/login',[LoginController::class, 'customLogin'])->name('process_login');
+  Route::get('users/logout',[LoginController::class, 'signOut'])->name('logout');
 });
 
 

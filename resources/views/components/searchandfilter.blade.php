@@ -15,11 +15,11 @@
         <tr>
             <td class="text-center">{{ $user->username }}</td>
             <td class="text-center">{{ $user->type }}</td>
-            <td class="text-center">{{ \Illuminate\Support\Facades\DB::table('adresse')->where('id',$user->adresse)->value('name')}}</td>
+            <td class="text-center">{{ \App\Models\Adresse::where('id',$user->adresse)->value('name')}}</td>
 
             <td class="text-center">{{ $user->activ == 1 ? 'ja' : 'nein' }} </td>
 
-            <td class="text-center">{{ \Illuminate\Support\Facades\DB::table('userrights')->where('user',$user->id)->count('id') }}</td>
+            <td class="text-center">{{ \App\Models\UserRight::where('user',$user->id)->count('id') }}</td>
             @if($user->standardetikett == 25)
                 <td class="text-center">Zeiterfassung</td>
             @else

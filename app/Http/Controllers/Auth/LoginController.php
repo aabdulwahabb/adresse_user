@@ -8,45 +8,45 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
-use App\Models\XentralUser;
-
+ 
 
 
 class LoginController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
 
     public function show_login_form()
     {
+
         return view('auth.login');
     }
-    public function process_login(Request $request)
-    {
-        $request->validate([
-            'username' => 'required',
-            'password' => 'required'
-        ]);
 
-        $credentials = $request->except(['_token']);
 
-        $user = User::where('username',$request->username)->first();
+    public function customLogin(Request $request)
+   {
+       $request->validate([
+           'username' => 'required',
+           'password' => 'required',
+       ]);
 
-        if (auth()->attempt($credentials)) {
+       $credentials = $request->only('username', 'password');
 
-            return redirect()->route('/users');
+       $user = User::where('username', $request->username)->first();
 
-        }else{
-            session()->flash('message', 'Invalid credentials');
-            return redirect()->back();
-        }
-    }
+       if (Auth::attempt($credentials)) {
 
-    public function logout()
-    {
-        \Auth::logout();
-        return redirect::to('/login');
-    }
+         Session::flash('message', 'Erflogreich angemeldet!');
+         return redirect::to('/users');
+       }
+
+       Session::flash('error', 'Zugangsdaten sind nicht gültig!');
+       return redirect::to('/login');
+   }
+
+   public function signOut() {
+       Session::flush();
+       Auth::logout();
+
+       Session::flash('status', 'Sie haben sich abgemeldet!');
+       return redirect::to('/login');
+   }
 }
