@@ -23,11 +23,12 @@ class XentralUserController extends Controller
      */
     public function index()
     {
+        if(session()->has('username')) {
         $users = XentralUser::all();
-          if(Auth::check()){
+
         return View('users.index', compact('users'));
       }
-      Session::flash('status', 'Sie dürfen nicht zugreifen!');
+      Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
       return redirect::to('/login');
     }
 
@@ -36,11 +37,11 @@ class XentralUserController extends Controller
      */
     public function create()
     {
-      if(Auth::check()){
+        if(session()->has('username')) {
         // load the create form (app/views/users/create.blade.php)
         return View('users.create');
       }
-      Session::flash('status', 'Sie dürfen nicht zugreifen!');
+      Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
       return redirect::to('/login');
     }
 
@@ -49,14 +50,14 @@ class XentralUserController extends Controller
      */
     public function setting()
     {
+        if(session()->has('username')) {
       $lastmanummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
       $manummer = intval($lastmanummer->username) +1;
 
-      if(Auth::check()){
         // load the create form (app/views/users/setting.blade.php)
         return View('users.setting', compact('lastmanummer'));
       }
-      Session::flash('status', 'Sie dürfen nicht zugreifen!');
+      Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
       return redirect::to('/login');
     }
 
@@ -77,15 +78,16 @@ class XentralUserController extends Controller
      */
     public function show($id)
     {
+        if(session()->has('username')) {
         // get the user
         $user = XentralUser::find($id);
 
-        if(Auth::check()){
         // show the view and pass the user to it
         return View('users.show', compact('user'));
       }
-      Session::flash('status', 'Sie dürfen nicht zugreifen!');
+      Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
       return redirect::to('/login');
+
     }
 
     /**
@@ -880,7 +882,7 @@ class XentralUserController extends Controller
                     $userrightes->save();                  }
                 }
 
-        Session::flash('message', 'Benutzer wurde erflogreich angelegt!');
+        Session::flash('success', 'Benutzer wurde erflogreich angelegt!');
         return redirect::to('/users/id=' . $newuser->id);
     }
 
@@ -893,10 +895,10 @@ class XentralUserController extends Controller
     {
         $user = XentralUser::find($id);
 
-        if(Auth::check()){
+        if(session()->has('username')) {
         return View('users.edit', compact('user'));
       }
-      Session::flash('status', 'Sie dürfen nicht zugreifen!');
+      Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
       return redirect::to('/login');
     }
 
@@ -945,7 +947,7 @@ $user = XentralUser::find($request->user_id);
         $user->remember_token = Hash::make($request->password);
           $user->save();
 // Update Feedback
-        Session::flash('message', 'Benutzer wurde erfolgreich bearbeitet!');
+        Session::flash('success', 'Benutzer wurde erfolgreich bearbeitet!');
         return redirect::to('/users/');
   }
 }

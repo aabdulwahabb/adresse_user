@@ -1,9 +1,5 @@
 <nav class="navbar navbar-dark bg-dark justify-content-between">
-  @guest
-  <form class="form-inline">
-      <a class="btn btn-outline-info mr-sm-1" href="{{ url('/login') }}">Anmelden</a>
-  </form>
-  @else
+  @if(session()->has('username'))
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -21,8 +17,17 @@
             </div>
         </div>
     </div>
+    <div class="col-md-4">
+        <div class="form-group">
+             <p><strong>Welcome {{ session('username') }}</strong></p>
+        </div>
+    </div>
     <form class="form-inline">
         <a class="btn btn-outline-danger mr-sm-1" href="{{ url('users/logout') }}">Abmelden</a>
     </form>
-    @endguest
+    @else
+    <form class="form-inline">
+        <a class="btn btn-outline-info mr-sm-1" href="{{ url('/login') }}">Anmelden</a>
+    </form>
+    @endif
 </nav>

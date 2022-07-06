@@ -11,6 +11,20 @@
               <strong>{{ Session::get('message') }}</strong>
             </div>
         @endif
+        @if (Session::has('status'))
+            <div class="alert alert-warning" id="flashmessage">
+              <button type="button" class="close" data-dismiss="alert">
+              x</button>
+              <strong>{{ Session::get('status') }}</strong>
+            </div>
+        @endif
+        @if (Session::has('success'))
+            <div class="alert alert-success" id="flashmessage">
+              <button type="button" class="close" data-dismiss="alert">
+              x</button>
+              <strong>{{ Session::get('success') }}</strong>
+            </div>
+        @endif
         @include('components.makarte')
         @endsection
         @extends('components.footer')

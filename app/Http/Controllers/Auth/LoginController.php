@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
- 
+
 
 
 class LoginController extends Controller
@@ -16,16 +16,27 @@ class LoginController extends Controller
 
     public function show_login_form()
     {
+      if(!session()->has('username')){
 
         return view('auth.login');
+      }
+      return redirect('/users');
     }
 
 
     public function customLogin(Request $request)
    {
-       $request->validate([
-           'username' => 'required',
-           'password' => 'required',
+     $data = $request->input();
+     $request->session()->put('username', $data['username']);
+
+     if(session()->has('username'))
+     {
+       return redirect('/users')->with('message', 'Sie haben sich erfolgreich angemeldet!');
+     }
+     return view('auth.login');
+      /* $request->validate([
+           'username' => 'required|string',
+           'password' => 'required|alphaNum|min:8',
        ]);
 
        $credentials = $request->only('username', 'password');
@@ -34,19 +45,19 @@ class LoginController extends Controller
 
        if (Auth::attempt($credentials)) {
 
-         Session::flash('message', 'Erflogreich angemeldet!');
-         return redirect::to('/users');
+         return redirect::to('/users')->with('message', 'Erflogreich angemeldet!');
        }
 
-       Session::flash('error', 'Zugangsdaten sind nicht gültig!');
-       return redirect::to('/login');
+       return redirect::to('/login')->with('error', 'Zugangsdaten sind nicht gültig!');
+       */
    }
 
    public function signOut() {
-       Session::flush();
-       Auth::logout();
 
-       Session::flash('status', 'Sie haben sich abgemeldet!');
-       return redirect::to('/login');
+      if(session()->has('username'))
+       {
+         session()->pull('username');
+       }
+        return redirect::to('/login')->with('status', 'Sie haben sich abgemeldet!');
    }
 }

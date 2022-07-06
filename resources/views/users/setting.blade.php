@@ -28,6 +28,13 @@
               <strong>{{ Session::get('status') }}</strong>
             </div>
         @endif
+        @if (Session::has('success'))
+            <div class="alert alert-success" id="flashmessage">
+              <button type="button" class="close" data-dismiss="alert">
+              x</button>
+              <strong>{{ Session::get('success') }}</strong>
+            </div>
+        @endif
         <br><br>
         <!-- Tittle and Input -->
         <form action="{{ url('/users/setting') }}" method="POST" class="form-horizontal">
