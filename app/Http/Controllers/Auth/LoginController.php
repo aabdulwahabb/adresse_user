@@ -26,31 +26,25 @@ class LoginController extends Controller
 
     public function customLogin(Request $request)
    {
-     $data = $request->input();
-     $request->session()->put('username', $data['username']);
+      $data = $request->validate([
+          "username"           =>    "required|string",
+          "password"        =>    "required|alphaNum|min:8"
+      ]);
 
-     if(session()->has('username'))
+     if(User::where('username',$request->username)->where('password', $request->password)->first())
      {
-       return redirect('/users')->with('message', 'Sie haben sich erfolgreich angemeldet!');
-     }
-     return view('auth.login');
-      /* $request->validate([
-           'username' => 'required|string',
-           'password' => 'required|alphaNum|min:8',
-       ]);
 
-       $credentials = $request->only('username', 'password');
+         $request->session()->put('username', $data['username']);
 
-       $user = User::where('username', $request->username)->first();
+         if(session()->has('username'))
+         {
+         return redirect('/users')->with('message', 'Sie haben sich erfolgreich angemeldet!');
+         }
 
-       if (Auth::attempt($credentials)) {
-
-         return redirect::to('/users')->with('message', 'Erflogreich angemeldet!');
-       }
-
-       return redirect::to('/login')->with('error', 'Zugangsdaten sind nicht gültig!');
-       */
-   }
+     }else{
+          return redirect('/login')->with('error', 'Falsche Zugangsdaten, versuchen Sie bitte erneut!');
+          }
+}
 
    public function signOut() {
 
@@ -58,6 +52,6 @@ class LoginController extends Controller
        {
          session()->pull('username');
        }
-        return redirect::to('/login')->with('status', 'Sie haben sich abgemeldet!');
+        return redirect::to('/login')->with('status', 'Sie haben sich erfolgreich abgemeldet!');
    }
 }

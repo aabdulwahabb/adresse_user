@@ -17,12 +17,10 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-             <p><strong>Welcome {{ session('username') }}</strong></p>
-        </div>
-    </div>
     <form class="form-inline">
+      <div class="form-group mr-sm-3" style="color:#D7D7D7">
+           <p><strong>{{ session('username') }}</strong></p>
+     </div>
         <a class="btn btn-outline-danger mr-sm-1" href="{{ url('users/logout') }}">Abmelden</a>
     </form>
     @else
