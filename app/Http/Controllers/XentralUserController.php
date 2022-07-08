@@ -61,7 +61,7 @@ class XentralUserController extends Controller
            return redirect::to('/users/setting');
          }
 
-        if($request->get('nummernkreis') != $letztemitarbeiternummer->username)
+        if($request->get('nummernkreis') != $naechstemitarbeiternummer)
         {
           $this->validate($request, [
             'nummernkreis' => 'required|numeric',
@@ -948,7 +948,7 @@ class XentralUserController extends Controller
 $user = XentralUser::find($request->user_id);
           if($request->get('password') != $user->password){
             $this->validate($request, [
-              'password' => 'sometimes|required|string|same:repassword|min:8',
+              'password' => 'sometimes|required_with:repassword|string|min:8',
               'repassword' => 'sometimes|required_with:password|same:password',
               ]);
           }
