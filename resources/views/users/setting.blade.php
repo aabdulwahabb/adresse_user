@@ -58,8 +58,15 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="integer" class="form-control" name="nummernkreis" value="{{ intval($naechstemitarbeiternummer) }}"
+                      @if ($naechstemitarbeiternummer == $lastnummer)
+                        <input type="integer" class="form-control" name="nummernkreis"
+                        value="{{ intval($lastnummer) +1 }}"
                                id="nummernkreis" placeholder="{letzte MA Nr. +1}">
+                    @else
+                      <input type="integer" class="form-control" name="nummernkreis"
+                      value="{{ $naechstemitarbeiternummer }}"
+                             id="nummernkreis" placeholder="{letzte MA Nr. +1}">
+                    @endif
                     </div>
                 </div>
             </div>

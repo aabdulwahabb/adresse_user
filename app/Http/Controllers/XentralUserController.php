@@ -56,7 +56,7 @@ class XentralUserController extends Controller
            return redirect::to('/users/setting');
          }
 
-        if($request->get('nummernkreis') != $naechstemitarbeiternummer)
+        if($request->get('nummernkreis') != $letztemitarbeiternummer->username)
         {
           $this->validate($request, [
             'nummernkreis' => 'required|numeric',
@@ -76,9 +76,11 @@ class XentralUserController extends Controller
     {
         if(session()->has('username'))
         {
+          $letztemitarbeiternummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
+          $lastnummer = intval($letztemitarbeiternummer->username);
           $naechstemitarbeiternummer = session('naechstemitarbeiternummer');
           // load the create form (app/views/users/setting.blade.php)
-          return View('users.setting', compact('naechstemitarbeiternummer'));
+          return View('users.setting', compact('naechstemitarbeiternummer', 'lastnummer'));
         }
           Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
           return redirect::to('/login');
