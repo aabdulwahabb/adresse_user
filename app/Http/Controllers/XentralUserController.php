@@ -56,6 +56,11 @@ class XentralUserController extends Controller
            return redirect::to('/users/setting');
          }
 
+         if($request->get('nummernkreis') <= $letztemitarbeiternummer->username){
+           Session::flash('error', 'Die neue Nummernkreisnummer soll größer als letzte Mitarbeiternummer sein!');
+           return redirect::to('/users/setting');
+         }
+
         if($request->get('nummernkreis') != $letztemitarbeiternummer->username)
         {
           $this->validate($request, [
