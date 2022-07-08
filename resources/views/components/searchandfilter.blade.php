@@ -1,4 +1,4 @@
-<table id="dtBasicExample" class="table table-striped table-bordered table-sm">
+<table id="dtBasicExample" class="table table-striped">
     <thead class="thead-dark">
     <tr>
         <td class="th-sm text-center"><strong>Benutzername</strong></td>
@@ -28,12 +28,10 @@
             <!-- we will also add show, and delete buttons -->
             <td class="text-center">
                 <!-- show the user (uses the show method found at GET /users/{id} -->
-                <a class="btn btn-small btn-info" href="{{ URL::to('/users/id=' . $user->id) }}">Mitarbeiter
-                    Karte</a>
+                <a class="btn btn-small btn-info" href="{{ URL::to('/users/id=' . $user->id) }}">Anzeigen</a>
 
                 <!-- edit this user (uses the edit method found at GET /users/{id}/edit -->
-                <a class="btn btn-warning"
-                   href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
+                <a class="btn btn-small btn-warning" href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
             </td>
         </tr>
     @endforeach

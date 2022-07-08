@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\UserRight;
 use Illuminate\Http\Request;
 use App\Models\XentralUser;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -81,11 +82,12 @@ class XentralUserController extends Controller
     {
         if(session()->has('username'))
         {
+          $adminusers = User::all();
           $letztemitarbeiternummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
           $lastnummer = intval($letztemitarbeiternummer->username);
           $naechstemitarbeiternummer = session('naechstemitarbeiternummer');
           // load the create form (app/views/users/setting.blade.php)
-          return View('users.setting', compact('naechstemitarbeiternummer', 'lastnummer'));
+          return View('users.setting', compact('naechstemitarbeiternummer', 'lastnummer', 'adminusers'));
         }
           Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
           return redirect::to('/login');
