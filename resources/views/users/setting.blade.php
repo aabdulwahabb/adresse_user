@@ -14,6 +14,13 @@
             </div>
         </div>
         <!-- will be used to show any messages -->
+        @if($message = Session::get('error'))
+        <div class="alert alert-danger alert-block">
+          <button type="button" class="close" data-dismiss="alert">
+          x</button>
+          <strong>{{ $message }}</strong>
+        </div>
+        @endif
         @if (Session::has('message'))
             <div class="alert alert-info" id="flashmessage">
               <button type="button" class="close" data-dismiss="alert">
@@ -28,11 +35,14 @@
               <strong>{{ Session::get('status') }}</strong>
             </div>
         @endif
-        @if (Session::has('success'))
-            <div class="alert alert-success" id="flashmessage">
-              <button type="button" class="close" data-dismiss="alert">
-              x</button>
-              <strong>{{ Session::get('success') }}</strong>
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
         <br><br>
@@ -48,7 +58,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="nummernkreis" value="{{ intval($lastmanummer->username) +1 }}"
+                        <input type="integer" class="form-control" name="nummernkreis" value="{{ intval($naechstemitarbeiternummer) }}"
                                id="nummernkreis" placeholder="{letzte MA Nr. +1}">
                     </div>
                 </div>

@@ -40,8 +40,8 @@ Route::get('/users/id={id}/edit', [XentralUserController::class, 'edit'])->name(
 
 // Store adresse and user, adresse_rolle, userright
 Route::post('/users', [XentralUserController::class, 'store']);            // store benutzer
-Route::put('/users/setting', [XentralUserController::class, 'updatemanummer']);
 Route::get('/status', [SearchController::class, 'search'])->name('status'); // Search status aktiv Inaktiv
 
 // Update User
 Route::put('/users',[XentralUserController::class, 'update']);       // Update
+Route::put('/users/setting', [XentralUserController::class, 'updatemanummer']); // Updatenummernkreis

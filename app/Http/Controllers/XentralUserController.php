@@ -45,33 +45,45 @@ class XentralUserController extends Controller
       return redirect::to('/login');
     }
 
+    // set nummernkreis der Mitarbeiternummer
+    public function updatemanummer(Request $request)
+    {
+      $letztemitarbeiternummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
+      $naechstemitarbeiternummer  = intval($letztemitarbeiternummer->username) + 1;
+         if (XentralUser::where('username', $request->get('nummernkreis'))->exists())
+         {
+           Session::flash('error', 'Mitarbeiternummer ist bereits existiert!');
+           return redirect::to('/users/setting');
+         }
+
+        if($request->get('nummernkreis') != $naechstemitarbeiternummer)
+        {
+          $this->validate($request, [
+            'nummernkreis' => 'required|numeric',
+          ]);
+          $naechstemitarbeiternummer = intval($request->get('nummernkreis'));
+          session(['naechstemitarbeiternummer'=>intval($request->get('nummernkreis'))]);
+          Session::flash('success', 'Mitarbeiternummernkreis wurde erfolgreich aktualisiert!');
+          return redirect::to('/users');
+        }
+        return redirect::to('/users');
+    }
+
     /**
      * Show the form for User Setting.
      */
     public function setting()
     {
-        if(session()->has('username')) {
-      $lastmanummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
-      $manummer = intval($lastmanummer->username) +1;
-
-        // load the create form (app/views/users/setting.blade.php)
-        return View('users.setting', compact('lastmanummer'));
-      }
-      Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
-      return redirect::to('/login');
+        if(session()->has('username'))
+        {
+          $naechstemitarbeiternummer = session('naechstemitarbeiternummer');
+          // load the create form (app/views/users/setting.blade.php)
+          return View('users.setting', compact('naechstemitarbeiternummer'));
+        }
+          Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
+          return redirect::to('/login');
     }
 
-    // set nummernkreis der Mitarbeiternummer
-    public function updatemanummer(Request $request)
-    {
-      $lastmanummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
-        $this->validate($request, [
-          'nummernkreis' => 'required|integer|max:32',
-        ]);
-
-        Session::flash('message', 'Mitarbeiternummernkreis wurde erfolgreich aktualisiert!');
-        return redirect::to('/users');
-    }
 
     /**
      * Display the specified resource.
@@ -149,27 +161,33 @@ class XentralUserController extends Controller
         ]);
         $newuser->save();
 
-        // nummernkreis
-        $lastmanummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
-        $manummer = intval($lastmanummer->username) +1;
+        $neuenummer = session('naechstemitarbeiternummer');
+        $letztemitarbeiternummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
+
+          if ($neuenummer == intval($letztemitarbeiternummer->username)){
+            $neuenummer = intval($letztemitarbeiternummer->username) + 1;
+            }
+            elseif($neuenummer != intval($letztemitarbeiternummer->username)){
+            $neuenummer = session('naechstemitarbeiternummer');
+           }
 
         // store stechuhr user
-        $stechuhr = new XentralUser([
-            'username' => strval($manummer),  // nummernkreis in setting request setzten
-            'password' => Hash::make($request->get('password')),
-            'repassword' => Hash::make($request->get('repassword')),
-            'remember_token' => Hash::make($request->get('password')),
-            'type' => 'standard',
-            'adresse' => $neuadresse->id,
-            'startseite' => 'index.php?module=stechuhr&action=list',
-            'logdatei' => now(),
-            'activ' => 1,
-            'sprachebevorzugen' => 'deutsch',
-            'externlogin' => 1,
-            'standardetikett' => 25,
-            'stechuhrdevice' => $manummer . 'RzA5US8F5Z',
-        ]);
-        $stechuhr->save();
+      $stechuhr = new XentralUser([
+          'username' => strval($neuenummer),  // nummernkreis in setting request setzten
+          'password' => Hash::make($request->get('password')),
+          'repassword' => Hash::make($request->get('repassword')),
+          'remember_token' => Hash::make($request->get('password')),
+          'type' => 'standard',
+          'adresse' => $neuadresse->id,
+          'startseite' => 'index.php?module=stechuhr&action=list',
+          'logdatei' => now(),
+          'activ' => 1,
+          'sprachebevorzugen' => 'deutsch',
+          'externlogin' => 1,
+          'standardetikett' => 25,
+          'stechuhrdevice' => strval($neuenummer) . 'RzA5US8F5Z',
+      ]);
+          $stechuhr->save();
 
         // store rolle
         $projektinput = Project::select('id')->where('abkuerzung', request('projekt'))->first();
