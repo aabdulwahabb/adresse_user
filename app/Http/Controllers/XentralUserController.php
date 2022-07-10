@@ -93,6 +93,19 @@ class XentralUserController extends Controller
           return redirect::to('/login');
     }
 
+    public function admin()
+      {
+        $adminuser = User::get();
+        return View('users.setting', compact('adminuser'));
+      }
+
+      public function changeStatus(Request $request)
+      {
+        $admin = User::find($request->id)->update(['status' => $request->status]);
+
+      return response()->json(['success'=>'Status changed successfully.']);
+      }
+
 
     /**
      * Display the specified resource.

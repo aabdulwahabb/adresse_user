@@ -45,3 +45,4 @@ Route::get('/status', [SearchController::class, 'search'])->name('status'); // S
 // Update User
 Route::put('/users',[XentralUserController::class, 'update']);       // Update
 Route::put('/users/setting', [XentralUserController::class, 'updatemanummer']); // Updatenummernkreis
+Route::get('change-status', [XentralUserController::class, 'changeStatus']); // admin typ ändern

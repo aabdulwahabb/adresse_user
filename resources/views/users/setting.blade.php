@@ -9,7 +9,7 @@
         <div class="container" role="main">
             <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <h2>Administrator Benutzern && Verwaltung Einstellungen</h2>
+                    <h2>Administrator Benutzern && Einstellungen</h2>
                 </div>
             </div>
         </div>
@@ -50,6 +50,11 @@
         <form action="{{ url('/users/setting') }}" method="POST" class="form-horizontal">
           @csrf
           @method('PUT')
+          <div class="row">
+              <div class="col-md-8 col-sm-8 col-xs-12">
+                  <h4>Nummernkreis Setzen</h4>
+              </div>
+          </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -62,19 +67,27 @@
                         <input type="integer" class="form-control" name="nummernkreis"
                         value="{{ intval($lastnummer) +1 }}"
                                id="nummernkreis" placeholder="{letzte MA Nr. +1}">
+                               <small class="form-text text-muted">Nächste Zeiterfassung Benutzername/Mitarbeiternummer</small>
                     @elseif(\App\Models\XentralUser::where('username', $naechstemitarbeiternummer)->exists())
                        <input type="integer" class="form-control" name="nummernkreis"
                        value="{{ intval($lastnummer) +1 }}"
                               id="nummernkreis" placeholder="{letzte MA Nr. +1}">
+                              <small class="form-text text-muted">Nächste Zeiterfassung Benutzername/Mitarbeiternummer</small>
                     @else
                       <input type="integer" class="form-control" name="nummernkreis"
                       value="{{ $naechstemitarbeiternummer }}"
                              id="nummernkreis" placeholder="{letzte MA Nr. +1}">
+                             <small class="form-text text-muted">Nächste Zeiterfassung Benutzername/Mitarbeiternummer</small>
                     @endif
                     </div>
                 </div>
             </div>
             <!--Tabel -->
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <h4>Admin Benutzern</h4>
+                </div>
+            </div>
         <table id="dtBasicExample" class="table table-striped table-sm col-md-1">
             <thead class="thead-dark col-md-3">
             <tr>
@@ -92,37 +105,38 @@
                     <td class="text-center">{{ $adminuser->email }}</td>
                     <!-- we will also add show, and admin rights -->
                     <td class="text-center">
-                        <!-- show the user (uses the show method found at GET /users/{id} -->
-                        <input type="checkbox" checked data-toggle="toggle" data-on="Admin"
-                        data-off="standard" data-onstyle="success" data-offstyle="secondary">
+                      <div class="form-group">
+                       <div class="custom-control custom-switch">
+                         <input type="checkbox" class="custom-control-input"
+                         {{($adminuser->is_admin) ? 'checked' : ''}}
+                         onclick="changeUserStatus(event.target, {{ $adminuser->id }});">
+                         <label class="custom-control-label pointer"></label>
+                      </div>
+                   </div>
                     </td>
                 </tr>
             @endforeach
             </tbody>
-            <script type="text/javascript">
-                $(function () {
-                    var table = $('.data-table').DataTable({
-                        processing: true,
-                        serverSide: true,
-                        ajax: {
-                            url: "{{ url('/status') }}",
-                            data: function (d) {
-                                d.activ = $('#activ').val(),
-                                    d.search = $('input[type="search"]').val()
-                            }
-                        },
-                        columns: [
-                            {data: 'name', name: 'name'},
-                            {data: 'username', name: 'username'},
-                            {data: 'email', name: 'email'},
-                        ]
-                    });
+            <!-- Toggle admin-->
+            <script>
+            function changeUserStatus(_this, id) {
+    var status = $(_this).prop('checked') == true ? 1 : 0;
+    let _token = $('meta[name="csrf-token"]').attr('content');
 
-                    $('#activ').change(function () {
-                        table.draw();
-                    });
-                });
+    $.ajax({
+        url: `/change-status`,
+        type: 'post',
+        data: {
+            _token: _token,
+            id: id,
+            status: status
+        },
+        success: function (result) {
+        }
+    });
+}
             </script>
+
         </table>
         <!-- Update Button -->
         <div class="row" style="position: absolute; bottom: 50px; width: 100%;">

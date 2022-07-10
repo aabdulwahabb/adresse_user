@@ -31,18 +31,24 @@ class LoginController extends Controller
           "password"        =>    "required|alphaNum|min:8"
       ]);
 
-     if(User::where('username',$request->username)->where('password', $request->password)->first())
+     if(User::where('username',$request->username)
+     ->where('password', $request->password)
+     ->first())
      {
+       if(User::where('is_admin', 0)->first())
+       {
+         return redirect('/login')->with('status', 'Sie sind kein admin Benutzer!');
+       }
 
          $request->session()->put('username', $data['username']);
 
          if(session()->has('username'))
          {
-         return redirect('/users')->with('message', 'Sie haben sich erfolgreich angemeldet!');
+           return redirect('/users')->with('message', 'Sie haben sich erfolgreich angemeldet!');
          }
 
      }else{
-          return redirect('/login')->with('error', 'Falsche Zugangsdaten, versuchen Sie bitte erneut!');
+            return redirect('/login')->with('error', 'Falsche Zugangsdaten, versuchen Sie bitte erneut!');
           }
 }
 
