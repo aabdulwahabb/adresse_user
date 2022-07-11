@@ -37,7 +37,7 @@ class LoginController extends Controller
      {
        if(User::where('is_admin', 0)->first())
        {
-         return redirect('/login')->with('status', 'Sie sind kein admin Benutzer!');
+         return redirect('/login')->with('warning', 'Sie sind kein admin Benutzer!');
        }
 
          $request->session()->put('username', $data['username']);
@@ -58,6 +58,6 @@ class LoginController extends Controller
        {
          session()->pull('username');
        }
-        return redirect::to('/login')->with('status', 'Sie haben sich erfolgreich abgemeldet!');
+        return redirect::to('/login')->with('warning', 'Sie haben sich erfolgreich abgemeldet!');
    }
 }

@@ -25,6 +25,7 @@ class User extends Authenticatable
    $this->attributes['password'] = bcrypt($value);
 }
 
+
     /**
      * The attributes that should be hidden for arrays.
      *

@@ -17,7 +17,11 @@
             <td class="text-center">{{ $user->type }}</td>
             <td class="text-center">{{ \App\Models\Adresse::where('id',$user->adresse)->value('name')}}</td>
 
-            <td class="text-center">{{ $user->activ == 1 ? 'ja' : 'nein' }} </td>
+            <td class="text-center">
+              <input data-id="{{$user->id}}" class="toggle-class" type="checkbox"
+              data-onstyle="success" data-offstyle="secondary" data-toggle="toggle"
+              data-on="ja" data-off="nein" {{ $user->activ ? 'checked' : '' }}>
+            </td>
 
             <td class="text-center">{{ \App\Models\UserRight::where('user',$user->id)->count('id') }}</td>
             @if($user->standardetikett == 25)

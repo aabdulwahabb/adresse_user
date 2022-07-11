@@ -35,6 +35,20 @@
               <strong>{{ Session::get('status') }}</strong>
             </div>
         @endif
+        @if (Session::has('info'))
+            <div class="alert alert-info" id="flashmessage">
+              <button type="button" class="close" data-dismiss="alert">
+              x</button>
+              <strong>{{ Session::get('message') }}</strong>
+            </div>
+        @endif
+        @if (Session::has('warning'))
+            <div class="alert alert-info" id="flashmessage">
+              <button type="button" class="close" data-dismiss="alert">
+              x</button>
+              <strong>{{ Session::get('message') }}</strong>
+            </div>
+        @endif
 
         @if (count($errors) > 0)
             <div class="alert alert-danger">
@@ -94,7 +108,7 @@
                 <td class="th-sm text-center"><strong>Name</strong></td>
                 <td class="th-sm text-center"><strong>Benutzername</strong></td>
                 <td class="th-sm text-center"><strong>Email</strong></td>
-                <td class="th-sm text-center"><strong>Typ</strong></td>
+                <td class="th-sm text-center"><strong>Admin</strong></td>
             </tr>
             </thead>
             <tbody>
@@ -105,38 +119,13 @@
                     <td class="text-center">{{ $adminuser->email }}</td>
                     <!-- we will also add show, and admin rights -->
                     <td class="text-center">
-                      <div class="form-group">
-                       <div class="custom-control custom-switch">
-                         <input type="checkbox" class="custom-control-input"
-                         {{($adminuser->is_admin) ? 'checked' : ''}}
-                         onclick="changeUserStatus(event.target, {{ $adminuser->id }});">
-                         <label class="custom-control-label pointer"></label>
-                      </div>
-                   </div>
+                      <input data-id="{{$adminuser->id}}" class="toggle-class" type="checkbox"
+                      data-onstyle="success" data-offstyle="secondary" data-toggle="toggle"
+                      data-on="ja" data-off="nein" {{ $adminuser->is_admin ? 'checked' : '' }}>
                     </td>
                 </tr>
             @endforeach
             </tbody>
-            <!-- Toggle admin-->
-            <script>
-            function changeUserStatus(_this, id) {
-    var status = $(_this).prop('checked') == true ? 1 : 0;
-    let _token = $('meta[name="csrf-token"]').attr('content');
-
-    $.ajax({
-        url: `/change-status`,
-        type: 'post',
-        data: {
-            _token: _token,
-            id: id,
-            status: status
-        },
-        success: function (result) {
-        }
-    });
-}
-            </script>
-
         </table>
         <!-- Update Button -->
         <div class="row" style="position: absolute; bottom: 50px; width: 100%;">

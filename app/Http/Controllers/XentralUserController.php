@@ -29,9 +29,16 @@ class XentralUserController extends Controller
 
         return View('users.index', compact('users'));
       }
-      Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
+      Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
       return redirect::to('/login');
     }
+// normale xentraluser status $user->activ column
+    public function benutzerStatus(Request $request)
+{
+    DB::table('user')->where('id', $request->user_id)->update(['activ' => $request->status]);
+
+   return response()->with(['success'=>'Benutzer status wurde aktualisiert!']);
+}
 
     /**
      * Show the form for creating a new resource.
@@ -42,7 +49,7 @@ class XentralUserController extends Controller
         // load the create form (app/views/users/create.blade.php)
         return View('users.create');
       }
-      Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
+      Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
       return redirect::to('/login');
     }
 
@@ -89,23 +96,23 @@ class XentralUserController extends Controller
           // load the create form (app/views/users/setting.blade.php)
           return View('users.setting', compact('naechstemitarbeiternummer', 'lastnummer', 'adminusers'));
         }
-          Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
+          Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
           return redirect::to('/login');
     }
 
-    public function admin()
+// admin Page
+    public function admin($id)
       {
-        $adminuser = User::get();
+        $adminuser = User::find($id);
         return View('users.setting', compact('adminuser'));
       }
+// admin Page Admin or standard ändern
+      public function changeUserStatus(Request $request)
+  {
+      DB::table('users')->where('id', $request->user_id)->update(['is_admin' => $request->status]);
 
-      public function changeStatus(Request $request)
-      {
-        $admin = User::find($request->id)->update(['status' => $request->status]);
-
-      return response()->json(['success'=>'Status changed successfully.']);
-      }
-
+     return response()->with(['success'=>'Admin Rechte wurden erfolgreich aktualisiert!']);
+  }
 
     /**
      * Display the specified resource.
@@ -119,7 +126,7 @@ class XentralUserController extends Controller
         // show the view and pass the user to it
         return View('users.show', compact('user'));
       }
-      Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
+      Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
       return redirect::to('/login');
 
     }
@@ -938,7 +945,7 @@ class XentralUserController extends Controller
         if(session()->has('username')) {
         return View('users.edit', compact('user'));
       }
-      Session::flash('status', 'Sie dürfen die Seite nicht zugreifen!');
+      Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
       return redirect::to('/login');
     }
 
@@ -987,7 +994,6 @@ $user = XentralUser::find($request->user_id);
         $user->remember_token = Hash::make($request->password);
           $user->save();
 // Update Feedback
-        Session::flash('success', 'Benutzer wurde erfolgreich bearbeitet!');
-        return redirect::to('/users/');
+return redirect('/users')->with('success', 'Benutzer wurde erfolgreich bearbeitet!');
   }
 }

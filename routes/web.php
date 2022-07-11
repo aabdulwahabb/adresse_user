@@ -29,7 +29,6 @@ Route::namespace('Auth')->group(function () {
   Route::get('users/logout',[LoginController::class, 'signOut'])->name('logout');
 });
 
-
 // User Page
 Route::get('/users', [XentralUserController::class, 'index'])->name('users.index'); // Startseite
 Route::get('/users/setting', [XentralUserController::class, 'setting'])->name('users.setting'); // Setting
@@ -37,12 +36,11 @@ Route::get('/users/create', [XentralUserController::class, 'create'])->name('adr
 Route::get('/users/id={id}', [XentralUserController::class, 'show'])->name('users.show'); // Mitarbeiterkarte
 Route::get('/users/id={id}/edit', [XentralUserController::class, 'edit'])->name('user.edit'); // Bearbeiten
 
-
 // Store adresse and user, adresse_rolle, userright
 Route::post('/users', [XentralUserController::class, 'store']);            // store benutzer
-Route::get('/status', [SearchController::class, 'search'])->name('status'); // Search status aktiv Inaktiv
 
 // Update User
-Route::put('/users',[XentralUserController::class, 'update']);       // Update
+Route::put('/users',[XentralUserController::class, 'update']);       // Update User
 Route::put('/users/setting', [XentralUserController::class, 'updatemanummer']); // Updatenummernkreis
-Route::get('change-status', [XentralUserController::class, 'changeStatus']); // admin typ ändern
+Route::get('/users/setting/status', [XentralUserController::class, 'ChangeUserStatus'])->name('/changeStatus'); // Admin or not admin
+Route::get('/users/setting/status', [XentralUserController::class, 'benutzerStatus'])->name('/changeStatus');
