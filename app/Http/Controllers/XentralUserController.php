@@ -147,7 +147,7 @@ class XentralUserController extends Controller
             'ansprechpartner' => 'nullable|alpha',
             'freifeld1' => 'required|in:intern,extern',
             'username' => 'required|string|regex:/^\S*$/u|max:255|unique:user',
-            'password' => 'required|string|same:repassword|min:8',
+            'password' => 'required|string|min:8',
             'repassword' => 'required|min:8|same:password',
         ]);
 

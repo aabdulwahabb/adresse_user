@@ -2,8 +2,6 @@
 @section('content')
     <section class="container">
         @extends('components.navigation')
-        <div class="form-group"></div>
-        <br>
         <!-- Titel and Search Imput -->
         <!-- main content -->
         <div class="container" role="main">
@@ -13,85 +11,33 @@
                 </div>
             </div>
         </div>
-        <!-- will be used to show any messages -->
-        @if($message = Session::get('error'))
-        <div class="alert alert-danger alert-block">
-          <button type="button" class="close" data-dismiss="alert">
-          x</button>
-          <strong>{{ $message }}</strong>
-        </div>
-        @endif
-        @if (Session::has('message'))
-            <div class="alert alert-info" id="flashmessage">
-              <button type="button" class="close" data-dismiss="alert">
-              x</button>
-              <strong>{{ Session::get('message') }}</strong>
-            </div>
-        @endif
-        @if (Session::has('status'))
-            <div class="alert alert-warning" id="flashmessage">
-              <button type="button" class="close" data-dismiss="alert">
-              x</button>
-              <strong>{{ Session::get('status') }}</strong>
-            </div>
-        @endif
-        @if (Session::has('info'))
-            <div class="alert alert-info" id="flashmessage">
-              <button type="button" class="close" data-dismiss="alert">
-              x</button>
-              <strong>{{ Session::get('message') }}</strong>
-            </div>
-        @endif
-        @if (Session::has('warning'))
-            <div class="alert alert-info" id="flashmessage">
-              <button type="button" class="close" data-dismiss="alert">
-              x</button>
-              <strong>{{ Session::get('message') }}</strong>
-            </div>
-        @endif
-
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <br><br>
+        <br>
         <!-- Tittle and Input -->
         <form action="{{ url('/users/setting') }}" method="POST" class="form-horizontal">
           @csrf
           @method('PUT')
+
           <div class="row">
               <div class="col-md-8 col-sm-8 col-xs-12">
                   <h4>Nummernkreis Setzen</h4>
               </div>
-          </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="staticEmail2" class="col-md-8 col-sm-8">Nächste Mitarbeiternummer:</label>
-                    </div>
-                </div>
                 <div class="col-md-4">
                     <div class="form-group">
                       @if ($naechstemitarbeiternummer == $lastnummer || empty($naechstemitarbeiternummer))
                         <input type="integer" class="form-control" name="nummernkreis"
                         value="{{ intval($lastnummer) +1 }}"
                                id="nummernkreis" placeholder="{letzte MA Nr. +1}">
-                               <small class="form-text text-muted">Nächste Zeiterfassung Benutzername/Mitarbeiternummer</small>
+                               <small class="form-text text-muted">soll die nächste Zeiterfassung Benutzername/Mitarbeiternummer sein</small>
                     @elseif(\App\Models\XentralUser::where('username', $naechstemitarbeiternummer)->exists())
                        <input type="integer" class="form-control" name="nummernkreis"
                        value="{{ intval($lastnummer) +1 }}"
                               id="nummernkreis" placeholder="{letzte MA Nr. +1}">
-                              <small class="form-text text-muted">Nächste Zeiterfassung Benutzername/Mitarbeiternummer</small>
+                              <small class="form-text text-muted">soll die nächste Zeiterfassung Benutzername/Mitarbeiternummer sein</small>
                     @else
                       <input type="integer" class="form-control" name="nummernkreis"
                       value="{{ $naechstemitarbeiternummer }}"
                              id="nummernkreis" placeholder="{letzte MA Nr. +1}">
-                             <small class="form-text text-muted">Nächste Zeiterfassung Benutzername/Mitarbeiternummer</small>
+                             <small class="form-text text-muted">Soll die nächste Zeiterfassung Benutzername/Mitarbeiternummer sein.</small>
                     @endif
                     </div>
                 </div>
@@ -128,11 +74,11 @@
             </tbody>
         </table>
         <!-- Update Button -->
-        <div class="row" style="position: absolute; bottom: 50px; width: 100%;">
-            <div class="col-md-3">
+        <div class="row position-bottom" style="position: relative; bottom: 0px; width: 100%;">
+            <div class="col-md-2">
                 <div class="form-group">
                     <a class="form-control btn btn-small btn-danger"
-                       href="{{ url('/users')}}"><i class="fa fa-btn fa-plus"></i>Abbrechen ohne speichern</a>
+                       href="{{ url('/users')}}"><i class="fa fa-btn fa-plus"></i>Abbrechen</a>
                 </div>
             </div>
             <div class="col-md-2">

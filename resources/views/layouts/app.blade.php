@@ -93,6 +93,12 @@
                 toastr.warning("{{ session('warning') }}");
         @endif
       </script>
+      <!--error toastr -->
+            <script>
+                @foreach ($errors->all() as $error)
+                toastr.error("{{$error}}")
+                @endforeach
+          </script>
 
       <!-- Admin Status ändern -->
       <script>
@@ -164,9 +170,9 @@
            }
            .pagination{
                float: right;
-               margin-right: 20px;
-               margin-top: 5px;
-               margin-bottom: 30px;
+               position: relative;
+               bottom: 0px;
+               width: 100%;
            }
 
        </style>

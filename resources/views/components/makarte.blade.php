@@ -20,7 +20,7 @@
         </p>
     </div>
 </div>
-<div class="text-center">
+<div class="row" style="position: relative; bottom: 0px; width: 100%; margin-left: 415px;">
     <a type="button" class="btn btn-small btn-info mr-sm-3"
        href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
     <a type="button" href="{{ url('/users') }}" class="btn btn-small btn-warning ml-sm-3">Abschließen</a>

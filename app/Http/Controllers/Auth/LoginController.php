@@ -44,7 +44,7 @@ class LoginController extends Controller
 
          if(session()->has('username'))
          {
-           return redirect('/users')->with('message', 'Sie haben sich erfolgreich angemeldet!');
+           return redirect('/users')->with('info', 'Sie haben sich erfolgreich angemeldet!');
          }
 
      }else{

@@ -1,7 +1,5 @@
-@foreach(\App\Models\XentralUser::get() as $user)
     <form action="{{ url('/users') }}" method="POST" class="form-horizontal">
         @csrf
-        @endforeach
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
@@ -14,6 +12,11 @@
                     </select>
                     <small class="form-text text-muted">z.B. Frau oder Herr <span class="text-rigt text-danger"
                                                                                   style="font-size:17px">*</span></small>
+                                                                                  @error('Type')
+                                                                                  <span class="invalid-feedback" role="alert">
+                                                                                      <strong>{{ $message }}</strong>
+                                                                                  </span>
+                                                                                  @enderror
                 </div>
             </div>
             <div class="col-md-4">
@@ -23,9 +26,11 @@
                            class="form-control" value="{{ old('name') }}">
                     <small class="form-text text-muted">Vor und Nachname bitte <span class="text-rigt text-danger"
                                                                                      style="font-size:17px">*</span></small>
-                    @if ($errors->has('name'))
-                        <span class="error">{{ $errors->first('name') }}</span>
-                    @endif
+                                                                                     @error('Name')
+                                                                                     <span class="invalid-feedback" role="alert">
+                                                                                         <strong>{{ $message }}</strong>
+                                                                                     </span>
+                                                                                     @enderror
                 </div>
             </div>
             <div class="col-md-4">
@@ -35,18 +40,42 @@
                            class="form-control" value="{{ old('email') }}">
                     <small class="form-text text-muted">Bitte gültige Email <span class="text-rigt text-danger"
                                                                                   style="font-size:17px">*</span></small>
-                    @if ($errors->has('email'))
-                        <span class="error">{{ $errors->first('email') }}</span>
-                    @endif
+                                                                                  @error('Email')
+                                                                                  <span class="invalid-feedback" role="alert">
+                                                                                      <strong>{{ $message }}</strong>
+                                                                                  </span>
+                                                                                  @enderror
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="freifeld1" id="freifeld1" value="intern" checked>
+                <label class="form-check-label" for="exampleRadios1">
+                <p>Intern
+                    <small class="form-text text-muted">Vertragtyp z.B. wenn direkt durch versandmanufaktur ist</small></p>
+            </div>
+                <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="freifeld1" id="freifeld1" value="extern">
+  <label class="form-check-label" for="exampleRadios2">
+                <p>Extern
+                    <small class="form-text text-muted">Vertragtyp z.B. wenn leiharbeiter ist</small></p>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Telefon:</label>
                     <input type="text" name="telefon" id="telefon" placeholder="Optional"
                            class="form-control" value="{{ old('telefon') }}">
+                           @error('Telefon')
+                           <span class="invalid-feedback" role="alert">
+                               <strong>{{ $message }}</strong>
+                           </span>
+                           @enderror
                 </div>
             </div>
             <div class="col-md-4">
@@ -54,6 +83,12 @@
                     <label>Ansprechpartner:</label>
                     <input type="text" name="ansprechpartner" id="ansprechpartner" placeholder="Optional"
                            class="form-control" value="{{ old('ansprechpartner') }}">
+                           <small class="form-text text-muted">z.B. zuständiger Ansprechpartner der Leihfirma</small>
+                           @error('Ansprechpartner')
+                           <span class="invalid-feedback" role="alert">
+                               <strong>{{ $message }}</strong>
+                           </span>
+                           @enderror
                 </div>
             </div>
             <div class="col-md-4">
@@ -67,30 +102,14 @@
                         @endforeach
                     </select>
                     <small class="form-text text-muted">Optional</small>
+                    @error('Team')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="freifeld1" id="freifeld1" value="intern" checked>
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        <p>Intern
-                            <small class="form-text text-muted">z.B. wenn direkt durch versandmanufaktur ist</small></p>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="freifeld1" id="freifeld1" value="extern" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        <p>Extern
-                            <small class="form-text text-muted">z.B. wenn leiharbeiter ist</small></p>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <br>
-
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
@@ -99,9 +118,11 @@
                            value="{{ old('username') }}" placeholder="Username">
                     <small class="form-text text-muted">Bitte klein Buchstaben benutzen <span
                             class="text-rigt text-danger" style="font-size:17px">*</span></small>
-                    @if ($errors->has('username'))
-                        <span class="error">{{ $errors->first('username') }}</span>
-                    @endif
+                            @error('Benutzername')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                 </div>
             </div>
             <div class="col-md-4">
@@ -109,12 +130,14 @@
                     <label>Passwort:</label>
                     <input type="password" name="password" id="password" required class="form-control password-field"
                            value="{{ old('password') }}" placeholder="Password">
-                    <input type="checkbox" onclick="myFunction()"> Einblenden
                     <small class="form-text text-muted">Bitte Mindestens 8 Zeichen eingeben <span
                             class="text-rigt text-danger" style="font-size:17px">*</span></small>
-                    @if ($errors->has('password'))
-                        <span class="error">{{ $errors->first('password') }}</span>
-                    @endif
+                            <input type="checkbox" onclick="myFunction()"> Einblenden
+                            @error('Passwort')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                 </div>
             </div>
             <div class="col-md-4">
@@ -124,15 +147,17 @@
                            value="{{ old('repassword') }}" placeholder="Password Wiederholen">
                     <small class="form-text text-muted">Bitte bestätigen Sie Ihr Password <span
                             class="text-rigt text-danger" style="font-size:17px">*</span></small>
-                    @if ($errors->has('repassword'))
-                        <span class="error">{{ $errors->first('repassword') }}</span>
-                    @endif
+                            @error('Passwortbestätigung')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                 </div>
             </div>
         </div>
+
         <!-- Add Button -->
-        <div class="form-group"></div>
-        <div class="row" style="position: absolute; bottom: 75px; width: 100%;">
+        <div class="row position-bottom" style="position: relative; bottom: 0px; width: 100%;">
             <div class="col-md-2">
                 <div class="form-group">
                     <a class="form-control btn btn-small btn-danger"

@@ -43,4 +43,4 @@ Route::post('/users', [XentralUserController::class, 'store']);            // st
 Route::put('/users',[XentralUserController::class, 'update']);       // Update User
 Route::put('/users/setting', [XentralUserController::class, 'updatemanummer']); // Updatenummernkreis
 Route::get('/users/setting/status', [XentralUserController::class, 'ChangeUserStatus'])->name('/changeStatus'); // Admin or not admin
-Route::get('/users/setting/status', [XentralUserController::class, 'benutzerStatus'])->name('/changeStatus');
+Route::get('/users/setting/status', [XentralUserController::class, 'benutzerStatus'])->name('/changeStatus'); // normale Xentral Benutzer Status aktualisieren
