@@ -6,6 +6,8 @@
        <meta name="csrf-token" content="{{ csrf_token() }}">
        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 
 <!--toastr-->
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -119,20 +121,36 @@
       });
       </script>
 
-<script>
-        //password ein-ausblenden
-            function myFunction() {
-                var x = document.getElementById("password");
-                var d = document.getElementById("repassword");
-                if (x.type === "password" && d.type === "password") {
-                    x.type = "text";
-                    d.type = "text";
-                } else {
-                    x.type = "password";
-                    d.type = "password";
-                }
-            }
-</script>
+      <!-- Password Ein und ausblenden -->
+      <script>
+      //Javascript function definition
+      function eyeEnableOrDisable()
+      {
+      //getting type of the password field element by jQuery
+      var x = $('#password').prop("type");
+      var y = $('#repassword').prop("type");
+      if (x === "password" && y === "password")
+      {
+        //changing input type text
+        $('#password').prop("type", "text");
+        $('#repassword').prop("type", "text");
+        //removing fa-eye class
+        $('#eyeChangeId').removeClass('fa-eye');
+        //adding fa-eye-slash class
+        $('#eyeChangeId').addClass('fa-eye-slash');
+      }
+      else
+      {
+        //changing type passord
+        $('#password').prop("type", "password");
+        $('#repassword').prop("type", "password");
+        //removinf fa-eye-slash class
+        $('#eyeChangeId').removeClass('fa-eye-slash');
+        //adding fa-eye class
+        $('#eyeChangeId').addClass('fa-eye');
+      }
+      }
+      </script>
 
 <!-- Suche Field-->
 <script type="text/javascript">

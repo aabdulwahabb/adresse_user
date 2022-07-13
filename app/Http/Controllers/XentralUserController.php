@@ -35,9 +35,13 @@ class XentralUserController extends Controller
 // normale xentraluser status $user->activ column
     public function benutzerStatus(Request $request)
 {
+  if(session()->has('username')) {
     DB::table('user')->where('id', $request->user_id)->update(['activ' => $request->status]);
 
    return response()->with(['success'=>'Benutzer status wurde aktualisiert!']);
+  }
+  Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
+  return redirect::to('/login');
 }
 
     /**
@@ -109,9 +113,13 @@ class XentralUserController extends Controller
 // admin Page Admin or standard ändern
       public function changeUserStatus(Request $request)
   {
+    if(session()->has('username')) {
       DB::table('users')->where('id', $request->user_id)->update(['is_admin' => $request->status]);
 
      return response()->with(['success'=>'Admin Rechte wurden erfolgreich aktualisiert!']);
+    }
+    Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
+    return redirect::to('/login');
   }
 
     /**

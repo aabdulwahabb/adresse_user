@@ -132,7 +132,7 @@
                            value="{{ old('password') }}" placeholder="Password">
                     <small class="form-text text-muted">Bitte Mindestens 8 Zeichen eingeben <span
                             class="text-rigt text-danger" style="font-size:17px">*</span></small>
-                            <input type="checkbox" onclick="myFunction()"> Einblenden
+                            <p class="text-right"><i class="bi bi-eye-slash" id="eyeChangeId" onclick="eyeEnableOrDisable()"></i></p>
                             @error('Passwort')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
