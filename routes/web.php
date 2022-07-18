@@ -25,7 +25,9 @@ Route::get('/userrights/users/{id}', [UserRightController::class, 'show'])->name
 // Login
 Route::namespace('Auth')->group(function () {
   Route::get('/login',[LoginController::class, 'show_login_form'])->name('show_login_form');
+    Route::get('/register',[LoginController::class, 'show_register_form'])->name('show_register_form');
   Route::post('/users/login',[LoginController::class, 'customLogin'])->name('process_login');
+    Route::post('/users/register',[LoginController::class, 'customRegister'])->name('process_register');
   Route::get('users/logout',[LoginController::class, 'signOut'])->name('logout');
 });
 
@@ -42,5 +44,5 @@ Route::post('/users', [XentralUserController::class, 'store']);            // st
 // Update User
 Route::put('/users',[XentralUserController::class, 'update']);       // Update User
 Route::put('/users/setting', [XentralUserController::class, 'updatemanummer']); // Updatenummernkreis
-Route::get('/users/setting/status', [XentralUserController::class, 'ChangeUserStatus'])->name('/changeStatus'); // Admin or not admin
+Route::get('/users/setting/admin/status', [XentralUserController::class, 'changeAdminStatus'])->name('/changeAdminStatus'); // Admin or not admin
 Route::get('/users/setting/status', [XentralUserController::class, 'benutzerStatus'])->name('/changeStatus'); // normale Xentral Benutzer Status aktualisieren

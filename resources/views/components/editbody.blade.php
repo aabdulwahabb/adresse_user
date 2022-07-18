@@ -16,11 +16,11 @@
                 </select>
                 <small class="form-text text-muted">z.B. Frau oder Herr <span class="text-rigt text-danger"
                                                                               style="font-size:17px">*</span></small>
-                                                                              @error('Type')
-                                                                              <span class="invalid-feedback" role="alert">
+                @error('Type')
+                <span class="invalid-feedback" role="alert">
                                                                                   <strong>{{ $message }}</strong>
                                                                               </span>
-                                                                              @enderror
+                @enderror
             </div>
         </div>
         <div class="col-md-4">
@@ -31,11 +31,11 @@
                        value="{{App\Models\Adresse::where('id',$user->adresse)->value('name')}}">
                 <small class="form-text text-muted">Vor und Nachname <span class="text-rigt text-danger"
                                                                            style="font-size:17px">*</span></small>
-                                                                           @error('Name')
-                                                                           <span class="invalid-feedback" role="alert">
+                @error('Name')
+                <span class="invalid-feedback" role="alert">
                                                                                <strong>{{ $message }}</strong>
                                                                            </span>
-                                                                           @enderror
+                @enderror
             </div>
         </div>
         <div class="col-md-4">
@@ -46,27 +46,32 @@
                        value="{{\App\Models\Adresse::where('id',$user->adresse)->value('email')}}">
                 <small class="form-text text-muted">Bitte gültige Email <span class="text-rigt text-danger"
                                                                               style="font-size:17px">*</span></small>
-                                                                              @error('Email')
-                                                                              <span class="invalid-feedback" role="alert">
+                @error('Email')
+                <span class="invalid-feedback" role="alert">
                                                                                   <strong>{{ $message }}</strong>
                                                                               </span>
-                                                                              @enderror
+                @enderror
             </div>
         </div>
     </div>
     <div class="row">
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="freifeld1" id="freifeld1" value="{{\App\Models\Adresse::where('id',$user->adresse)->value('freifeld1')}}" checked>
+            <input class="form-check-input" type="radio" name="freifeld1" id="freifeld1"
+                   value="{{\App\Models\Adresse::where('id',$user->adresse)->value('freifeld1')}}" checked>
             <label class="form-check-label" for="exampleRadios1">
-            <p>Intern
-                <small class="form-text text-muted">Vertragtyp z.B. wenn direkt durch versandmanufaktur ist</small></p>
+                <p>Intern
+                    <small class="form-text text-muted">Vertragtyp z.B. wenn direkt durch versandmanufaktur ist</small>
+                </p>
+            </label>
         </div>
-            <!-- Material inline 2 -->
+        <!-- Material inline 2 -->
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="freifeld1" id="freifeld1" value="{{\App\Models\Adresse::where('id',$user->adresse)->value('freifeld1')}}" checked>
-<label class="form-check-label" for="exampleRadios2">
-            <p>Extern
-                <small class="form-text text-muted">Vertragtyp z.B. wenn leiharbeiter ist</small></p>
+            <input class="form-check-input" type="radio" name="freifeld1" id="freifeld1"
+                   value="{{\App\Models\Adresse::where('id',$user->adresse)->value('freifeld1')}}" checked>
+            <label class="form-check-label" for="exampleRadios2">
+                <p>Extern
+                    <small class="form-text text-muted">Vertragtyp z.B. wenn leiharbeiter ist</small></p>
+            </label>
         </div>
     </div>
     <div class="row">
@@ -76,11 +81,11 @@
                 <input type="text" name="telefon" id="telefon" placeholder="Optional"
                        class="form-control"
                        value="{{\App\Models\Adresse::where('id',$user->adresse)->value('telefon')}}">
-                       @error('Telefon')
-                       <span class="invalid-feedback" role="alert">
+                @error('Telefon')
+                <span class="invalid-feedback" role="alert">
                            <strong>{{ $message }}</strong>
                        </span>
-                       @enderror
+                @enderror
             </div>
         </div>
         <div class="col-md-4">
@@ -89,12 +94,12 @@
                 <input type="text" name="ansprechpartner" id="ansprechpartner" placeholder="Optional"
                        class="form-control"
                        value="{{\App\Models\Adresse::where('id',$user->adresse)->value('ansprechpartner')}}">
-                       <small class="form-text text-muted">z.B. zuständiger Ansprechpartner der Leihfirma</small>
-                       @error('Ansprechpartner')
-                       <span class="invalid-feedback" role="alert">
+                <small class="form-text text-muted">z.B. zuständiger Ansprechpartner der Leihfirma</small>
+                @error('Ansprechpartner')
+                <span class="invalid-feedback" role="alert">
                            <strong>{{ $message }}</strong>
                        </span>
-                       @enderror
+                @enderror
             </div>
         </div>
         <div class="col-md-4">
@@ -128,22 +133,22 @@
                            value="{{ $user->username }}">
                     <small class="form-text text-muted">Wird für stechuhr login benötigt <span
                             class="text-rigt text-danger" style="font-size:17px">*</span></small>
-                            @error('Mitarbeiternummer')
-                            <span class="invalid-feedback" role="alert">
+                    @error('Mitarbeiternummer')
+                    <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror
+                    @enderror
                 @else
                     <label>Benutzername:</label>
                     <input type="text" name="username" id="username" required class="form-control"
                            value="{{ $user->username }}">
                     <small class="form-text text-muted">Bitte klein Buchstaben benutzen <span
                             class="text-rigt text-danger" style="font-size:17px">*</span></small>
-                            @error('Benutzername')
-                            <span class="invalid-feedback" role="alert">
+                    @error('Benutzername')
+                    <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror
+                    @enderror
                 @endif
             </div>
         </div>
@@ -154,11 +159,11 @@
                        value="{{ $user->password }}">
                 <small class="form-text text-muted">Bitte Mindestens 8 Zeichen vergeben <span
                         class="text-rigt text-danger" style="font-size:17px">*</span></small>
-                        @error('Passwort')
-                        <span class="invalid-feedback" role="alert">
+                @error('Passwort')
+                <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                        @enderror
+                @enderror
             </div>
         </div>
         <div class="col-md-4">
@@ -168,11 +173,11 @@
                        value="{{ $user->repassword }}">
                 <small class="form-text text-muted">Bitte bestätigen Sie Ihr Password <span
                         class="text-rigt text-danger" style="font-size:17px">*</span></small>
-                        @error('Passwortbestätigung')
-                        <span class="invalid-feedback" role="alert">
+                @error('Passwortbestätigung')
+                <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                        @enderror
+                @enderror
             </div>
         </div>
     </div>
@@ -181,7 +186,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <a class="form-control btn btn-small btn-danger"
-                   href="{{ url('/users')}}"><i class="fa fa-btn fa-plus"></i>Abbrechen</a>
+                   href="{{ url('/users')}}"><i class="fa fa-btn"></i>Abbrechen</a>
             </div>
         </div>
         <div class="col-md-2">

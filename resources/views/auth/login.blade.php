@@ -1,14 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="POST" action="{{ url('/users/login') }}">
+ <form method="POST" action="{{ url('/users/login') }}">
     @csrf
     <div class="container">
       @extends('components.navigation')
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <div class="col-md-8 col-sm-8 col-xs-12 mt-3">
+                    <h2>{{ __('Melden Sie sich Bitte an') }}</h2>
+                </div>
+
                 <div class="card mt-5">
-                    <div class="card-header">{{ __('Melden Sie sich Bitte an') }}</div>
 
                     <div class="card-body">
                             <div class="row mb-3">
@@ -51,12 +54,12 @@
                                     </button>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</form>
     <!-- Password Ein und ausblenden -->
 <script>
 	//Javascript function definition

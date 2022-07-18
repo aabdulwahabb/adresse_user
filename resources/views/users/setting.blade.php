@@ -23,7 +23,12 @@
               </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                      @if ($naechstemitarbeiternummer == $lastnummer || empty($naechstemitarbeiternummer))
+                        @if(!isset($lastnummer))
+                            <input type="integer" class="form-control" name="nummernkreis"
+                                   id="nummernkreis" placeholder="{letzte MA Nr. +1}">
+                            <small class="form-text text-muted">soll die nächste Zeiterfassung Benutzername/Mitarbeiternummer sein</small>
+                        @endif
+                    @if ($naechstemitarbeiternummer == $lastnummer || empty($naechstemitarbeiternummer))
                         <input type="integer" class="form-control" name="nummernkreis"
                         value="{{ intval($lastnummer) +1 }}"
                                id="nummernkreis" placeholder="{letzte MA Nr. +1}">
@@ -65,20 +70,38 @@
                     <td class="text-center">{{ $adminuser->email }}</td>
                     <!-- we will also add show, and admin rights -->
                     <td class="text-center">
-                      <input data-id="{{$adminuser->id}}" class="toggle-class" type="checkbox"
-                      data-onstyle="success" data-offstyle="secondary" data-toggle="toggle"
-                      data-on="ja" data-off="nein" {{ $adminuser->is_admin ? 'checked' : '' }}>
+                        <input data-id="{{$adminuser->id}}" class="toggle-class" type="checkbox"
+                               data-onstyle="success" data-offstyle="secondary" data-toggle="toggle"
+                               data-on="ja" data-off="nein" {{ $adminuser->is_admin ? 'checked' : '' }}>
                     </td>
                 </tr>
             @endforeach
             </tbody>
+            <!-- Admin Status ändern -->
+            <script>
+                $(document).ready(function(){
+                    $('.toggle-class').change(function () {
+                        let admin = $(this).prop('checked') === true ? 1 : 0;
+                        let adminId = $(this).data('id');
+                        $.ajax({
+                            type: "GET",
+                            dataType: "json",
+                            url: "{{ url('/users/setting/admin/status') }}",
+                            data: {'admin': admin, 'admin_id': adminId},
+                            success: function (data) {
+                                console.log(data.message);
+                            }
+                        });
+                    });
+                });
+            </script>
         </table>
         <!-- Update Button -->
         <div class="row position-bottom" style="position: relative; bottom: 0px; width: 100%;">
             <div class="col-md-2">
                 <div class="form-group">
                     <a class="form-control btn btn-small btn-danger"
-                       href="{{ url('/users')}}"><i class="fa fa-btn fa-plus"></i>Abbrechen</a>
+                       href="{{ url('/users')}}"><i class="fa fa-btn"></i>Abbrechen</a>
                 </div>
             </div>
             <div class="col-md-2">

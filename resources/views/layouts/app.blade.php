@@ -102,7 +102,7 @@
                 @endforeach
           </script>
 
-      <!-- Admin Status ändern -->
+      <!-- Xentraluser Status ändern -->
       <script>
       $(document).ready(function(){
       $('.toggle-class').change(function () {
@@ -121,7 +121,7 @@
       });
       </script>
 
-      <!-- Password Ein und ausblenden -->
+      <!-- Password && Repassword Ein und ausblenden -->
       <script>
       //Javascript function definition
       function eyeEnableOrDisable()

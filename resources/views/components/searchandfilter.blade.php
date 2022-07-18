@@ -22,8 +22,11 @@
               data-onstyle="success" data-offstyle="secondary" data-toggle="toggle"
               data-on="ja" data-off="nein" {{ $user->activ ? 'checked' : '' }}>
             </td>
-
+            @if($user->type == 'admin')
+                <td class="text-center">alle</td>
+            @else
             <td class="text-center">{{ \App\Models\UserRight::where('user',$user->id)->count('id') }}</td>
+            @endif
             @if($user->standardetikett == 25)
                 <td class="text-center">Zeiterfassung</td>
             @else

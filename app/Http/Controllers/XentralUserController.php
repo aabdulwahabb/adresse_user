@@ -24,64 +24,63 @@ class XentralUserController extends Controller
      */
     public function index()
     {
-        if(session()->has('username')) {
-        $users = XentralUser::all();
+        if (session()->has('username')) {
+            $users = XentralUser::all();
 
-        return View('users.index', compact('users'));
-      }
-      Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
-      return redirect::to('/login');
+            return View('users.index', compact('users'));
+        }
+        Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
+        return redirect::to('/login');
     }
+
 // normale xentraluser status $user->activ column
     public function benutzerStatus(Request $request)
-{
-  if(session()->has('username')) {
-    DB::table('user')->where('id', $request->user_id)->update(['activ' => $request->status]);
+    {
+        if (session()->has('username')) {
+            DB::table('user')->where('id', $request->user_id)->update(['activ' => $request->status]);
 
-   return response()->with(['success'=>'Benutzer status wurde aktualisiert!']);
-  }
-  Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
-  return redirect::to('/login');
-}
+            return response()->with(['success' => 'Benutzer status wurde aktualisiert!']);
+        }
+        Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
+        return redirect::to('/login');
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        if(session()->has('username')) {
-        // load the create form (app/views/users/create.blade.php)
-        return View('users.create');
-      }
-      Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
-      return redirect::to('/login');
+        if (session()->has('username')) {
+            // load the create form (app/views/users/create.blade.php)
+            return View('users.create');
+        }
+        Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
+        return redirect::to('/login');
     }
 
     // set nummernkreis der Mitarbeiternummer
     public function updatemanummer(Request $request)
     {
-      $letztemitarbeiternummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
-      $naechstemitarbeiternummer  = intval($letztemitarbeiternummer->username) + 1;
-         if (XentralUser::where('username', $request->get('nummernkreis'))->exists())
-         {
-           Session::flash('error', 'Mitarbeiternummer ist bereits existiert!');
-           return redirect::to('/users/setting');
-         }
+        $letztemitarbeiternummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
+        $naechstemitarbeiternummer = intval($letztemitarbeiternummer->username) + 1;
+        if (XentralUser::where('username', $request->get('nummernkreis'))->exists()) {
+            Session::flash('error', 'Mitarbeiternummer ist bereits existiert!');
+            return redirect::to('/users/setting');
+        }
 
-         if($request->get('nummernkreis') <= $letztemitarbeiternummer->username){
-           Session::flash('error', 'Die neue Nummernkreisnummer soll größer als letzte Mitarbeiternummer sein!');
-           return redirect::to('/users/setting');
-         }
+        if ($request->get('nummernkreis') <= $letztemitarbeiternummer->username) {
+            Session::flash('error', 'Die neue Nummernkreisnummer soll größer als letzte Mitarbeiternummer sein!');
+            return redirect::to('/users/setting');
+        }
 
-        if($request->get('nummernkreis') != $naechstemitarbeiternummer)
-        {
-          $this->validate($request, [
-            'nummernkreis' => 'required|numeric',
-          ]);
-          $naechstemitarbeiternummer = intval($request->get('nummernkreis'));
-          session(['naechstemitarbeiternummer'=>intval($request->get('nummernkreis'))]);
-          Session::flash('success', 'Mitarbeiternummernkreis wurde erfolgreich aktualisiert!');
-          return redirect::to('/users');
+        if ($request->get('nummernkreis') != $naechstemitarbeiternummer) {
+            $this->validate($request, [
+                'nummernkreis' => 'required|numeric',
+            ]);
+            $naechstemitarbeiternummer = intval($request->get('nummernkreis'));
+            session(['naechstemitarbeiternummer' => intval($request->get('nummernkreis'))]);
+            Session::flash('success', 'Mitarbeiternummernkreis wurde erfolgreich aktualisiert!');
+            return redirect::to('/users');
         }
         return redirect::to('/users');
     }
@@ -89,53 +88,53 @@ class XentralUserController extends Controller
     /**
      * Show the form for User Setting.
      */
-    public function setting()
+    public function setting(Request $request)
     {
-        if(session()->has('username'))
-        {
-          $adminusers = User::all();
-          $letztemitarbeiternummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
-          $lastnummer = intval($letztemitarbeiternummer->username);
-          $naechstemitarbeiternummer = session('naechstemitarbeiternummer');
-          // load the create form (app/views/users/setting.blade.php)
-          return View('users.setting', compact('naechstemitarbeiternummer', 'lastnummer', 'adminusers'));
+        if (session()->has('username')) {
+            $adminusers = User::all();
+            $letztemitarbeiternummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
+                $lastnummer = intval($letztemitarbeiternummer->username);
+            $naechstemitarbeiternummer = intval($request->get('nummernkreis'));
+                // load the create form (app/views/users/setting.blade.php)
+                return View('users.setting', compact('naechstemitarbeiternummer', 'lastnummer', 'adminusers'));
         }
-          Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
-          return redirect::to('/login');
+        Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
+        return redirect::to('/login');
     }
 
 // admin Page
     public function admin($id)
-      {
+    {
         $adminuser = User::find($id);
         return View('users.setting', compact('adminuser'));
-      }
-// admin Page Admin or standard ändern
-      public function changeUserStatus(Request $request)
-  {
-    if(session()->has('username')) {
-      DB::table('users')->where('id', $request->user_id)->update(['is_admin' => $request->status]);
-
-     return response()->with(['success'=>'Admin Rechte wurden erfolgreich aktualisiert!']);
     }
-    Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
-    return redirect::to('/login');
-  }
+
+// admin Page Admin or standard ändern
+    public function changeAdminStatus(Request $request)
+    {
+        if (session()->has('username')) {
+            User::where('id', $request->admin_id)->update(['is_admin' => $request->admin]);
+
+            return response()->with(['success' => 'Admin status wurde aktualisiert!']);
+        }
+        Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
+        return redirect::to('/login');
+    }
 
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
-        if(session()->has('username')) {
-        // get the user
-        $user = XentralUser::find($id);
+        if (session()->has('username')) {
+            // get the user
+            $user = XentralUser::find($id);
 
-        // show the view and pass the user to it
-        return View('users.show', compact('user'));
-      }
-      Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
-      return redirect::to('/login');
+            // show the view and pass the user to it
+            return View('users.show', compact('user'));
+        }
+        Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
+        return redirect::to('/login');
 
     }
 
@@ -163,7 +162,7 @@ class XentralUserController extends Controller
         $neuadresse = new Adresse([
             'typ' => $request->get('typ'),
             'name' => $request->get('name'),
-            'email' => $request->get('email'),
+            'email' => strtolower($request->get('email')),
             'abteilung' => $request->get('abteilung'),
             'telefon' => $request->get('telefon'),
             'ansprechpartner' => $request->get('ansprechpartner'),
@@ -182,7 +181,7 @@ class XentralUserController extends Controller
 
         // store user
         $newuser = new XentralUser([
-            'username' => $request->get('username'),
+            'username' => strtolower($request->get('username')),
             'password' => Hash::make($request->get('password')),
             'repassword' => Hash::make($request->get('repassword')),
             'remember_token' => Hash::make($request->get('password')),
@@ -201,30 +200,29 @@ class XentralUserController extends Controller
         $neuenummer = session('naechstemitarbeiternummer');
         $letztemitarbeiternummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
 
-          if ($neuenummer == intval($letztemitarbeiternummer->username)){
+        if ($neuenummer == intval($letztemitarbeiternummer->username)) {
             $neuenummer = intval($letztemitarbeiternummer->username) + 1;
-            }
-            elseif($neuenummer != intval($letztemitarbeiternummer->username)){
+        } elseif ($neuenummer != intval($letztemitarbeiternummer->username)) {
             $neuenummer = session('naechstemitarbeiternummer');
-           }
+        }
 
         // store stechuhr user
-      $stechuhr = new XentralUser([
-          'username' => strval($neuenummer),  // nummernkreis in setting request setzten
-          'password' => Hash::make($request->get('password')),
-          'repassword' => Hash::make($request->get('repassword')),
-          'remember_token' => Hash::make($request->get('password')),
-          'type' => 'standard',
-          'adresse' => $neuadresse->id,
-          'startseite' => 'index.php?module=stechuhr&action=list',
-          'logdatei' => now(),
-          'activ' => 1,
-          'sprachebevorzugen' => 'deutsch',
-          'externlogin' => 1,
-          'standardetikett' => 25,
-          'stechuhrdevice' => strval($neuenummer) . 'RzA5US8F5Z',
-      ]);
-          $stechuhr->save();
+        $stechuhr = new XentralUser([
+            'username' => strval($neuenummer),  // nummernkreis in setting request setzten
+            'password' => Hash::make($request->get('password')),
+            'repassword' => Hash::make($request->get('repassword')),
+            'remember_token' => Hash::make($request->get('password')),
+            'type' => 'standard',
+            'adresse' => $neuadresse->id,
+            'startseite' => 'index.php?module=stechuhr&action=list',
+            'logdatei' => now(),
+            'activ' => 1,
+            'sprachebevorzugen' => 'deutsch',
+            'externlogin' => 1,
+            'standardetikett' => 25,
+            'stechuhrdevice' => strval($neuenummer) . 'RzA5US8F5Z',
+        ]);
+        $stechuhr->save();
 
         // store rolle
         $projektinput = Project::select('id')->where('abkuerzung', request('projekt'))->first();
@@ -908,39 +906,39 @@ class XentralUserController extends Controller
                     'edit',
                     'list']
             ];
-    // store rights for user xentral login
+        // store rights for user xentral login
         foreach ($rechte as $modul => $rights) {
             foreach ($rights as $right) {
                 $userrights = new UserRight([
-                   'user' => $newuser->id,
-                   'module' => $modul,
-                   'action' => $right,
-                   'permission' => 1,
+                    'user' => $newuser->id,
+                    'module' => $modul,
+                    'action' => $right,
+                    'permission' => 1,
                 ]);
                 $userrights->save();
-              }
             }
+        }
 
-      // store Right for stechuhr
-                $stechuhrrechte = [
-                  "welcome" => ['login', 'logout', 'start', 'startseite', 'settings', ],
-                  "stechuhr" => ['change', 'list', 'change', 'list', 'change', 'list', 'change', 'list']
-                ];
-                foreach ($stechuhrrechte as $moduls => $stechrechts){
-                  foreach ($stechrechts as $stechrecht) {
-                  $userrightes = new UserRight([
-                       'user' => $stechuhr->id,
-                       'module' => $moduls,
-                       'action' => $stechrecht,
-                       'permission' => 1,
-                    ]);
-                    $userrightes->save();                  }
-                }
+        // store Right for stechuhr
+        $stechuhrrechte = [
+            "welcome" => ['login', 'logout', 'start', 'startseite', 'settings',],
+            "stechuhr" => ['change', 'list', 'change', 'list', 'change', 'list', 'change', 'list']
+        ];
+        foreach ($stechuhrrechte as $moduls => $stechrechts) {
+            foreach ($stechrechts as $stechrecht) {
+                $userrightes = new UserRight([
+                    'user' => $stechuhr->id,
+                    'module' => $moduls,
+                    'action' => $stechrecht,
+                    'permission' => 1,
+                ]);
+                $userrightes->save();
+            }
+        }
 
         Session::flash('success', 'Benutzer wurde erflogreich angelegt!');
         return redirect::to('/users/id=' . $newuser->id);
     }
-
 
 
     /**
@@ -950,11 +948,11 @@ class XentralUserController extends Controller
     {
         $user = XentralUser::find($id);
 
-        if(session()->has('username')) {
-        return View('users.edit', compact('user'));
-      }
-      Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
-      return redirect::to('/login');
+        if (session()->has('username')) {
+            return View('users.edit', compact('user'));
+        }
+        Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
+        return redirect::to('/login');
     }
 
     /**
@@ -964,44 +962,44 @@ class XentralUserController extends Controller
 // Validate Update
     public function update(Request $request)
     {
-          $this->validate($request, [
-              'typ' => 'sometimes',
-              'name' => 'sometimes|string|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
-              'abteilung' => 'sometimes|nullable',
-              'telefon' => 'sometimes|nullable|numeric',
-              'ansprechpartner' => 'sometimes|alpha|nullable',
-              'username' => 'sometimes|string|regex:/^\S*$/u|max:255',
+        $this->validate($request, [
+            'typ' => 'sometimes',
+            'name' => 'sometimes|string|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
+            'abteilung' => 'sometimes|nullable',
+            'telefon' => 'sometimes|nullable|numeric',
+            'ansprechpartner' => 'sometimes|alpha|nullable',
+            'username' => 'sometimes|string|regex:/^\S*$/u|max:255',
 
-          ]);
+        ]);
 
 // only if password has be changed then make the validate otherwise not validate
-$user = XentralUser::find($request->user_id);
-          if($request->get('password') != $user->password){
+        $user = XentralUser::find($request->user_id);
+        if ($request->get('password') != $user->password) {
             $this->validate($request, [
-              'password' => 'sometimes|required_with:repassword|string|min:8',
-              'repassword' => 'sometimes|required_with:password|same:password',
-              ]);
-          }
+                'password' => 'sometimes|required_with:repassword|string|min:8',
+                'repassword' => 'sometimes|required_with:password|same:password',
+            ]);
+        }
 
 // Store Update in adresse table
         $adresse = Adresse::find($request->adresse_id);
-          $adresse->typ = $request->typ;
-          $adresse->name = $request->name;
-          $adresse->email = $request->email;
-          $adresse->abteilung = $request->abteilung;
-          $adresse->telefon = $request->telefon;
-          $adresse->ansprechpartner = $request->ansprechpartner;
-          $adresse->freifeld1 = $request->freifeld1;
-           $adresse->save();
+        $adresse->typ = $request->typ;
+        $adresse->name = $request->name;
+        $adresse->email = strtolower($request->email);
+        $adresse->abteilung = $request->abteilung;
+        $adresse->telefon = $request->telefon;
+        $adresse->ansprechpartner = $request->ansprechpartner;
+        $adresse->freifeld1 = $request->freifeld1;
+        $adresse->save();
 
 // Store Update in user table
-      $user = XentralUser::find($request->user_id);
-        $user->username = $request->username;
+        $user = XentralUser::find($request->user_id);
+        $user->username = strtolower($request->username);
         $user->password = Hash::make($request->password);
         $user->repassword = Hash::make($request->repassword);
         $user->remember_token = Hash::make($request->password);
-          $user->save();
+        $user->save();
 // Update Feedback
-return redirect('/users')->with('success', 'Benutzer wurde erfolgreich bearbeitet!');
-  }
+        return redirect('/users')->with('success', 'Benutzer wurde erfolgreich bearbeitet!');
+    }
 }
