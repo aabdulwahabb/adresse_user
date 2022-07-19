@@ -8,7 +8,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
 
-                <div class="col-md-8 col-sm-8 col-xs-12 mt-3">
+                <div class="col-md-8 col-sm-8 col-xs-12 mt-3 mb-3">
                     <h2>{{ __('Neue Admin People Verwaltung Anlegen') }}</h2>
                 </div>
 

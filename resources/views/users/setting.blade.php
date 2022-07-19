@@ -6,7 +6,7 @@
         <!-- main content -->
         <div class="container" role="main">
             <div class="row">
-                <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="col-md-8 col-sm-8 col-xs-12 mt-3">
                     <h2>Administrator Benutzern && Einstellungen</h2>
                 </div>
             </div>
@@ -23,11 +23,6 @@
               </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        @if(!isset($lastnummer))
-                            <input type="integer" class="form-control" name="nummernkreis"
-                                   id="nummernkreis" placeholder="{letzte MA Nr. +1}">
-                            <small class="form-text text-muted">soll die nächste Zeiterfassung Benutzername/Mitarbeiternummer sein</small>
-                        @endif
                     @if ($naechstemitarbeiternummer == $lastnummer || empty($naechstemitarbeiternummer))
                         <input type="integer" class="form-control" name="nummernkreis"
                         value="{{ intval($lastnummer) +1 }}"

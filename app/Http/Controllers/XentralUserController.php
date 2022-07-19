@@ -94,7 +94,8 @@ class XentralUserController extends Controller
             $adminusers = User::all();
             $letztemitarbeiternummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
                 $lastnummer = intval($letztemitarbeiternummer->username);
-            $naechstemitarbeiternummer = intval($request->get('nummernkreis'));
+                $naechstemitarbeiternummer = intval($request->get('nummernkreis'));
+
                 // load the create form (app/views/users/setting.blade.php)
                 return View('users.setting', compact('naechstemitarbeiternummer', 'lastnummer', 'adminusers'));
         }

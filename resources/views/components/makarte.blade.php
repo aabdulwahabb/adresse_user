@@ -1,6 +1,11 @@
-<br><br><br><br><br><br><br><br>
-<div class="form-group"></div>
-<br><br>
+<div class="container" role="main">
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12 mt-3 mb-3">
+            <h2>Karte Übersicht für
+                Benutzer: {{ \App\Models\Adresse::where('id',$user->adresse)->value('name') }}</h2>
+        </div>
+    </div>
+</div>
 <div class="card border-dark mb-5" style="max-width:25rem; margin-left: 31%;
     margin-right: 18%;">
     <div class="card-header">Mitarbeiter Karte</div>
