@@ -127,7 +127,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                @if($user->standardetikett == 25)
+                @if($user->hwtoken == 4)
                     <label>Mitarbeiternummer:</label>
                     <input type="text" name="username" id="username" required class="form-control"
                            value="{{ $user->username }}">

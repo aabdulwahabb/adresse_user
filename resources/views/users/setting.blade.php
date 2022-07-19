@@ -55,6 +55,7 @@
                 <td class="th-sm text-center"><strong>Benutzername</strong></td>
                 <td class="th-sm text-center"><strong>Email</strong></td>
                 <td class="th-sm text-center"><strong>Admin</strong></td>
+                <td class="th-sm text-center"><strong>Menü</strong></td>
             </tr>
             </thead>
             <tbody>
@@ -68,6 +69,10 @@
                         <input data-id="{{$adminuser->id}}" class="toggle-class" type="checkbox"
                                data-onstyle="success" data-offstyle="secondary" data-toggle="toggle"
                                data-on="ja" data-off="nein" {{ $adminuser->is_admin ? 'checked' : '' }}>
+                    </td>
+                    <td class="text-center">
+                    <!-- edit this user (uses the edit method found at GET /users/setting/admin/{id}/edit -->
+                    <a class="btn btn-small btn-warning" href="{{ URL::to('users/setting/admin/id=' . $adminuser->id . '/edit') }}">Bearbeiten</a>
                     </td>
                 </tr>
             @endforeach

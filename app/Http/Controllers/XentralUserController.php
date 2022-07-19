@@ -61,7 +61,7 @@ class XentralUserController extends Controller
     // set nummernkreis der Mitarbeiternummer
     public function updatemanummer(Request $request)
     {
-        $letztemitarbeiternummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
+        $letztemitarbeiternummer = XentralUser::where('hwtoken', '=', 4)->latest('id')->first();
         $naechstemitarbeiternummer = intval($letztemitarbeiternummer->username) + 1;
         if (XentralUser::where('username', $request->get('nummernkreis'))->exists()) {
             Session::flash('error', 'Mitarbeiternummer ist bereits existiert!');
@@ -92,7 +92,7 @@ class XentralUserController extends Controller
     {
         if (session()->has('username')) {
             $adminusers = User::all();
-            $letztemitarbeiternummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
+            $letztemitarbeiternummer = XentralUser::where('hwtoken', '=', 4)->latest('id')->first();
                 $lastnummer = intval($letztemitarbeiternummer->username);
                 $naechstemitarbeiternummer = intval($request->get('nummernkreis'));
 
@@ -185,7 +185,6 @@ class XentralUserController extends Controller
             'username' => strtolower($request->get('username')),
             'password' => Hash::make($request->get('password')),
             'repassword' => Hash::make($request->get('repassword')),
-            'remember_token' => Hash::make($request->get('password')),
             'type' => 'standard',
             'adresse' => $neuadresse->id,
             'settings' => 'Tjs=',
@@ -199,7 +198,7 @@ class XentralUserController extends Controller
         $newuser->save();
 
         $neuenummer = session('naechstemitarbeiternummer');
-        $letztemitarbeiternummer = XentralUser::where('standardetikett', '=', 25)->latest('id')->first();
+        $letztemitarbeiternummer = XentralUser::where('hwtoken', '=', 4)->latest('id')->first();
 
         if ($neuenummer == intval($letztemitarbeiternummer->username)) {
             $neuenummer = intval($letztemitarbeiternummer->username) + 1;
@@ -212,7 +211,6 @@ class XentralUserController extends Controller
             'username' => strval($neuenummer),  // nummernkreis in setting request setzten
             'password' => Hash::make($request->get('password')),
             'repassword' => Hash::make($request->get('repassword')),
-            'remember_token' => Hash::make($request->get('password')),
             'type' => 'standard',
             'adresse' => $neuadresse->id,
             'startseite' => 'index.php?module=stechuhr&action=list',
@@ -220,7 +218,8 @@ class XentralUserController extends Controller
             'activ' => 1,
             'sprachebevorzugen' => 'deutsch',
             'externlogin' => 1,
-            'standardetikett' => 25,
+            'hwtoken' => 4,
+            'standardetikett' => 0,
             'stechuhrdevice' => strval($neuenummer) . 'RzA5US8F5Z',
         ]);
         $stechuhr->save();
@@ -945,6 +944,7 @@ class XentralUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+    //edit user page
     public function edit($id)
     {
         $user = XentralUser::find($id);
@@ -966,6 +966,7 @@ class XentralUserController extends Controller
         $this->validate($request, [
             'typ' => 'sometimes',
             'name' => 'sometimes|string|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
+            'email' => 'sometimes|string|max:255',
             'abteilung' => 'sometimes|nullable',
             'telefon' => 'sometimes|nullable|numeric',
             'ansprechpartner' => 'sometimes|alpha|nullable',
@@ -977,8 +978,8 @@ class XentralUserController extends Controller
         $user = XentralUser::find($request->user_id);
         if ($request->get('password') != $user->password) {
             $this->validate($request, [
-                'password' => 'sometimes|required_with:repassword|string|min:8',
-                'repassword' => 'sometimes|required_with:password|same:password',
+                'password' => 'sometimes|string|min:8',
+                'repassword' => 'sometimes|same:password',
             ]);
         }
 
@@ -998,9 +999,8 @@ class XentralUserController extends Controller
         $user->username = strtolower($request->username);
         $user->password = Hash::make($request->password);
         $user->repassword = Hash::make($request->repassword);
-        $user->remember_token = Hash::make($request->password);
         $user->save();
 // Update Feedback
-        return redirect('/users')->with('success', 'Benutzer wurde erfolgreich bearbeitet!');
+        return redirect('/users')->with('success', 'Benutzer ' . $adresse->name . ' wurde erfolgreich bearbeitet!');
     }
 }

@@ -12,11 +12,11 @@
     <div class="card-body text-dark">
         <h5 class="card-title">{{ \App\Models\Adresse::where('id',$user->adresse)->value('name') }}</h5>
         <p class="card-text">
-            <strong>Username: </strong> {{ \App\Models\XentralUser::where('adresse',$user->adresse)->whereNot('standardetikett',25)->value('username') }}
+            <strong>Username: </strong> {{ \App\Models\XentralUser::where('adresse',$user->adresse)->whereNot('hwtoken',4)->value('username') }}
             <br>
             <strong>Password: </strong> {{ $user->password }}<br>
             <strong>Type: </strong>{{ $user->type }} User <br>
-            <strong>Mitarbeiternummer: </strong> {{ \App\Models\XentralUser::where('adresse',$user->adresse)->where('standardetikett',25)->value('username') }}
+            <strong>Mitarbeiternummer: </strong> {{ \App\Models\XentralUser::where('adresse',$user->adresse)->where('hwtoken',4)->value('username') }}
             <br>
             <strong>Team: </strong>{{ \App\Models\Adresse::where('id',$user->adresse)->value('abteilung') }}
             <br>

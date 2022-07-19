@@ -30,6 +30,9 @@ Route::namespace('Auth')->group(function () {
     Route::post('/users/register',[LoginController::class, 'customRegister'])->name('process_register');
   Route::get('users/logout',[LoginController::class, 'signOut'])->name('logout');
 });
+// Update Admin
+Route::get('users/setting/admin/id={id}/edit', [LoginController::class, 'editadmin'])->name('admin.edit'); // Bearbeiten
+Route::put('/users/setting/admin',[LoginController::class, 'updateadmin']);       // Update Admin
 
 // User Page
 Route::get('/users', [XentralUserController::class, 'index'])->name('users.index'); // Startseite

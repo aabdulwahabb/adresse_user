@@ -56,7 +56,6 @@ class LoginController extends Controller
             $neuadmin->username = strtolower($request->username);
             $neuadmin->password = Hash::make($request->password);
             $neuadmin->repassword = Hash::make($request->repassword);
-            $neuadmin->remember_token = Hash::make($request->password);
             $neuadmin->is_admin = 1;
             $neuadmin->email_verified_at = now();
 
@@ -67,6 +66,48 @@ class LoginController extends Controller
         return redirect('/register')->with('error', 'Sie dürfen die Seite nicht zugreifen!');
     }
 
+    //edit admin page
+    public function editadmin($id)
+    {
+        $admin = User::find($id);
+
+        if (session()->has('username')) {
+            return View('auth.editadmin', compact('admin'));
+        }
+        Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
+        return redirect::to('/login');
+    }
+
+    // Validate Update admin
+    public function updateadmin(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'sometimes|string|regex:/^[A-Za-z]+([\ A-Za-z]+)*/',
+            'email' => 'sometimes|string|max:255',
+            'sometimes|string|regex:/^\S*$/u|max:255',
+        ]);
+
+// only if password has be changed then make the validate otherwise not validate
+        $admin = User::find($request->admin_id);
+        if ($request->password != $admin->password) {
+            $this->validate($request, [
+                'password' => 'sometimes|string|min:8',
+                'repassword' => 'sometimes|same:password',
+            ]);
+        }
+
+// Store Update in admin users table
+        $admin = User::find($request->admin_id);
+        $admin->name = $request->name;
+        $admin->email = strtolower($request->email);
+        $admin->username = strtolower($request->username);
+        $admin->password = Hash::make($request->password);
+        $admin->repassword = Hash::make($request->repassword);
+        $admin->save();
+// Update Feedback
+        return redirect('/users/setting')->with('success', 'Admin: ' . $admin->name . ' wurde erfolgreich bearbeitet!');
+    }
+
     // Login logic Process
     public function customLogin(Request $request)
    {
@@ -74,7 +115,6 @@ class LoginController extends Controller
           'username' => 'required|string|regex:/^\S*$/u|max:255|unique:user',
           "password"        =>    "required|alphaNum|min:8"
       ]);
-       $admin = User::where("username",$request->username)->first();
            if (User::where('username', $request->username)
                ->where('password', $request->password)
                ->where('is_admin', 1)

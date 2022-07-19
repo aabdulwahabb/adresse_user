@@ -27,7 +27,7 @@
             @else
             <td class="text-center">{{ \App\Models\UserRight::where('user',$user->id)->count('id') }}</td>
             @endif
-            @if($user->standardetikett == 25)
+            @if($user->hwtoken == 4)
                 <td class="text-center">Zeiterfassung</td>
             @else
                 <td class="text-center"></td>
