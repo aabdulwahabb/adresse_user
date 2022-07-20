@@ -14,8 +14,8 @@
                                                                               style="font-size:17px">*</span></small>
                 @error('Type')
                 <span class="invalid-feedback" role="alert">
-                                                                                      <strong>{{ $message }}</strong>
-                                                                                  </span>
+               <strong>{{ $message }}</strong>
+                </span>
                 @enderror
             </div>
         </div>
@@ -28,8 +28,8 @@
                                                                                  style="font-size:17px">*</span></small>
                 @error('Name')
                 <span class="invalid-feedback" role="alert">
-                                                                                         <strong>{{ $message }}</strong>
-                                                                                     </span>
+                <strong>{{ $message }}</strong>
+                </span>
                 @enderror
             </div>
         </div>
@@ -42,8 +42,8 @@
                                                                               style="font-size:17px">*</span></small>
                 @error('Email')
                 <span class="invalid-feedback" role="alert">
-                                                                                      <strong>{{ $message }}</strong>
-                                                                                  </span>
+                <strong>{{ $message }}</strong>
+                </span>
                 @enderror
             </div>
         </div>
@@ -135,8 +135,7 @@
                        value="{{ old('password') }}" placeholder="Password">
                 <small class="form-text text-muted">Bitte Mindestens 8 Zeichen eingeben <span
                         class="text-rigt text-danger" style="font-size:17px">*</span></small>
-                <p class="text-right"><i class="bi bi-eye-slash" id="eyeChangeId" onclick="eyeEnableOrDisable()"></i>
-                </p>
+
                 @error('Passwort')
                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -151,6 +150,8 @@
                        value="{{ old('repassword') }}" placeholder="Password Wiederholen">
                 <small class="form-text text-muted">Bitte bestätigen Sie Ihr Password <span
                         class="text-rigt text-danger" style="font-size:17px">*</span></small>
+                <p class="text-right"><i class="bi bi-eye-slash" id="eyeChangeId" onclick="eyeEnableOrDisable()"></i>
+                </p>
                 @error('Passwortbestätigung')
                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

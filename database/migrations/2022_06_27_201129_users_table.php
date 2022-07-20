@@ -22,6 +22,10 @@ return new class extends Migration
             $table->boolean('is_admin')->nullable();
             $table->string('password');
             $table->string('repassword');
+            $table->string('passwordhash',60)->nullable();
+            $table->string('passwordmd5')->nullable();
+            $table->string('passwordsha512',128)->default('');
+            $table->string('salt',128)->default('');
             $table->rememberToken();
             $table->timestamps();
         });

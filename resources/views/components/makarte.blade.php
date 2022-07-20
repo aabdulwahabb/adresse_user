@@ -1,8 +1,7 @@
 <div class="container" role="main">
     <div class="row">
         <div class="col-md-8 col-sm-8 col-xs-12 mt-3 mb-3">
-            <h2>Karte Übersicht für
-                Benutzer: {{ \App\Models\Adresse::where('id',$user->adresse)->value('name') }}</h2>
+            <h2>Karte Übersicht Benutzer: {{ \App\Models\Adresse::where('id',$user->adresse)->value('name') }}</h2>
         </div>
     </div>
 </div>
@@ -14,14 +13,14 @@
         <p class="card-text">
             <strong>Username: </strong> {{ \App\Models\XentralUser::where('adresse',$user->adresse)->whereNot('hwtoken',4)->value('username') }}
             <br>
-            <strong>Password: </strong> {{ $user->password }}<br>
-            <strong>Type: </strong>{{ $user->type }} User <br>
+            <strong>Password: </strong> <small class="form-text text-muted">Notieren Sie bitte das Passwort vorher beim Benutzer Anlegen </small>
+            <strong>Type: </strong>{{ $user->type }} Benutzer <br>
             <strong>Mitarbeiternummer: </strong> {{ \App\Models\XentralUser::where('adresse',$user->adresse)->where('hwtoken',4)->value('username') }}
             <br>
             <strong>Team: </strong>{{ \App\Models\Adresse::where('id',$user->adresse)->value('abteilung') }}
             <br>
             <strong>Dienstleister: </strong>{{ \App\Models\Adresse::where('id',$user->adresse)->value('freifeld1')}}
-            User <br>
+            Mitarbeiter <br>
         </p>
     </div>
 </div>

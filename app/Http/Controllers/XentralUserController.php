@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\Input;
 use View;
 
@@ -183,14 +184,20 @@ class XentralUserController extends Controller
         // store user
         $newuser = new XentralUser([
             'username' => strtolower($request->get('username')),
-            'password' => Hash::make($request->get('password')),
-            'repassword' => Hash::make($request->get('repassword')),
+            'passwordhash' => Hash::make($request->get('password')),
+            'password' => '',
+            'repassword' => 0,
+            'passwordmd5' => Str::random(40),
+            'passwordsha512' => Str::random(40),
+            'remember_token' => Str::random(40),
+            'salt' => Str::random(40),
             'type' => 'standard',
             'adresse' => $neuadresse->id,
             'settings' => 'Tjs=',
             'startseite' => 'index.php?module=welcome&action=start',
             'logdatei' => now(),
             'activ' => 1,
+            'hwtoken' => 0,
             'sprachebevorzugen' => 'deutsch',
             'externlogin' => 1,
             'standardetikett' => 43
@@ -200,17 +207,25 @@ class XentralUserController extends Controller
         $neuenummer = session('naechstemitarbeiternummer');
         $letztemitarbeiternummer = XentralUser::where('hwtoken', '=', 4)->latest('id')->first();
 
-        if ($neuenummer == intval($letztemitarbeiternummer->username)) {
+        if ($neuenummer == intval($letztemitarbeiternummer->username) + 1) {
             $neuenummer = intval($letztemitarbeiternummer->username) + 1;
-        } elseif ($neuenummer != intval($letztemitarbeiternummer->username)) {
+        } if ($neuenummer != intval($letztemitarbeiternummer->username) + 1) {
             $neuenummer = session('naechstemitarbeiternummer');
         }
+           if (!isset($neuenummer)){
+               $neuenummer = intval($letztemitarbeiternummer->username) + 1;
+           }
 
         // store stechuhr user
         $stechuhr = new XentralUser([
             'username' => strval($neuenummer),  // nummernkreis in setting request setzten
-            'password' => Hash::make($request->get('password')),
-            'repassword' => Hash::make($request->get('repassword')),
+            'passwordhash' => Hash::make($request->get('password')),
+            'password' => '',
+            'repassword' => 0,
+            'passwordmd5' => Str::random(40),
+            'passwordsha512' => Str::random(40),
+            'remember_token' => Str::random(40),
+            'salt' => Str::random(40),
             'type' => 'standard',
             'adresse' => $neuadresse->id,
             'startseite' => 'index.php?module=stechuhr&action=list',
@@ -220,7 +235,7 @@ class XentralUserController extends Controller
             'externlogin' => 1,
             'hwtoken' => 4,
             'standardetikett' => 0,
-            'stechuhrdevice' => strval($neuenummer) . 'RzA5US8F5Z',
+            'stechuhrdevice' => $neuenummer . 'RzA5US8F5Z',
         ]);
         $stechuhr->save();
 
@@ -936,7 +951,7 @@ class XentralUserController extends Controller
             }
         }
 
-        Session::flash('success', 'Benutzer wurde erflogreich angelegt!');
+        Session::flash('success', 'Benutzer ' . $neuadresse->name . ' wurde erflogreich angelegt!');
         return redirect::to('/users/id=' . $newuser->id);
     }
 
@@ -976,11 +991,14 @@ class XentralUserController extends Controller
 
 // only if password has be changed then make the validate otherwise not validate
         $user = XentralUser::find($request->user_id);
-        if ($request->get('password') != $user->password) {
+        if ($request->get('password') != $user->passwordhash) {
             $this->validate($request, [
                 'password' => 'sometimes|string|min:8',
                 'repassword' => 'sometimes|same:password',
             ]);
+            $user = XentralUser::find($request->user_id);
+            $user->passwordhash = Hash::make($request->password);
+            $user->save();
         }
 
 // Store Update in adresse table
@@ -997,8 +1015,6 @@ class XentralUserController extends Controller
 // Store Update in user table
         $user = XentralUser::find($request->user_id);
         $user->username = strtolower($request->username);
-        $user->password = Hash::make($request->password);
-        $user->repassword = Hash::make($request->repassword);
         $user->save();
 // Update Feedback
         return redirect('/users')->with('success', 'Benutzer ' . $adresse->name . ' wurde erfolgreich bearbeitet!');

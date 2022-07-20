@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
-
+use Illuminate\Support\Str;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 
 class LoginController extends Controller
@@ -54,8 +55,13 @@ class LoginController extends Controller
             $neuadmin->name = $request->name;
             $neuadmin->email = strtolower($request->email);
             $neuadmin->username = strtolower($request->username);
-            $neuadmin->password = Hash::make($request->password);
-            $neuadmin->repassword = Hash::make($request->repassword);
+            $neuadmin->passwordhash = Hash::make($request->password);
+            $neuadmin->password = '';
+            $neuadmin->repassword = 0;
+            $neuadmin->remember_token = Str::random(40);
+            $neuadmin->passwordmd5 = Str::random(40);
+            $neuadmin->passwordsha512 = Str::random(40);
+            $neuadmin->salt = Str::random(40);
             $neuadmin->is_admin = 1;
             $neuadmin->email_verified_at = now();
 
@@ -89,11 +95,14 @@ class LoginController extends Controller
 
 // only if password has be changed then make the validate otherwise not validate
         $admin = User::find($request->admin_id);
-        if ($request->password != $admin->password) {
+        if ($request->password != $admin->passwordhash) {
             $this->validate($request, [
                 'password' => 'sometimes|string|min:8',
                 'repassword' => 'sometimes|same:password',
             ]);
+            $admin = User::find($request->admin_id);
+            $admin->passwordhash = Hash::make($request->password);
+            $admin->save();
         }
 
 // Store Update in admin users table
@@ -101,8 +110,7 @@ class LoginController extends Controller
         $admin->name = $request->name;
         $admin->email = strtolower($request->email);
         $admin->username = strtolower($request->username);
-        $admin->password = Hash::make($request->password);
-        $admin->repassword = Hash::make($request->repassword);
+        $admin->updated_at = now();
         $admin->save();
 // Update Feedback
         return redirect('/users/setting')->with('success', 'Admin: ' . $admin->name . ' wurde erfolgreich bearbeitet!');
@@ -115,22 +123,19 @@ class LoginController extends Controller
           'username' => 'required|string|regex:/^\S*$/u|max:255|unique:user',
           "password"        =>    "required|alphaNum|min:8"
       ]);
-           if (User::where('username', $request->username)
-               ->where('password', $request->password)
-               ->where('is_admin', 1)
-               ->first()) {
-               $request->session()->put('username', $data['username']);
-               if (session()->has('username')) {
-                   return redirect('/users')->with('info', 'Sie haben sich erfolgreich als Admin angemeldet!');
-               }
+      $admin = User::where('username', $request->username)->first();
+      if(!$admin){return redirect('/login')->with('error', 'Benutzername ist Falsch!, versuchen Sie bitte erneut');}
+          if (Hash::check($request->password, $admin->passwordhash)) {
 
-           } elseif (User::where('username', $request->username)
-               ->where('password', $request->password)
-               ->where('is_admin', 0)
-               ->first()) {
-               return redirect('/login')->with('error', 'Sie Sind kein Admin User!');
-           }
-         return redirect('/login')->with('error', 'Falsche Zugangsdaten, versuchen Sie bitte erneut!');
+              if ($admin->is_admin == 0){
+                  return redirect('/login')->with('warning', 'Sie Sind kein Admin Benutzer!');
+              }
+              $request->session()->put('username', $data['username']);
+              if (session()->has('username')) {
+                  return redirect('/users')->with('info', 'Sie haben sich erfolgreich als Admin angemeldet!');
+              }
+          }
+         return redirect('/login')->with('error', 'Passwort ist falsch, versuchen Sie bitte erneut!');
 }
 
     // Logout process

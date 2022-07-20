@@ -3,12 +3,10 @@
 
 <style>
 .footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin-bottom: -400px;
+  position: fixed;
   padding: 6px;
   text-align: center;
+  bottom:0;
+  width: 100%;
 }
 </style>

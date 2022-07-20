@@ -7,7 +7,7 @@
         <div class="container" role="main">
             <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-12 mt-3">
-                    <h2>Administrator Benutzern && Einstellungen</h2>
+                    <h2>Administrator Benutzer && Einstellungen</h2>
                 </div>
             </div>
         </div>

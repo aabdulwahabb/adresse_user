@@ -18,8 +18,8 @@
                                                                               style="font-size:17px">*</span></small>
                 @error('Type')
                 <span class="invalid-feedback" role="alert">
-                                                                                  <strong>{{ $message }}</strong>
-                                                                              </span>
+                <strong>{{ $message }}</strong>
+                </span>
                 @enderror
             </div>
         </div>
@@ -33,8 +33,8 @@
                                                                            style="font-size:17px">*</span></small>
                 @error('Name')
                 <span class="invalid-feedback" role="alert">
-                                                                               <strong>{{ $message }}</strong>
-                                                                           </span>
+               <strong>{{ $message }}</strong>
+               </span>
                 @enderror
             </div>
         </div>
@@ -48,8 +48,8 @@
                                                                               style="font-size:17px">*</span></small>
                 @error('Email')
                 <span class="invalid-feedback" role="alert">
-                                                                                  <strong>{{ $message }}</strong>
-                                                                              </span>
+                <strong>{{ $message }}</strong>
+                </span>
                 @enderror
             </div>
         </div>
@@ -156,7 +156,7 @@
             <div class="form-group">
                 <label>Passwort:</label>
                 <input type="password" name="password" id="password" required class="form-control"
-                       value="{{ $user->password }}">
+                       value="{{ $user->passwordhash }}">
                 <small class="form-text text-muted">Bitte Mindestens 8 Zeichen vergeben <span
                         class="text-rigt text-danger" style="font-size:17px">*</span></small>
                 @error('Passwort')
@@ -170,9 +170,11 @@
             <div class="form-group">
                 <label>Passwort wiederholen:</label>
                 <input type="password" name="repassword" id="repassword" required class="form-control"
-                       value="{{ $user->repassword }}">
+                       value="{{ $user->passwordhash }}">
                 <small class="form-text text-muted">Bitte bestätigen Sie Ihr Password <span
                         class="text-rigt text-danger" style="font-size:17px">*</span></small>
+                <p class="text-right"><i class="bi bi-eye-slash" id="eyeChangeId" onclick="eyeEnableOrDisable()"></i>
+                </p>
                 @error('Passwortbestätigung')
                 <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
