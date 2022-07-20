@@ -11,18 +11,20 @@
                 </div>
             </div>
         </div>
+        <div>
+            <h7 class="form-text text-muted ml-sm-3">Hiermit werden die Benutzer, die in Versandmanufaktur People Team angezeigt.</h7>
+            <h7 class="form-text text-muted ml-sm-3">Nur diesen Benutzer können dieses Tool Benutzen.</h7>
+        </div>
         <br>
         <!-- Tittle and Input -->
         <form action="{{ url('/users/setting') }}" method="POST" class="form-horizontal">
           @csrf
           @method('PUT')
 
-          <div class="row">
-              <div class="col-md-8 col-sm-8 col-xs-12">
-                  <h4>Nummernkreis Setzen</h4>
-              </div>
-                <div class="col-md-4">
-                    <div class="form-group">
+          <div class="row mt-sm-5">
+              <label
+                     class="col-md-3 col-form-label text-md-end"><h5>Nummernkreis Setzen</h5></label>
+               <div class="col-md-3">
                     @if ($naechstemitarbeiternummer == $lastnummer || empty($naechstemitarbeiternummer))
                         <input type="integer" class="form-control" name="nummernkreis"
                         value="{{ intval($lastnummer) +1 }}"
@@ -39,11 +41,10 @@
                              id="nummernkreis" placeholder="{letzte MA Nr. +1}">
                              <small class="form-text text-muted">Soll die nächste Zeiterfassung Benutzername/Mitarbeiternummer sein.</small>
                     @endif
-                    </div>
                 </div>
             </div>
             <!--Tabel -->
-            <div class="row">
+            <div class="row mt-sm-5">
                 <div class="col-md-8 col-sm-8 col-xs-12">
                     <h4>Admin Benutzern</h4>
                 </div>
@@ -97,6 +98,7 @@
             </script>
         </table>
         <!-- Update Button -->
+            <br><br><br><br><br><br><br><br>
         <div class="row position-bottom" style="position: relative; bottom: 0px; width: 100%;">
             <div class="col-md-2">
                 <div class="form-group">
@@ -114,6 +116,7 @@
         </div>
         <!-- Update Button -->
     </form>
+
     </section>
 @endsection
 @extends('components.footer')

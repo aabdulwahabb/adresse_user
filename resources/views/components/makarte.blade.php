@@ -5,6 +5,7 @@
         </div>
     </div>
 </div>
+<br><br><br><br><br><br><br>
 <div class="card border-dark mb-5" style="max-width:25rem; margin-left: 31%;
     margin-right: 18%;">
     <div class="card-header">Mitarbeiter Karte</div>
@@ -25,9 +26,9 @@
     </div>
 </div>
 <div class="row" style="position: relative; bottom: 0px; width: 100%; margin-left: 415px;">
-    <a type="button" class="btn btn-small btn-info mr-sm-3"
+    <a type="button" href="{{ url('/users') }}" class="btn btn-small btn-warning mr-sm-3">Abschließen</a>
+    <a type="button" class="btn btn-small btn-info"
        href="{{ URL::to('users/id=' . $user->id . '/edit') }}">Bearbeiten</a>
-    <a type="button" href="{{ url('/users') }}" class="btn btn-small btn-warning ml-sm-3">Abschließen</a>
 
 
 </div>

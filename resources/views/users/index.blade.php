@@ -9,6 +9,9 @@
             <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-12 mt-3">
                     <h2>Angelegte Benutzer</h2>
+                    <div>
+                        <h5 class="form-text text-muted ml-sm-3">Hier werden alle Xentral Benutzer aufgelistet.</h5>
+                    </div>
                 </div>
             </div>
         </div>

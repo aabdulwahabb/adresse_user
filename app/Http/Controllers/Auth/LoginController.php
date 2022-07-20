@@ -113,7 +113,7 @@ class LoginController extends Controller
         $admin->updated_at = now();
         $admin->save();
 // Update Feedback
-        return redirect('/users/setting')->with('success', 'Admin: ' . $admin->name . ' wurde erfolgreich bearbeitet!');
+        return redirect('/users/setting')->with('success', 'Admin ' . $admin->name . ' wurde erfolgreich bearbeitet!');
     }
 
     // Login logic Process
@@ -128,11 +128,11 @@ class LoginController extends Controller
           if (Hash::check($request->password, $admin->passwordhash)) {
 
               if ($admin->is_admin == 0){
-                  return redirect('/login')->with('warning', 'Sie Sind kein Admin Benutzer!');
+                  return redirect('/login')->with('warning', 'Sorry ' . $admin->name . ', Sie Sind kein Admin Benutzer!');
               }
               $request->session()->put('username', $data['username']);
               if (session()->has('username')) {
-                  return redirect('/users')->with('info', 'Sie haben sich erfolgreich als Admin angemeldet!');
+                  return redirect('/users')->with('info', 'Hallo ' . $admin->name . ' :), Sie haben sich erfolgreich als Admin angemeldet!');
               }
           }
          return redirect('/login')->with('error', 'Passwort ist falsch, versuchen Sie bitte erneut!');
@@ -145,6 +145,6 @@ class LoginController extends Controller
        {
          session()->pull('username');
        }
-        return redirect::to('/login')->with('warning', 'Sie haben sich erfolgreich abgemeldet!');
+        return redirect::to('/login')->with('warning', 'Tschüss, Sie haben sich erfolgreich abgemeldet!');
    }
 }
