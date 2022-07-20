@@ -1,3 +1,4 @@
+<!-- resources/views/users/setting.blade.php -->
 @extends('layouts.app')
 @section('content')
     <section class="container">
@@ -46,7 +47,11 @@
             <!--Tabel -->
             <div class="row mt-sm-5">
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <h4>Admin Benutzern</h4>
+                    <h3>Admin Benutzer</h3>
+                    <div>
+                        <h5>
+                            <small class="form-text text-muted">aktivieren/deaktivieren auf Knopf "ja/nein" klicken</small></h5>
+                    </div>
                 </div>
             </div>
         <table id="dtBasicExample" class="table table-striped table-sm col-md-1">

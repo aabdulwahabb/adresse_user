@@ -1,5 +1,5 @@
+<!-- resources/views/auth/login.blade.php -->
 @extends('layouts.app')
-
 @section('content')
  <form method="POST" action="{{ url('/users/login') }}">
     @csrf

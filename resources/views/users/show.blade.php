@@ -1,4 +1,4 @@
-<!-- resources/views/adresse/show.blade.php -->
+<!-- resources/views/users/show.blade.php -->
 @extends('layouts.app')
 @section('content')
     <div class="container">
