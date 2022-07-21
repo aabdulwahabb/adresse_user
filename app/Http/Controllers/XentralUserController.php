@@ -65,12 +65,12 @@ class XentralUserController extends Controller
         $letztemitarbeiternummer = XentralUser::where('hwtoken', '=', 4)->latest('id')->first();
         $naechstemitarbeiternummer = intval($letztemitarbeiternummer->username) + 1;
         if (XentralUser::where('username', $request->get('nummernkreis'))->exists()) {
-            Session::flash('error', 'Mitarbeiternummer ist bereits existiert!');
+            Session::flash('warning', 'Nummernkreisnummer: ' . $request->get('nummernkreis') . ' ist bereits existiert!');
             return redirect::to('/users/setting');
         }
 
         if ($request->get('nummernkreis') <= $letztemitarbeiternummer->username) {
-            Session::flash('error', 'Die neue Nummernkreisnummer soll größer als letzte Mitarbeiternummer sein!');
+            Session::flash('error', 'Die Nummernkreisnummer: ' . $request->get('nummernkreis') . ' soll größer als letzt Mitarbeiternummernkreis sein!');
             return redirect::to('/users/setting');
         }
 
@@ -80,7 +80,7 @@ class XentralUserController extends Controller
             ]);
             $naechstemitarbeiternummer = intval($request->get('nummernkreis'));
             session(['naechstemitarbeiternummer' => intval($request->get('nummernkreis'))]);
-            Session::flash('success', 'Mitarbeiternummernkreis wurde erfolgreich aktualisiert!');
+            Session::flash('success', 'Mitarbeiternummernkreis: ' . $naechstemitarbeiternummer . ' wurde erfolgreich aktualisiert!');
             return redirect::to('/users');
         }
         return redirect::to('/users');
