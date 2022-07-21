@@ -113,19 +113,19 @@ class DatabaseSeeder extends Seeder
                     Team::factory(5)
                         ->create();
 
-            User::create([
+            User::factory()->create([
                 'name'    => 'Abdulwahab Alhasan',
                 'username'    => 'aalhasan',
                 'email'    => 'abdul@gmail.com',
                 'email_verified_at'    => now(),
                 'is_admin'    => 1,
-                'passwordhash' => Hash::make(Str::random(40)),
                 'password' => '',
                 'repassword' => 0,
+                'passwordhash' => Hash::make('qwqwqwqw'),
                 'passwordmd5' => Str::random(40),
                 'passwordsha512' => Str::random(40),
-                'remember_token' => Str::random(40),
                 'salt' => Str::random(40),
+                'remember_token' => Str::random(40),
             ]);
         }
     }

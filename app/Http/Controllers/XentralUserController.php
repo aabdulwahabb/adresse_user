@@ -94,14 +94,20 @@ class XentralUserController extends Controller
         if (session()->has('username')) {
             $adminusers = User::all();
             $letztemitarbeiternummer = XentralUser::where('hwtoken', '=', 4)->latest('id')->first();
+            if (isset($letztemitarbeiternummer)) {
                 $lastnummer = intval($letztemitarbeiternummer->username);
                 $naechstemitarbeiternummer = intval($request->get('nummernkreis'));
-
                 // load the create form (app/views/users/setting.blade.php)
                 return View('users.setting', compact('naechstemitarbeiternummer', 'lastnummer', 'adminusers'));
+            }
+            $naechstemitarbeiternummer = intval($request->get('nummernkreis'));
+            $lastnummer = 0;
+            // load the create form (app/views/users/setting.blade.php)
+            Session::flash('warning', 'keine Daten vorhanden!');
+            return View('users.setting', compact('naechstemitarbeiternummer', 'lastnummer', 'adminusers'));
         }
-        Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
-        return redirect::to('/login');
+            Session::flash('warning', 'Sie dürfen die Seite nicht zugreifen!');
+            return redirect::to('/login');
     }
 
 // admin Page

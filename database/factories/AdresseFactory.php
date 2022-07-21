@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Adresse;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class AdresseFactory extends Factory
 {
@@ -48,7 +49,7 @@ class AdresseFactory extends Factory
             'mandatsreferenzart' => "einmalig",
             'mandatsreferenzwdhart' => "erste",
             'art' => "standardauftrag",
-            'bundesstaat' => "NW",
+            'bundesstaat' => "NRW",
 
         ];
     }

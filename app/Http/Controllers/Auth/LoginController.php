@@ -124,7 +124,7 @@ class LoginController extends Controller
           "password"        =>    "required|alphaNum|min:8"
       ]);
       $admin = User::where('username', $request->username)->first();
-      if(!$admin){return redirect('/login')->with('error', 'Benutzername ist Falsch!, versuchen Sie bitte erneut');}
+      if(!$admin){return redirect('/login')->with('error', 'Benutzername oder Passwort ist Falsch!, versuchen Sie bitte erneut');}
           if (Hash::check($request->password, $admin->passwordhash)) {
 
               if ($admin->is_admin == 0){
@@ -135,7 +135,7 @@ class LoginController extends Controller
                   return redirect('/users')->with('info', 'Hallo ' . $admin->name . ' :), Sie haben sich erfolgreich als Admin angemeldet!');
               }
           }
-         return redirect('/login')->with('error', 'Passwort ist falsch, versuchen Sie bitte erneut!');
+         return redirect('/login')->with('error', 'Passwort oder Benutzername ist falsch, versuchen Sie bitte erneut!');
 }
 
     // Logout process
